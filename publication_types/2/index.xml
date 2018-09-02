@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>2 on Erica S. Nielsen</title>
-    <link>/publication_types/2/</link>
-    <description>Recent content in 2 on Erica S. Nielsen</description>
+    <title>2 on </title>
+    <link>https://esnielsen.github.io/publication_types/2/</link>
+    <description>Recent content in 2 on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Tue, 01 Sep 2015 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 01 Jul 2017 00:00:00 +0200</lastBuildDate>
     
-	<atom:link href="/publication_types/2/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://esnielsen.github.io/publication_types/2/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>A Person Re-Identification System For Mobile Devices</title>
-      <link>/publication/person-re-identification/</link>
+      <title>Multispecies genetic objectives in spatial conservation planning</title>
+      <link>https://esnielsen.github.io/publication/clothing-search/</link>
+      <pubDate>Sat, 01 Jul 2017 00:00:00 +0200</pubDate>
+      
+      <guid>https://esnielsen.github.io/publication/clothing-search/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Complex Signatures</title>
+      <link>https://esnielsen.github.io/publication/person-re-identification/</link>
       <pubDate>Tue, 01 Sep 2015 00:00:00 +0200</pubDate>
       
-      <guid>/publication/person-re-identification/</guid>
+      <guid>https://esnielsen.github.io/publication/person-re-identification/</guid>
       <description>More detail can easily be written here using Markdown and $\rm \LaTeX$ math code.</description>
     </item>
     

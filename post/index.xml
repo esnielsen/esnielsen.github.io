@@ -13,15 +13,6 @@
     
     
     <item>
-      <title>Hello World</title>
-      <link>https://esnielsen.github.io/post/hello-world/</link>
-      <pubDate>Fri, 31 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://esnielsen.github.io/post/hello-world/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Academic: the website designer for Hugo</title>
       <link>https://esnielsen.github.io/post/getting-started/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>

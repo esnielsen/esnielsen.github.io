@@ -11,24 +11,6 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Complex signatures of genomic variation of two non-model marine species in a homogeneous environment</title>
-      <link>https://esnielsen.github.io/publication/person-re-identification/</link>
-      <pubDate>Sat, 01 Sep 2018 00:00:00 +0200</pubDate>
-      
-      <guid>https://esnielsen.github.io/publication/person-re-identification/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hello World</title>
-      <link>https://esnielsen.github.io/post/hello-world/</link>
-      <pubDate>Fri, 31 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://esnielsen.github.io/post/hello-world/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Privacy Policy</title>
       <link>https://esnielsen.github.io/privacy/</link>
       <pubDate>Thu, 28 Jun 2018 00:00:00 +0200</pubDate>
@@ -39,11 +21,11 @@
     </item>
     
     <item>
-      <title>Multispecies genetic objectives in spatial conservation planning</title>
-      <link>https://esnielsen.github.io/publication/clothing-search/</link>
-      <pubDate>Sat, 01 Jul 2017 00:00:00 +0200</pubDate>
+      <title>Complex signatures of genomic variation of two non-model marine species in a homogeneous environment</title>
+      <link>https://esnielsen.github.io/publication/person-re-identification/</link>
+      <pubDate>Tue, 01 May 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/publication/clothing-search/</guid>
+      <guid>https://esnielsen.github.io/publication/person-re-identification/</guid>
       <description></description>
     </item>
     
@@ -55,6 +37,15 @@
       <guid>https://esnielsen.github.io/talk/example-talk/</guid>
       <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://sourcethemes.com/academic/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>Multispecies genetic objectives in spatial conservation planning</title>
+      <link>https://esnielsen.github.io/publication/clothing-search/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0200</pubDate>
+      
+      <guid>https://esnielsen.github.io/publication/clothing-search/</guid>
+      <description></description>
     </item>
     
     <item>

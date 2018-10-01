@@ -27,25 +27,25 @@
       <guid>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</guid>
       <description>&lt;p&gt;As Pooled sequencing gains popularity in the world of genomics, more and more programs are being introduced to specifically handle Pool-seq data. However, for students such as myself, it can be difficult to find the right program for each step of the bioinformatics process, and to know the correct data format and parameters used with each individual program.&lt;/p&gt;
 
-&lt;p&gt;Here is a short recap of all the Pool-seq bioinformatic programs that I have gathered, including input and output files, and any additional notes I had on the program.&lt;/p&gt;
+&lt;p&gt;Here is a short recap of the Pool-seq bioinformatic programs that I have gathered, including input and output files, and any additional notes I had on the program.&lt;/p&gt;
 
 &lt;p&gt;~&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://sourceforge.net/p/popoolation/wiki/Manual/&#34; target=&#34;_blank&#34;&gt;Popoolation&lt;/a&gt; -&lt;/p&gt;
 
-&lt;p&gt;input: pileup file (Note: must be made by samtools version 0.1.18 and below)&lt;/p&gt;
+&lt;p&gt;input: a samtools pileup file (Note: must be made by samtools version 0.1.18 and below, and cannot take mpileup files)&lt;/p&gt;
 
 &lt;p&gt;output: a pool-specific sync file, from which population specific diversity indices (such at Tajima&amp;rsquo;s pi &amp;amp; D, Watterson&amp;rsquo;s theta) can be calculated with the Variance-sliding.pl&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://sourceforge.net/p/popoolation2/wiki/Manual/&#34; target=&#34;_blank&#34;&gt;Popoolation2&lt;/a&gt; -&lt;/p&gt;
 
-&lt;p&gt;input: a mpileup file (Note: must be made by samtools version 0.1.18 and below)&lt;/p&gt;
+&lt;p&gt;input: a samtools mpileup file (Note: must be made by samtools version 0.1.18 and below)&lt;/p&gt;
 
 &lt;p&gt;output: a sync file including multiple pools, from which diversity metrics (FSTs) can be calculated. The sync file can also be converted into a genepop file for further analysis.&lt;/p&gt;
 
 &lt;p&gt;Notes of Popoolation/Polpoolation2:&lt;/p&gt;
 
-&lt;p&gt;There is not much guidance on these programs available online. Plus, the sync2GenePop conversion step requires custom scripts to be written so that it can be run on all loci at once, instead of each locus individually. Feel free to contact me if you wish to see perl scripts used to create a GenePop file for an entire pool.&lt;/p&gt;
+&lt;p&gt;The sync2GenePop conversion step requires custom scripts to be written so that it can be run on all loci at once, instead of each locus individually. Feel free to contact me if you wish to see perl scripts used to create a GenePop file for an entire pool.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/ekg/freebayes&#34; target=&#34;_blank&#34;&gt;FreeBayes&lt;/a&gt; -&lt;/p&gt;
 
@@ -55,35 +55,35 @@
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/vibansal/crisp&#34; target=&#34;_blank&#34;&gt;CRISP&lt;/a&gt; -&lt;/p&gt;
 
-&lt;p&gt;input: bam files, pool sample sizes, reference fasta file (NB: requires at least 2 pools/2 bam files)&lt;/p&gt;
+&lt;p&gt;input: BAM files, pool sample sizes, reference fasta file (NB: requires at least 2 pools/2 BAM files)&lt;/p&gt;
 
 &lt;p&gt;output: a pool VCF file&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://snver.sourceforge.net/manual.html&#34; target=&#34;_blank&#34;&gt;SNVer&lt;/a&gt; -&lt;/p&gt;
 
-&lt;p&gt;input: a batch of bam files (one per pool) &amp;amp; a text file with the bam file names, number of haploids, number of samples, and filtering thresholds&lt;/p&gt;
+&lt;p&gt;input: BAM files &amp;amp; a text file with the BAM file names, number of haploids, number of samples, and filtering thresholds&lt;/p&gt;
 
 &lt;p&gt;output: a pool VCF file&lt;/p&gt;
 
 &lt;p&gt;Notes on FreeBayes, CRISP &amp;amp; SNVer:&lt;/p&gt;
 
-&lt;p&gt;Even though these programs make VCF files, I personally could not find a way to convert these VCF files to other inputs such as genepop/genind/genlight to in conversion tools such as PGDspider, vcf2genepop, or genomic_converter. However, it seems like it can be input into the R package &lt;a href=&#34;https://cran.r-project.org/web/packages/poolfstat/poolfstat.pdf&#34; target=&#34;_blank&#34;&gt;poolfstat&lt;/a&gt; to calculate F-statistics, and be converted into files for BayPass and SelEstim.&lt;/p&gt;
+&lt;p&gt;Even though these programs make VCF files, I personally could not find a way to convert these VCF files to other formats such as genepop/genind/genlight with conversion tools such as PGDspider, vcf2genepop, or genomic_converter. However, it seems like it can be input into the R package &lt;a href=&#34;https://cran.r-project.org/web/packages/poolfstat/poolfstat.pdf&#34; target=&#34;_blank&#34;&gt;poolfstat&lt;/a&gt; to calculate F-statistics, and be converted into files for BayPass and SelEstim.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/EmanueleRaineri/snape-pooled&#34; target=&#34;_blank&#34;&gt;SNAPE-pool&lt;/a&gt; -&lt;/p&gt;
 
-&lt;p&gt;input: single pool pileup files (not mpileup files)&lt;/p&gt;
+&lt;p&gt;input: a samtools pileup file (not mpileup)&lt;/p&gt;
 
 &lt;p&gt;output: allele frequency output files&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/lucaferretti/npstat&#34; target=&#34;_blank&#34;&gt;npstat&lt;/a&gt; -&lt;/p&gt;
 
-&lt;p&gt;input: mpileup (all pools combined) + individual bam files (per pool) Can also take GFF3 annotations to perform McDonald-Krietman tests.&lt;/p&gt;
+&lt;p&gt;input: a samtools mpileup file + individual BAM files (per pool). Can also take GFF3 annotations to perform McDonald-Krietman tests.&lt;/p&gt;
 
 &lt;p&gt;output: population specific diversity indices (such at Tajima&amp;rsquo;s pi &amp;amp; D, Watterson&amp;rsquo;s theta), and population differentiation (FSTs)&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/chasewnelson/SNPGenie&#34; target=&#34;_blank&#34;&gt;SNPgenie&lt;/a&gt; -&lt;/p&gt;
 
-&lt;p&gt;input: a vcf file (for a single pool), a reference fasta file, and gtf annotation file&lt;/p&gt;
+&lt;p&gt;input: a VCF file (for a single pool), a reference fasta file, and GTF annotation file&lt;/p&gt;
 
 &lt;p&gt;output: πN/πS, dN/dS, and other evolutionary parameters (has a great number output files)&lt;/p&gt;
 
@@ -95,19 +95,19 @@
 
 &lt;p&gt;output: several plots and list of potential outlier loci&lt;/p&gt;
 
-&lt;p&gt;Note: For my data, this program suggested quite a large number of putative outliers, especially compared to Bayescan, Loistan, and Popoolation FSTs.&lt;/p&gt;
+&lt;p&gt;Note: For my data, this program suggested quite a large number of putative outliers, especially compared to Bayescan, Loistan, and Popoolation.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://www1.montpellier.inra.fr/CBGP/software/selestim/files/SelEstim_1.1.7_manual.pdf&#34; target=&#34;_blank&#34;&gt;SelEstim&lt;/a&gt; -&lt;/p&gt;
 
-&lt;p&gt;input: allele/read count file&lt;/p&gt;
+&lt;p&gt;input: an allele/read count file&lt;/p&gt;
 
-&lt;p&gt;ouput: a &amp;lsquo;delta&amp;rsquo; output file which is input in R to find outlier loci&lt;/p&gt;
+&lt;p&gt;ouput: a &amp;lsquo;delta&amp;rsquo; output file which is input in R to identify outlier loci&lt;/p&gt;
 
 &lt;p&gt;Note: I personally tried SelEstim with ~ 8,000 loci, and the program ran for about 4 weeks without finishing, so could not use due to time restraints.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/magicDGS/PoolHMM/blob/master/README.txt&#34; target=&#34;_blank&#34;&gt;Pool-hmm&lt;/a&gt; -&lt;/p&gt;
 
-&lt;p&gt;input: samtools mpileup (Note: the mpileup command should not have -u or -g option)&lt;/p&gt;
+&lt;p&gt;input: a samtools mpileup (Note: the mpileup command should not have -u or -g option)&lt;/p&gt;
 
 &lt;p&gt;output: allele frequency spectrum, plus probability of &amp;ldquo;Neutral&amp;rdquo;, &amp;ldquo;Intermediate&amp;rdquo; and &amp;ldquo;Selection&amp;rdquo; for each polymorphic site, with additional stats files&lt;/p&gt;
 

@@ -16,7 +16,7 @@
     
   
   <meta name="description" content="As Pooled sequencing gains popularity in the world of genomics, more and more programs are being introduced to specifically handle Pool-seq data. However, for students such as myself, it can be difficult to find the right program for each step of the bioinformatics process, and to know the correct data format and parameters used with each individual program.
-Here is a short recap of all the Pool-seq bioinformatic programs that I have gathered, including input and output files, and any additional notes I had on the program.">
+Here is a short recap of the Pool-seq bioinformatic programs that I have gathered, including input and output files, and any additional notes I had on the program.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/">
@@ -94,7 +94,7 @@ Here is a short recap of all the Pool-seq bioinformatic programs that I have gat
   <meta property="og:url" content="https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/">
   <meta property="og:title" content="Pool-seq Programs for Population Genomics | ">
   <meta property="og:description" content="As Pooled sequencing gains popularity in the world of genomics, more and more programs are being introduced to specifically handle Pool-seq data. However, for students such as myself, it can be difficult to find the right program for each step of the bioinformatics process, and to know the correct data format and parameters used with each individual program.
-Here is a short recap of all the Pool-seq bioinformatic programs that I have gathered, including input and output files, and any additional notes I had on the program."><meta property="og:image" content="https://esnielsen.github.io/img/headers/pic.pool.png">
+Here is a short recap of the Pool-seq bioinformatic programs that I have gathered, including input and output files, and any additional notes I had on the program."><meta property="og:image" content="https://esnielsen.github.io/img/headers/pic.pool.png">
   <meta property="og:locale" content="en-us">
   
   <meta property="article:published_time" content="2018-09-07T00:00:00&#43;00:00">
@@ -380,25 +380,25 @@ Here is a short recap of all the Pool-seq bioinformatic programs that I have gat
     <div class="article-style" itemprop="articleBody">
       <p>As Pooled sequencing gains popularity in the world of genomics, more and more programs are being introduced to specifically handle Pool-seq data. However, for students such as myself, it can be difficult to find the right program for each step of the bioinformatics process, and to know the correct data format and parameters used with each individual program.</p>
 
-<p>Here is a short recap of all the Pool-seq bioinformatic programs that I have gathered, including input and output files, and any additional notes I had on the program.</p>
+<p>Here is a short recap of the Pool-seq bioinformatic programs that I have gathered, including input and output files, and any additional notes I had on the program.</p>
 
 <p>~</p>
 
 <p><a href="https://sourceforge.net/p/popoolation/wiki/Manual/" target="_blank">Popoolation</a> -</p>
 
-<p>input: pileup file (Note: must be made by samtools version 0.1.18 and below)</p>
+<p>input: a samtools pileup file (Note: must be made by samtools version 0.1.18 and below, and cannot take mpileup files)</p>
 
 <p>output: a pool-specific sync file, from which population specific diversity indices (such at Tajima&rsquo;s pi &amp; D, Watterson&rsquo;s theta) can be calculated with the Variance-sliding.pl</p>
 
 <p><a href="https://sourceforge.net/p/popoolation2/wiki/Manual/" target="_blank">Popoolation2</a> -</p>
 
-<p>input: a mpileup file (Note: must be made by samtools version 0.1.18 and below)</p>
+<p>input: a samtools mpileup file (Note: must be made by samtools version 0.1.18 and below)</p>
 
 <p>output: a sync file including multiple pools, from which diversity metrics (FSTs) can be calculated. The sync file can also be converted into a genepop file for further analysis.</p>
 
 <p>Notes of Popoolation/Polpoolation2:</p>
 
-<p>There is not much guidance on these programs available online. Plus, the sync2GenePop conversion step requires custom scripts to be written so that it can be run on all loci at once, instead of each locus individually. Feel free to contact me if you wish to see perl scripts used to create a GenePop file for an entire pool.</p>
+<p>The sync2GenePop conversion step requires custom scripts to be written so that it can be run on all loci at once, instead of each locus individually. Feel free to contact me if you wish to see perl scripts used to create a GenePop file for an entire pool.</p>
 
 <p><a href="https://github.com/ekg/freebayes" target="_blank">FreeBayes</a> -</p>
 
@@ -408,35 +408,35 @@ Here is a short recap of all the Pool-seq bioinformatic programs that I have gat
 
 <p><a href="https://github.com/vibansal/crisp" target="_blank">CRISP</a> -</p>
 
-<p>input: bam files, pool sample sizes, reference fasta file (NB: requires at least 2 pools/2 bam files)</p>
+<p>input: BAM files, pool sample sizes, reference fasta file (NB: requires at least 2 pools/2 BAM files)</p>
 
 <p>output: a pool VCF file</p>
 
 <p><a href="http://snver.sourceforge.net/manual.html" target="_blank">SNVer</a> -</p>
 
-<p>input: a batch of bam files (one per pool) &amp; a text file with the bam file names, number of haploids, number of samples, and filtering thresholds</p>
+<p>input: BAM files &amp; a text file with the BAM file names, number of haploids, number of samples, and filtering thresholds</p>
 
 <p>output: a pool VCF file</p>
 
 <p>Notes on FreeBayes, CRISP &amp; SNVer:</p>
 
-<p>Even though these programs make VCF files, I personally could not find a way to convert these VCF files to other inputs such as genepop/genind/genlight to in conversion tools such as PGDspider, vcf2genepop, or genomic_converter. However, it seems like it can be input into the R package <a href="https://cran.r-project.org/web/packages/poolfstat/poolfstat.pdf" target="_blank">poolfstat</a> to calculate F-statistics, and be converted into files for BayPass and SelEstim.</p>
+<p>Even though these programs make VCF files, I personally could not find a way to convert these VCF files to other formats such as genepop/genind/genlight with conversion tools such as PGDspider, vcf2genepop, or genomic_converter. However, it seems like it can be input into the R package <a href="https://cran.r-project.org/web/packages/poolfstat/poolfstat.pdf" target="_blank">poolfstat</a> to calculate F-statistics, and be converted into files for BayPass and SelEstim.</p>
 
 <p><a href="https://github.com/EmanueleRaineri/snape-pooled" target="_blank">SNAPE-pool</a> -</p>
 
-<p>input: single pool pileup files (not mpileup files)</p>
+<p>input: a samtools pileup file (not mpileup)</p>
 
 <p>output: allele frequency output files</p>
 
 <p><a href="https://github.com/lucaferretti/npstat" target="_blank">npstat</a> -</p>
 
-<p>input: mpileup (all pools combined) + individual bam files (per pool) Can also take GFF3 annotations to perform McDonald-Krietman tests.</p>
+<p>input: a samtools mpileup file + individual BAM files (per pool). Can also take GFF3 annotations to perform McDonald-Krietman tests.</p>
 
 <p>output: population specific diversity indices (such at Tajima&rsquo;s pi &amp; D, Watterson&rsquo;s theta), and population differentiation (FSTs)</p>
 
 <p><a href="https://github.com/chasewnelson/SNPGenie" target="_blank">SNPgenie</a> -</p>
 
-<p>input: a vcf file (for a single pool), a reference fasta file, and gtf annotation file</p>
+<p>input: a VCF file (for a single pool), a reference fasta file, and GTF annotation file</p>
 
 <p>output: πN/πS, dN/dS, and other evolutionary parameters (has a great number output files)</p>
 
@@ -448,19 +448,19 @@ Here is a short recap of all the Pool-seq bioinformatic programs that I have gat
 
 <p>output: several plots and list of potential outlier loci</p>
 
-<p>Note: For my data, this program suggested quite a large number of putative outliers, especially compared to Bayescan, Loistan, and Popoolation FSTs.</p>
+<p>Note: For my data, this program suggested quite a large number of putative outliers, especially compared to Bayescan, Loistan, and Popoolation.</p>
 
 <p><a href="http://www1.montpellier.inra.fr/CBGP/software/selestim/files/SelEstim_1.1.7_manual.pdf" target="_blank">SelEstim</a> -</p>
 
-<p>input: allele/read count file</p>
+<p>input: an allele/read count file</p>
 
-<p>ouput: a &lsquo;delta&rsquo; output file which is input in R to find outlier loci</p>
+<p>ouput: a &lsquo;delta&rsquo; output file which is input in R to identify outlier loci</p>
 
 <p>Note: I personally tried SelEstim with ~ 8,000 loci, and the program ran for about 4 weeks without finishing, so could not use due to time restraints.</p>
 
 <p><a href="https://github.com/magicDGS/PoolHMM/blob/master/README.txt" target="_blank">Pool-hmm</a> -</p>
 
-<p>input: samtools mpileup (Note: the mpileup command should not have -u or -g option)</p>
+<p>input: a samtools mpileup (Note: the mpileup command should not have -u or -g option)</p>
 
 <p>output: allele frequency spectrum, plus probability of &ldquo;Neutral&rdquo;, &ldquo;Intermediate&rdquo; and &ldquo;Selection&rdquo; for each polymorphic site, with additional stats files</p>
 

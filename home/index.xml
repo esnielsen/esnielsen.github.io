@@ -37,7 +37,7 @@
       
       <guid>https://esnielsen.github.io/home/about/</guid>
       <description>Biography I am a PhD candidate within the von der Heyden lab at Stellenbosch University. Some of my research interests include seascape genomics, conservation planning, social-ecological interactions, and ecological niche modeling.
-When I am not working on my PhD, I am most likely at the beach and on the water, teaching hula hooping classes, or hanging out with my three cats.</description>
+When I am not working on my PhD, I am most likely at the beach, playing with hula hoops and rollerskates, or hanging out with my three cats.</description>
     </item>
     
     <item>
@@ -109,9 +109,9 @@ When I am not working on my PhD, I am most likely at the beach and on the water,
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
       
       <guid>https://esnielsen.github.io/home/teaching/</guid>
-      <description>This is an example of using the custom widget to create your own homepage section.
-I am a teaching instructor for the following courses at University X:
- CS101: An intro to computer science CS102: An intro to computer science CS103: An intro to computer science CS104: An intro to computer science CS105: An intro to computer science CS106: An intro to computer science CS107: An intro to computer science  </description>
+      <description>#This is an example of using the custom widget to create your own homepage section.
+I am currently teaching the following courses at Stellenbosch University:
+ Biology 124 teaching assistant (1st year) Biology 154 teaching assistant (1st year) Population genomics in R (3rd year Honours practical)  </description>
     </item>
     
     <item>

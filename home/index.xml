@@ -2,142 +2,141 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Homes on </title>
-    <link>https://esnielsen.github.io/home/</link>
+    <link>/home/</link>
     <description>Recent content in Homes on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
     <lastBuildDate>Sun, 15 Oct 2017 00:00:00 +0200</lastBuildDate>
     
-	<atom:link href="https://esnielsen.github.io/home/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/home/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title></title>
-      <link>https://esnielsen.github.io/home/hero_carousel/</link>
+      <link>/home/hero_carousel/</link>
       <pubDate>Sun, 15 Oct 2017 00:00:00 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/home/hero_carousel/</guid>
+      <guid>/home/hero_carousel/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Erica S. Nielsen</title>
-      <link>https://esnielsen.github.io/home/hero/</link>
+      <link>/home/hero/</link>
       <pubDate>Sun, 15 Oct 2017 00:00:00 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/home/hero/</guid>
+      <guid>/home/hero/</guid>
       <description></description>
     </item>
     
     <item>
       <title></title>
-      <link>https://esnielsen.github.io/home/about/</link>
+      <link>/home/about/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/home/about/</guid>
+      <guid>/home/about/</guid>
       <description>Biography I am a PhD candidate within the von der Heyden lab at Stellenbosch University. Some of my research interests include seascape genomics, conservation planning, social-ecological interactions, and ecological niche modeling.
 When I am not working on my PhD, I am most likely at the beach, playing with hula hoops and rollerskates, or hanging out with my three cats.</description>
     </item>
     
     <item>
       <title>Selected Publications</title>
-      <link>https://esnielsen.github.io/home/publications_selected/</link>
+      <link>/home/publications_selected/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/home/publications_selected/</guid>
+      <guid>/home/publications_selected/</guid>
       <description></description>
     </item>
     
     <item>
       <title></title>
-      <link>https://esnielsen.github.io/home/skills/</link>
+      <link>/home/skills/</link>
       <pubDate>Wed, 20 Sep 2017 00:00:00 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/home/skills/</guid>
+      <guid>/home/skills/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Recent Publications</title>
-      <link>https://esnielsen.github.io/home/publications/</link>
+      <link>/home/publications/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/home/publications/</guid>
+      <guid>/home/publications/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Selected Talks</title>
-      <link>https://esnielsen.github.io/home/talks_selected/</link>
+      <link>/home/talks_selected/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/home/talks_selected/</guid>
+      <guid>/home/talks_selected/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Recent &amp; Upcoming Talks</title>
-      <link>https://esnielsen.github.io/home/talks/</link>
+      <link>/home/talks/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/home/talks/</guid>
+      <guid>/home/talks/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Recent Posts</title>
-      <link>https://esnielsen.github.io/home/posts/</link>
+      <link>/home/posts/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/home/posts/</guid>
+      <guid>/home/posts/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Projects</title>
-      <link>https://esnielsen.github.io/home/projects/</link>
+      <link>/home/projects/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/home/projects/</guid>
+      <guid>/home/projects/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Teaching</title>
-      <link>https://esnielsen.github.io/home/teaching/</link>
+      <link>/home/teaching/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/home/teaching/</guid>
-      <description>#This is an example of using the custom widget to create your own homepage section.
-I am currently teaching the following courses at Stellenbosch University:
- Biology 124 teaching assistant (1st year) Biology 154 teaching assistant (1st year) Population genomics in R (3rd year Honours practical)  </description>
+      <guid>/home/teaching/</guid>
+      <description>I am currently involved in the following courses at Stellenbosch University:
+ Biology 124 (1st year - Teaching Assistant) Biology 154 (1st year - Teaching Assistant) Population genomics in R (3rd year - Honours practical)  </description>
     </item>
     
     <item>
       <title>Tags</title>
-      <link>https://esnielsen.github.io/home/tags/</link>
+      <link>/home/tags/</link>
       <pubDate>Wed, 20 Sep 2017 00:00:00 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/home/tags/</guid>
+      <guid>/home/tags/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Search</title>
-      <link>https://esnielsen.github.io/home/search/</link>
+      <link>/home/search/</link>
       <pubDate>Mon, 23 Jul 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/home/search/</guid>
+      <guid>/home/search/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Contact</title>
-      <link>https://esnielsen.github.io/home/contact/</link>
+      <link>/home/contact/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/home/contact/</guid>
+      <guid>/home/contact/</guid>
       <description></description>
     </item>
     

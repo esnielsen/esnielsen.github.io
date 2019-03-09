@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Projects on </title>
-    <link>/project/</link>
+    <link>https://esnielsen.github.io/project/</link>
     <description>Recent content in Projects on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
     <lastBuildDate>Fri, 07 Sep 2018 16:32:54 +0200</lastBuildDate>
     
-	<atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://esnielsen.github.io/project/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Women in STEM</title>
-      <link>/project/genetic-diversity-in-spatial-planning/</link>
+      <link>https://esnielsen.github.io/project/genetic-diversity-in-spatial-planning/</link>
       <pubDate>Fri, 07 Sep 2018 16:32:54 +0200</pubDate>
       
-      <guid>/project/genetic-diversity-in-spatial-planning/</guid>
+      <guid>https://esnielsen.github.io/project/genetic-diversity-in-spatial-planning/</guid>
       <description>I have always loved Cindi Lauper&amp;rsquo;s style and her iconic song, &amp;lsquo;Girls just want to have fun&amp;rsquo;, and when I saw this photo (see above) from the Women&amp;rsquo;s March, I knew I needed to make my own rendition of the song. I hope you enjoy!
   I originally learned how to play the song on the ukulele following this tutorial. The lyrics and tabs below:
 __
@@ -26,20 +26,20 @@ Women in STEM</description>
     
     <item>
       <title></title>
-      <link>/project/deep-learning/</link>
+      <link>https://esnielsen.github.io/project/deep-learning/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/project/deep-learning/</guid>
+      <guid>https://esnielsen.github.io/project/deep-learning/</guid>
       <description>#This post was originally inspired by the photo above, which I am assuming was from the women&amp;rsquo;s march in 2018.
 #I have always loved Cindi Lauper&amp;rsquo;s style and her iconic song, &amp;lsquo;Girls just want to have fun&amp;rsquo; - so I figured, why not make my own version? Here is the link to the song and the lyrics.</description>
     </item>
     
     <item>
       <title></title>
-      <link>/project/example-external-project/</link>
+      <link>https://esnielsen.github.io/project/example-external-project/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/project/example-external-project/</guid>
+      <guid>https://esnielsen.github.io/project/example-external-project/</guid>
       <description></description>
     </item>
     

@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title></title>
-    <link>/</link>
+    <link>https://esnielsen.github.io/</link>
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,10 +12,10 @@
     
     <item>
       <title>Women in STEM</title>
-      <link>/project/genetic-diversity-in-spatial-planning/</link>
+      <link>https://esnielsen.github.io/project/genetic-diversity-in-spatial-planning/</link>
       <pubDate>Fri, 07 Sep 2018 16:32:54 +0200</pubDate>
       
-      <guid>/project/genetic-diversity-in-spatial-planning/</guid>
+      <guid>https://esnielsen.github.io/project/genetic-diversity-in-spatial-planning/</guid>
       <description>&lt;p&gt;I have always loved Cindi Lauper&amp;rsquo;s style and her iconic song, &amp;lsquo;Girls just want to have fun&amp;rsquo;, and when I saw this photo (see above) from the Women&amp;rsquo;s March, I knew I needed to make my own rendition of the song. I hope you enjoy!&lt;/p&gt;
 
 
@@ -68,10 +68,10 @@
     
     <item>
       <title>Pool-seq Programs for Population Genomics</title>
-      <link>/post/a-guide-to-ngs-pool-seq-programs/</link>
+      <link>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</link>
       <pubDate>Fri, 07 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/a-guide-to-ngs-pool-seq-programs/</guid>
+      <guid>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</guid>
       <description>&lt;p&gt;As Pooled sequencing gains popularity in the world of genomics, more and more programs are being introduced to specifically handle Pool-seq data. However, for students such as myself, it can be difficult to find the right program for each step of the bioinformatics process, and to know the correct data format and parameters used with each individual program.&lt;/p&gt;
 
 &lt;p&gt;Here is a short recap of the Pool-seq bioinformatic programs that I have gathered, including input and output files, and any additional notes I had on the program.&lt;/p&gt;
@@ -180,48 +180,48 @@
     
     <item>
       <title>Privacy Policy</title>
-      <link>/privacy/</link>
+      <link>https://esnielsen.github.io/privacy/</link>
       <pubDate>Thu, 28 Jun 2018 00:00:00 +0200</pubDate>
       
-      <guid>/privacy/</guid>
+      <guid>https://esnielsen.github.io/privacy/</guid>
       <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Complex signatures of genomic variation of two non-model marine species in a homogeneous environment</title>
-      <link>/publication/person-re-identification/</link>
+      <link>https://esnielsen.github.io/publication/person-re-identification/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0200</pubDate>
       
-      <guid>/publication/person-re-identification/</guid>
+      <guid>https://esnielsen.github.io/publication/person-re-identification/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Example Talk</title>
-      <link>/talk/example-talk/</link>
+      <link>https://esnielsen.github.io/talk/example-talk/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0200</pubDate>
       
-      <guid>/talk/example-talk/</guid>
+      <guid>https://esnielsen.github.io/talk/example-talk/</guid>
       <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://sourcethemes.com/academic/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Multispecies genetic objectives in spatial conservation planning</title>
-      <link>/publication/clothing-search/</link>
+      <link>https://esnielsen.github.io/publication/clothing-search/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0200</pubDate>
       
-      <guid>/publication/clothing-search/</guid>
+      <guid>https://esnielsen.github.io/publication/clothing-search/</guid>
       <description></description>
     </item>
     
     <item>
       <title></title>
-      <link>/project/deep-learning/</link>
+      <link>https://esnielsen.github.io/project/deep-learning/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/project/deep-learning/</guid>
+      <guid>https://esnielsen.github.io/project/deep-learning/</guid>
       <description>&lt;p&gt;#This post was originally inspired by the photo above, which I am assuming was from the women&amp;rsquo;s march in 2018.&lt;/p&gt;
 
 &lt;p&gt;#I have always loved Cindi Lauper&amp;rsquo;s style and her iconic song, &amp;lsquo;Girls just want to have fun&amp;rsquo; - so I figured, why not make my own version? Here is the link to the song and the lyrics.&lt;/p&gt;
@@ -230,10 +230,10 @@
     
     <item>
       <title></title>
-      <link>/project/example-external-project/</link>
+      <link>https://esnielsen.github.io/project/example-external-project/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/project/example-external-project/</guid>
+      <guid>https://esnielsen.github.io/project/example-external-project/</guid>
       <description></description>
     </item>
     

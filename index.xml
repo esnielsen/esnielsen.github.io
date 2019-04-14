@@ -90,7 +90,7 @@
 
 &lt;p&gt;Thanks for reading!&lt;/p&gt;
 
-&lt;p&gt;{{ template &amp;ldquo;_internal/disqus.html&amp;rdquo; . }}&lt;/p&gt;
+&lt;p&gt;{{ partial &amp;ldquo;disqus.html&amp;rdquo; . }}&lt;/p&gt;
 </description>
     </item>
     

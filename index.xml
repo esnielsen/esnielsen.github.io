@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title></title>
-    <link>https://esnielsen.github.io/</link>
+    <link>/</link>
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,10 +12,10 @@
     
     <item>
       <title>Representation: The foundation of conservation</title>
-      <link>https://esnielsen.github.io/project/respresentation/</link>
+      <link>/project/respresentation/</link>
       <pubDate>Fri, 07 Sep 2018 16:32:54 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/project/respresentation/</guid>
+      <guid>/project/respresentation/</guid>
       <description>&lt;p&gt;Designing Marine Protected Areas, or MPAS, can be difficult, and we still have a lot to learn - as beautifully portrayed in the comic above by &lt;a href=&#34;https://www.ohdakuwaqa.com/&#34; target=&#34;_blank&#34;&gt;Anju Sabu&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;There are complex and dynamic social-ecological systems that need to be weighed and balanced to create an arrangement of MPAs that best protect the natural environment, and provide for various cultural and economic uses of marine resources.&lt;/p&gt;
@@ -96,10 +96,10 @@
     
     <item>
       <title>Women in STEM</title>
-      <link>https://esnielsen.github.io/project/women-in-stem/</link>
+      <link>/project/women-in-stem/</link>
       <pubDate>Fri, 07 Sep 2018 16:32:54 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/project/women-in-stem/</guid>
+      <guid>/project/women-in-stem/</guid>
       <description>&lt;p&gt;I have always loved Cindi Lauper&amp;rsquo;s style and her iconic song, &amp;lsquo;Girls just want to have fun&amp;rsquo;, and when I saw this photo (see above) from the Women&amp;rsquo;s March, I knew I needed to make my own rendition of the song. I hope you enjoy!&lt;/p&gt;
 
 
@@ -162,13 +162,13 @@
     
     <item>
       <title>Get Genetic With It</title>
-      <link>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</link>
+      <link>/post/a-guide-to-ngs-pool-seq-programs/</link>
       <pubDate>Fri, 07 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</guid>
+      <guid>/post/a-guide-to-ngs-pool-seq-programs/</guid>
       <description>&lt;p&gt;Here is my entry to the &lt;a href=&#34;https://evolutionfilmfestival.org/2019/02/11/enter-the-8th-annual-evolution-video-contest/&#34; target=&#34;_blank&#34;&gt;Evolution Film Contest&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Every year our university opens it&amp;rsquo;s doors to high school students, so that they can get an idea of what postgraduates do within each lab. My intention with this video is to open our lab doors to a much wider audience and offer a view into my world as a PhD student working within a molecular lab. I wanted to make a video that is not only fun to watch, but also describes the basic theories and methodologies used within molecular ecology. I also wanted to highlight different sub-divisions of genetics so that viewers can get a sense of the diversity within the field.&lt;/p&gt;
+&lt;p&gt;Every year our university opens its doors to high school students, so that they can get an idea of what postgraduates do within each lab. My intention with this video is to open our lab doors to a much wider audience and offer a view into my world as a PhD student studying molecular ecology. I wanted to make a video that is not only fun to watch, but also describes the basic theories and methodologies used within molecular ecology. I also wanted to highlight different sub-divisions of genetics so that viewers can get a sense of the diversity within the field.&lt;/p&gt;
 
 &lt;p&gt;This video also could not have happened without the support of my lab members and Stellenbosch University. And special thanks to all those who agreed to wiggle in front of the camera!&lt;/p&gt;
 
@@ -184,10 +184,10 @@
     
     <item>
       <title>Pool-seq Programs for Population Genomics</title>
-      <link>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</link>
+      <link>/post/a-guide-to-ngs-pool-seq-programs/</link>
       <pubDate>Fri, 07 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</guid>
+      <guid>/post/a-guide-to-ngs-pool-seq-programs/</guid>
       <description>&lt;p&gt;As Pooled sequencing gains popularity in the world of genomics, more and more programs are being introduced to specifically handle Pool-seq data. However, for students such as myself, it can be difficult to find the right program for each step of the bioinformatics process, and to know the correct data format and parameters used with each individual program.&lt;/p&gt;
 
 &lt;p&gt;Here is a short recap of the Pool-seq bioinformatic programs that I have gathered, including input and output files, and any additional notes I had on the program.&lt;/p&gt;
@@ -296,39 +296,39 @@
     
     <item>
       <title>Privacy Policy</title>
-      <link>https://esnielsen.github.io/privacy/</link>
+      <link>/privacy/</link>
       <pubDate>Thu, 28 Jun 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/privacy/</guid>
+      <guid>/privacy/</guid>
       <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Complex signatures of genomic variation of two non-model marine species in a homogeneous environment</title>
-      <link>https://esnielsen.github.io/publication/person-re-identification/</link>
+      <link>/publication/person-re-identification/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/publication/person-re-identification/</guid>
+      <guid>/publication/person-re-identification/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Example Talk</title>
-      <link>https://esnielsen.github.io/talk/example-talk/</link>
+      <link>/talk/example-talk/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/talk/example-talk/</guid>
+      <guid>/talk/example-talk/</guid>
       <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://sourcethemes.com/academic/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Multispecies genetic objectives in spatial conservation planning</title>
-      <link>https://esnielsen.github.io/publication/clothing-search/</link>
+      <link>/publication/clothing-search/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0200</pubDate>
       
-      <guid>https://esnielsen.github.io/publication/clothing-search/</guid>
+      <guid>/publication/clothing-search/</guid>
       <description></description>
     </item>
     

@@ -15,10 +15,12 @@
   
     
   
-  <meta name="description" content="&hellip;">
+  <meta name="description" content="This tutorial will go through how to run Species Distribution Models (SDMs) on coastal species using biomod2 in R.
+We will obtain the predictor environmental variables from Bio-Oracle with the R package sdmpredictors. Since I work on intertidal species, I want to include both terrestrial and marine environmental variables. We will first load and stack the layers.
+It is also important to only include variables that are available at both time points you want to model.">
 
   
-  <link rel="alternate" hreflang="en-us" href="/privacy/">
+  <link rel="alternate" hreflang="en-us" href="/post/coastal-species-distribution-models/">
 
   
 
@@ -82,7 +84,7 @@
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/privacy/">
+  <link rel="canonical" href="/post/coastal-species-distribution-models/">
 
   <meta property="twitter:card" content="summary_large_image">
   
@@ -90,21 +92,23 @@
   <meta property="twitter:creator" content="@https://twitter.com/erica_at_work">
   
   <meta property="og:site_name" content="">
-  <meta property="og:url" content="/privacy/">
-  <meta property="og:title" content="Privacy Policy | ">
-  <meta property="og:description" content="&hellip;">
+  <meta property="og:url" content="/post/coastal-species-distribution-models/">
+  <meta property="og:title" content="Coastal Species Distribution Models | ">
+  <meta property="og:description" content="This tutorial will go through how to run Species Distribution Models (SDMs) on coastal species using biomod2 in R.
+We will obtain the predictor environmental variables from Bio-Oracle with the R package sdmpredictors. Since I work on intertidal species, I want to include both terrestrial and marine environmental variables. We will first load and stack the layers.
+It is also important to only include variables that are available at both time points you want to model."><meta property="og:image" content="/img/headers/p10.jpeg">
   <meta property="og:locale" content="en-us">
   
-  <meta property="article:published_time" content="2018-06-28T00:00:00&#43;02:00">
+  <meta property="article:published_time" content="2019-12-16T00:00:00&#43;00:00">
   
-  <meta property="article:modified_time" content="2018-06-28T00:00:00&#43;02:00">
-  
-
+  <meta property="article:modified_time" content="2019-12-16T00:00:00&#43;00:00">
   
 
   
 
-  <title>Privacy Policy | </title>
+  
+
+  <title>Coastal Species Distribution Models | </title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
@@ -277,10 +281,19 @@
 <article class="article" itemscope itemtype="http://schema.org/Article">
 
   
+<div class="article-header">
+  
+  
+    <img src="/img/headers/p10.jpeg" class="article-banner" itemprop="image">
+  
+
+  
+</div>
+
 
 
   <div class="article-container">
-    <h1 itemprop="name">Privacy Policy</h1>
+    <h1 itemprop="name">Coastal Species Distribution Models</h1>
 
     
 
@@ -295,9 +308,9 @@
 
   <span class="article-date">
     
-    <meta content="2018-06-28 00:00:00 &#43;0200 SAST" itemprop="datePublished">
-    <time datetime="2018-06-28 00:00:00 &#43;0200 SAST" itemprop="dateModified">
-      Jun 28, 2018
+    <meta content="2019-12-16 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+    <time datetime="2019-12-16 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+      Dec 16, 2019
     </time>
   </span>
   <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
@@ -307,16 +320,19 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    1 min read
+    4 min read
   </span>
   
 
   
   
   <span class="middot-divider"></span>
-  <a href="/privacy/#disqus_thread"></a>
+  <a href="/post/coastal-species-distribution-models/#disqus_thread"></a>
   
 
+  
+  
+  
   
 
   
@@ -325,35 +341,35 @@
   <ul class="share">
     <li>
       <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=Privacy%20Policy&amp;url=%2fprivacy%2f"
+         href="https://twitter.com/intent/tweet?text=Coastal%20Species%20Distribution%20Models&amp;url=%2fpost%2fcoastal-species-distribution-models%2f"
          target="_blank" rel="noopener">
         <i class="fa fa-twitter"></i>
       </a>
     </li>
     <li>
       <a class="facebook"
-         href="https://www.facebook.com/sharer.php?u=%2fprivacy%2f"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2fcoastal-species-distribution-models%2f"
          target="_blank" rel="noopener">
         <i class="fa fa-facebook"></i>
       </a>
     </li>
     <li>
       <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fprivacy%2f&amp;title=Privacy%20Policy"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fcoastal-species-distribution-models%2f&amp;title=Coastal%20Species%20Distribution%20Models"
          target="_blank" rel="noopener">
         <i class="fa fa-linkedin"></i>
       </a>
     </li>
     <li>
       <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=%2fprivacy%2f&amp;title=Privacy%20Policy"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2fcoastal-species-distribution-models%2f&amp;title=Coastal%20Species%20Distribution%20Models"
          target="_blank" rel="noopener">
         <i class="fa fa-weibo"></i>
       </a>
     </li>
     <li>
       <a class="email"
-         href="mailto:?subject=Privacy%20Policy&amp;body=%2fprivacy%2f">
+         href="mailto:?subject=Coastal%20Species%20Distribution%20Models&amp;body=%2fpost%2fcoastal-species-distribution-models%2f">
         <i class="fa fa-envelope"></i>
       </a>
     </li>
@@ -367,11 +383,96 @@
 
 
     <div class="article-style" itemprop="articleBody">
-      <p>&hellip;</p>
+      <p>This tutorial will go through how to run Species Distribution Models (SDMs) on coastal species using biomod2 in R.</p>
+
+<p>We will obtain the predictor environmental variables from <a href="http://www.bio-oracle.org/" target="_blank">Bio-Oracle</a> with the R package sdmpredictors. Since I work on intertidal species, I want to include both terrestrial and marine environmental variables. We will first load and stack the layers.</p>
+
+<p>It is also important to only include variables that are available at both time points you want to model.</p>
+
+<script src="//gist.github.com/esnielsen/4170042f638a89b0ded49cf03958fc0c.js"></script>
+
+<p>Because the terrestrial and marine layers have different dimensions, we will need to resample them so that we can combine them into a single raster stack.</p>
+
+<script src="//gist.github.com/esnielsen/6686615bdf05e71b62fe7fb368aa29fc.js"></script>
+
+<p>Plotting the environmental layers should give you a figure such as this:</p>
+
+<p><img src="/img/sdm/fig1.pdf" alt="Example image" /></p>
+
+<p>Now we have a single raster stack called &lsquo;env&rsquo;. We now need to remove highly correlated environmental variables.</p>
+
+<script src="//gist.github.com/esnielsen/02d91b891093a9fd8273ffd52d1e8684.js"></script>
+
+<p>Here we will need to include our species presence data, which should include three columns: columns 1 &amp; 2: x and y coordinates; column 3: presence (1) or absence (0) at each coordinate.</p>
+
+<p>To check for variable collinearity, we will first create a correlation circle, and then calculate the variance inflation factor, or VIF.</p>
+
+<p>The correlation circle should look something like this:</p>
+
+<p><img src="/img/sdm/fig5.pdf" alt="Example image" /></p>
+
+<p>From the correlation circle, we want to select variables on different axes and not in the same/overlapping environmental space. If there are multiple variables in the same quadrant of the circle, we should choose the one with a longer arrow, as that means it varies more over the environmental space, which is preferred. However, it is also important to know which environmental features are more relevant to your study species, and to choose according to the ecology of each species.</p>
+
+<ul>
+<li>A note on arrow directions: same direction = highly correlated, orthogonal (this means at a 90 degree angle) = unrelated, opposite directions = negatively correlated</li>
+</ul>
+
+<p>From the VIF we want to only include variables with a VIF&lt; 10.</p>
+
+<p>Looking at both the correlation circle, and from the VIFs, we will select the following variables: Tmax, T_range, SSS, and SST. After selecting these variables our correlation circle looks like so:</p>
+
+<p><img src="/img/sdm/fig6.pdf" alt="Example image" /></p>
+
+<p>Now that we have our final set of variables, we can download the same variables for the Last Glacial Maximum (LGM), 21,000 years ago. The environmental features from Bio-Oracle automatically include the lowered sea levels at the LGM which is nice.</p>
+
+<p>It is generally good practice to include multiple climatic models. Here we will include two models: CCSM4 and MIROC. The oceanic layers are already an ensemble of multiple models, so we will use the ensemble without CCSM with the MIROC terrestrial layers, and the ocean model including CCSM with the CCSM terrestrial layers.</p>
+
+<script src="//gist.github.com/esnielsen/b278c7c8a4e65865925e8e97b1a90ad8.js"></script>
+
+<p>Now we can use our environmental raster stack and presence data to create pseudo-absence data.</p>
+
+<script src="//gist.github.com/esnielsen/7c03987d0d08cb01d9dca0c80497a8d9.js"></script>
+
+<p>The output maps for the pseudo-absences looks like so:</p>
+
+<p><img src="/img/sdm/fig7.pdf" alt="Example image" /></p>
+
+<p>Next we will run model models using our presence and pseudo absence data and environmental features. Here we will run 6 different models, over 10 runs, using 30% of the data for callibration, and 70% for fitting models.</p>
+
+<script src="//gist.github.com/esnielsen/4f3cf3ac1c570b22e7c3d0cb5cdc6989.js"></script>
+
+<p>Then we can evaluate the models. We will graph the model scores. A TSS of above ~0.55 and ROC of above ~ 0.8 are indicative of well performing models.</p>
+
+<p>The graphs should look similar to this:</p>
+
+<p><img src="/img/sdm/fig8.pdf" alt="Example image" /></p>
+
+<p>We can also look at the importance of each environmental variable in explaining the distribution, which is calculated as the variable importance. It is also good practice to visualize the response curves pertaining to each environmental variable.</p>
+
+<p>Now we will project our models onto the current climate, and compare how well they predict the current distribution. Running this script will create a folder in your directory called &lsquo;current&rsquo;. Note that this will automatically overwrite any other folder of the same name.</p>
+
+<p>Afterwards we will create the ensemble model, which will combine the 6 model types we specified earlier. Here we will use a TSS cut off of 0.55 and ROC cut off of 0.8.</p>
+
+<script src="//gist.github.com/esnielsen/43b975aa182bedfff50ef88fff71248f.js"></script>
+
+<p>The output of our ensemble model looks like so:</p>
+
+<p><img src="/img/sdm/fig10.pdf" alt="Example image" /></p>
+
+<p>Finally, we can project our models onto future layers. We will first combine the MIROC and CCSM model outputs, by averaging their values per cell. We will also enlargen the cells to make the output maps easier to read.</p>
+
+<script src="//gist.github.com/esnielsen/1def0bae8f97ce53a871fb637b0d57e8.js"></script>
+
+<p>Our final figure showing habitat suitability for all models at two timepoints looks like so:</p>
+
+<p><img src="/img/sdm/fig11.pdf" alt="Example image" /></p>
 
     </div>
 
     
+
+
+
 
 
     

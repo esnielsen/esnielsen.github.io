@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on </title>
+    <title>Tutorials on </title>
     <link>/post/</link>
-    <description>Recent content in Posts on </description>
+    <description>Recent content in Tutorials on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
@@ -11,6 +11,17 @@
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Coastal Species Distribution Models</title>
+      <link>/post/coastal-species-distribution-models/</link>
+      <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/coastal-species-distribution-models/</guid>
+      <description>This tutorial will go through how to run Species Distribution Models (SDMs) on coastal species using biomod2 in R.
+We will obtain the predictor environmental variables from Bio-Oracle with the R package sdmpredictors. Since I work on intertidal species, I want to include both terrestrial and marine environmental variables. We will first load and stack the layers.
+It is also important to only include variables that are available at both time points you want to model.</description>
+    </item>
     
     <item>
       <title>Pool-seq Programs for Population Genomics</title>

@@ -7,19 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sun, 22 Sep 2019 16:32:54 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 14 Dec 2019 16:32:54 +0200</lastBuildDate>
     
 	<atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>A Sustainable Future</title>
-      <link>/project/sustainability/</link>
-      <pubDate>Sun, 22 Sep 2019 16:32:54 +0200</pubDate>
+      <title>2019 Conservation Symposium Review</title>
+      <link>/project/sccp_2019/</link>
+      <pubDate>Sat, 14 Dec 2019 16:32:54 +0200</pubDate>
       
-      <guid>/project/sustainability/</guid>
-      <description>Today civil, political and business leaders are meeting at the UN Climate Action Summit to address the global climate emergency. Ultimately, in order to reduce emissions by 45% by 2030, we will need large corporations and governments to take the lead to ensure that ongoing global development shifts from fossil fuels to renewable energy.
-But while it is mainly a handful of companies that are responsible for 71% of greenhouse gas emissions, we as individuals and consumers can also fight towards and create a more sustainable future.</description>
+      <guid>/project/sccp_2019/</guid>
+      <description>On Nov 4-7th 2019 I had the opportunity to attend The Conservation Symposium, which aims to bring together those working on conservation issues within South Africa.
+I enjoy this conference because it takes me out of my academia bubble and transports me into the ‘on the ground’ conservation practice realm. Students and academics make up a small portion of the attendees, outnumbered by NGOs, consulting companies, government organizations, attorneys, reporters, and filmmakers.</description>
     </item>
     
     <item>
@@ -54,6 +54,16 @@ WIOMSA is always a great conference as it covers a variety of scientific discipl
       <description>Below is my entry to the Evolution Film Contest.
 _
 Every year our university opens its doors to high school students, so that they can get an idea of what postgraduates do within each lab. My intention with this video is to open our lab doors to a much wider audience and offer a view into my world as a PhD student studying conservation genetics. I wanted to make a video that is not only fun to watch, but also describes the basic theories and methodologies used within molecular ecology.</description>
+    </item>
+    
+    <item>
+      <title>A Sustainable Future</title>
+      <link>/project/sustainability/</link>
+      <pubDate>Fri, 07 Sep 2018 16:32:54 +0200</pubDate>
+      
+      <guid>/project/sustainability/</guid>
+      <description>Today civil, political and business leaders are meeting at the UN Climate Action Summit to address the global climate emergency. Ultimately, in order to reduce emissions by 45% by 2030, we will need large corporations and governments to take the lead to ensure that ongoing global development shifts from fossil fuels to renewable energy.
+But while it is mainly a handful of companies that are responsible for 71% of greenhouse gas emissions, we as individuals and consumers can also fight towards and create a more sustainable future.</description>
     </item>
     
     <item>

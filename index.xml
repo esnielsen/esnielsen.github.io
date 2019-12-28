@@ -11,60 +11,121 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>A Sustainable Future</title>
-      <link>/project/sustainability/</link>
-      <pubDate>Sun, 22 Sep 2019 16:32:54 +0200</pubDate>
+      <title>Coastal Species Distribution Models</title>
+      <link>/post/coastal-species-distribution-models/</link>
+      <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/project/sustainability/</guid>
-      <description>&lt;p&gt;Today civil, political and business leaders are meeting at the &lt;a href=&#34;https://www.un.org/en/climatechange/&#34; target=&#34;_blank&#34;&gt;UN Climate Action Summit&lt;/a&gt; to address the global climate emergency. Ultimately, in order to reduce emissions by 45% by 2030, we will need large corporations and governments to take the lead to ensure that ongoing global development shifts from fossil fuels to renewable energy.&lt;/p&gt;
+      <guid>/post/coastal-species-distribution-models/</guid>
+      <description>&lt;p&gt;This tutorial will go through how to run Species Distribution Models (SDMs) on coastal species using biomod2 in R.&lt;/p&gt;
 
-&lt;p&gt;But while it is mainly a handful of companies that are responsible for 71% of greenhouse gas emissions, we as individuals and consumers can also fight towards and create a more sustainable future. As the lovel figure above by &lt;a href=&#34;http://www.ashleylukashevsky.com/&#34; target=&#34;_blank&#34;&gt;Ashley Lukashevsky&lt;/a&gt; shows, we are all in this together, and together we will rise.&lt;/p&gt;
+&lt;p&gt;We will obtain the predictor environmental variables from &lt;a href=&#34;http://www.bio-oracle.org/&#34; target=&#34;_blank&#34;&gt;Bio-Oracle&lt;/a&gt; with the R package sdmpredictors. Since I work on intertidal species, I want to include both terrestrial and marine environmental variables. We will first load and stack the layers.&lt;/p&gt;
 
-&lt;p&gt;Therefore, this multi-media post is an ode to small, sustainable actions. And it is important that this is at no means and exhaustive list, and everyone has their own passions and actions that they are attracted to. In the end, the greatest thing we can do is start a conversation on sustainability, as this is the best way to discover new and exciting ways we can transform our society.&lt;/p&gt;
+&lt;p&gt;It is also important to only include variables that are available at both time points you want to model.&lt;/p&gt;
 
-&lt;hr /&gt;
+&lt;script src=&#34;//gist.github.com/esnielsen/4170042f638a89b0ded49cf03958fc0c.js&#34;&gt;&lt;/script&gt;
 
-&lt;p&gt;First, here is a fun little song I wrote with the intention spreading the idea of sustainability in a way that is hopefully catchy and creative.&lt;/p&gt;
+&lt;p&gt;Because the terrestrial and marine layers have different dimensions, we will need to resample them so that we can combine them into a single raster stack.&lt;/p&gt;
 
+&lt;script src=&#34;//gist.github.com/esnielsen/6686615bdf05e71b62fe7fb368aa29fc.js&#34;&gt;&lt;/script&gt;
 
-&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;//player.vimeo.com/video/361592712&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
- &lt;/div&gt;
+&lt;p&gt;Plotting the environmental layers should give you a figure such as this:&lt;/p&gt;
 
+&lt;p&gt;&lt;img src=&#34;/img/sdm/fig1.pdf&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
 
-&lt;hr /&gt;
+&lt;p&gt;Now we have a single raster stack called &amp;lsquo;env&amp;rsquo;. We now need to remove highly correlated environmental variables.&lt;/p&gt;
 
-&lt;p&gt;Then there is the &lt;a href=&#34;https://www.ted.com/talks/leyla_acaroglu_paper_beats_plastic_how_to_rethink_environmental_folklore?language=en&#34; target=&#34;_blank&#34;&gt;TED talk&lt;/a&gt; which I found really interesting, and pointed out many &amp;lsquo;Sustainability Myths&amp;rsquo; that I was previously ignorant of.&lt;/p&gt;
+&lt;script src=&#34;//gist.github.com/esnielsen/02d91b891093a9fd8273ffd52d1e8684.js&#34;&gt;&lt;/script&gt;
 
-&lt;p&gt;I was also recently ignorant of the CO2 emissions of the internet, until I stumbled upon this lovely &lt;a href=&#34;https://climatecare.org/infographic-the-carbon-footprint-of-the-internet/&#34; target=&#34;_blank&#34;&gt;infographic&lt;/a&gt;. You can also switch your browser from Google to &lt;a href=&#34;https://www.ecosia.org/&#34; target=&#34;_blank&#34;&gt;Ecosia&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here we will need to include our species presence data, which should include three columns: columns 1 &amp;amp; 2: x and y coordinates; column 3: presence (1) or absence (0) at each coordinate.&lt;/p&gt;
 
-&lt;p&gt;There are also many monetary ways to achieve a lower carbon footprint. One of my favorite new ways is with micro-funding. Find out how you can give micro-loans to green initiatives with &lt;a href=&#34;https://www.kiva.org/&#34; target=&#34;_blank&#34;&gt;Kiva&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To check for variable collinearity, we will first create a correlation circle, and then calculate the variance inflation factor, or VIF.&lt;/p&gt;
 
-&lt;p&gt;But maybe these actions seem like they will take too much time and energy to implement. No need to fret, the UN has some actions even the laziest of us can do to become more sustainable: find them &lt;a href=&#34;https://www.un.org/sustainabledevelopment/takeaction/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The correlation circle should look something like this:&lt;/p&gt;
 
-&lt;p&gt;And here are a few random ways that I came up with to reduce my footprint:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/sdm/fig5.pdf&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;From the correlation circle, we want to select variables on different axes and not in the same/overlapping environmental space. If there are multiple variables in the same quadrant of the circle, we should choose the one with a longer arrow, as that means it varies more over the environmental space, which is preferred. However, it is also important to know which environmental features are more relevant to your study species, and to choose according to the ecology of each species.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Floss- it&amp;rsquo;s reusable! Floss strings can we washed after use, and are effective at getting out gunk after multiple washes.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;If you are like me you loose hairbands and bobbi-pins all the time. Good news is that over people seem to too! I haven&amp;rsquo;t bought a new hair tie in years by picking them up off the ground instead.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Dido to the above with pens.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Learn to be good at mooching off other people! I am still learning to ditch my Ego and ask people to give me off-cuts of their plants, my friends to share clothes with me, my neighbour to lend me their food processor, and my surfing buddies to share their sunscreen. The more we share, the less we buy, and the less we waste. But remember to return the favor and actively share with others!&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Go to the bathroom in nature. I swear, there is no better feeling than doing a number 2 outside and having it become beautiful fertilizer.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Actively try to get outside of your normal social circles. Go to random events, or places where you feel uncomfortable. Have conversations with people with different mindsets. I like to say, &amp;ldquo;I want to live a life that algorithms wouldn&amp;rsquo;t be able to predict.&amp;rdquo;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Spend time alone, get to know and love yourself. This may seem like a bit of a stretch, but I think the more we get to know ourselves, the less we need material goods to make us happy, and the less we stress over work and things that maybe aren&amp;rsquo;t important in the &amp;lsquo;bigger picture&amp;rsquo;.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Volunteer. Swerve for deers. Don&amp;rsquo;t use buds to clean your ears. Talk to those with more or less years. Feel emotions and allow yourself tears. But more than anything, don&amp;rsquo;t become indifferent due to your fears.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;A note on arrow directions: same direction = highly correlated, orthogonal (this means at a 90 degree angle) = unrelated, opposite directions = negatively correlated&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Lastly, I would like to end with a quote by Anne Marie Bonneau said, &amp;ldquo;We don&amp;rsquo;t need a handful of people doing zero waste perfectly. We need millions of people doing it imperfectly&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;From the VIF we want to only include variables with a VIF&amp;lt; 10.&lt;/p&gt;
 
-&lt;p&gt;Thanks for reading!&lt;/p&gt;
+&lt;p&gt;Looking at both the correlation circle, and from the VIFs, we will select the following variables: Tmax, T_range, SSS, and SST. After selecting these variables our correlation circle looks like so:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/sdm/fig6.pdf&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now that we have our final set of variables, we can download the same variables for the Last Glacial Maximum (LGM), 21,000 years ago. The environmental features from Bio-Oracle automatically include the lowered sea levels at the LGM which is nice.&lt;/p&gt;
+
+&lt;p&gt;It is generally good practice to include multiple climatic models. Here we will include two models: CCSM4 and MIROC. The oceanic layers are already an ensemble of multiple models, so we will use the ensemble without CCSM with the MIROC terrestrial layers, and the ocean model including CCSM with the CCSM terrestrial layers.&lt;/p&gt;
+
+&lt;script src=&#34;//gist.github.com/esnielsen/b278c7c8a4e65865925e8e97b1a90ad8.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;Now we can use our environmental raster stack and presence data to create pseudo-absence data.&lt;/p&gt;
+
+&lt;script src=&#34;//gist.github.com/esnielsen/7c03987d0d08cb01d9dca0c80497a8d9.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;The output maps for the pseudo-absences looks like so:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/sdm/fig7.pdf&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Next we will run model models using our presence and pseudo absence data and environmental features. Here we will run 6 different models, over 10 runs, using 30% of the data for callibration, and 70% for fitting models.&lt;/p&gt;
+
+&lt;script src=&#34;//gist.github.com/esnielsen/4f3cf3ac1c570b22e7c3d0cb5cdc6989.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;Then we can evaluate the models. We will graph the model scores. A TSS of above ~0.55 and ROC of above ~ 0.8 are indicative of well performing models.&lt;/p&gt;
+
+&lt;p&gt;The graphs should look similar to this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/sdm/fig8.pdf&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We can also look at the importance of each environmental variable in explaining the distribution, which is calculated as the variable importance. It is also good practice to visualize the response curves pertaining to each environmental variable.&lt;/p&gt;
+
+&lt;p&gt;Now we will project our models onto the current climate, and compare how well they predict the current distribution. Running this script will create a folder in your directory called &amp;lsquo;current&amp;rsquo;. Note that this will automatically overwrite any other folder of the same name.&lt;/p&gt;
+
+&lt;p&gt;Afterwards we will create the ensemble model, which will combine the 6 model types we specified earlier. Here we will use a TSS cut off of 0.55 and ROC cut off of 0.8.&lt;/p&gt;
+
+&lt;script src=&#34;//gist.github.com/esnielsen/43b975aa182bedfff50ef88fff71248f.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;The output of our ensemble model looks like so:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/sdm/fig10.pdf&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Finally, we can project our models onto future layers. We will first combine the MIROC and CCSM model outputs, by averaging their values per cell. We will also enlargen the cells to make the output maps easier to read.&lt;/p&gt;
+
+&lt;script src=&#34;//gist.github.com/esnielsen/1def0bae8f97ce53a871fb637b0d57e8.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;Our final figure showing habitat suitability for all models at two timepoints looks like so:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/sdm/fig11.pdf&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>2019 Conservation Symposium Review</title>
+      <link>/project/sccp_2019/</link>
+      <pubDate>Sat, 14 Dec 2019 16:32:54 +0200</pubDate>
+      
+      <guid>/project/sccp_2019/</guid>
+      <description>&lt;p&gt;On Nov 4-7th 2019 I had the opportunity to attend The Conservation Symposium, which aims to bring together those working on conservation issues within South Africa.&lt;/p&gt;
+
+&lt;p&gt;I enjoy this conference because it takes me out of my academia bubble and transports me into the ‘on the ground’ conservation practice realm. Students and academics make up a small portion of the attendees, outnumbered by NGOs, consulting companies, government organizations, attorneys, reporters, and filmmakers.&lt;/p&gt;
+
+&lt;p&gt;The main theme that struck me throughout this conference is the need to understand the human dimension to ensure effective conservation planning and management. Below I discuss a few of the key insights I had in relation to this topic.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;This year they had the first ever session dedicated to indigenous knowledge (IK) in conservation. It was interesting to see how as a country we are actually quite ahead of the game in the inclusion of IK in conservation publications. But the thing that irked me during this session was that the audience laughed at almost all mentions of local taboos (an example of which is that some indigenous people believe that touching a certain tree species causes women to immediately start menstruating). I think this demonstrates how far we have yet to go in reframing our mindsets to see conservation not from a typical westernized view, but from a more inclusive, open-minded framing.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I also noted how all of the IK-related talks were in a terrestrial setting. I searched ‘South Africa indigenous knowledge marine’ in Web of Science and found zero papers investigating the use of IK in marine conservation. But, this made me remember an interesting poster at this year’s WIOMSA symposium where they interviewed local fishers along the South African coastline asking if water temperatures were changing, and reported areas where fishers’ knowledge differed from temperature changes monitored by scientists. We still have a long way to go with integrating IK into conservation management, and I think we will see a lot more marine conservation studies incorporating aspects of local communities in the near future.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;This year the symposium also introduced the Conservation Café, which involved youth-led discussions on conservation topics chosen by young (&amp;lt;35 yrs) attendants. During the tea breaks, we wrote on a white board what we wanted to discuss or added stars next to those topics on the board that we were interested in (seen in pictures below). In the session I went to, we talked again about IK within conservation, but also about capitalism and the goal of conservation. It was a lot of discussing problems, but one of the solutions I took away was that as youth we need to use our voices on social media, and also broaden our social circles in real life (or IRL as the kids say these days) to actively ‘market’ sustainable lifestyles and ‘make conservation cool again’.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Lastly, there were some very interesting talks on how people perceive our parks within the country. Nyiko Mutileni gave a talk on her work where she interviewed local communities just a few km outside of Man’ombe Nature Reserve, asking if they have every entered the reserve, and if they benefit from the reserve. Many local people had never even heard of the park, only ~3% had entered the park, and most believed they did not benefit from the park because they could no longer access natural resources. Another talk by Dr Izak Smit described how he interviewed visitors of Kruger National Park to understand how they perceived conservation. Most visitors do not believe that conservation areas should be focused on making money, or that we humans should actively manage nature through ‘harsh’ management such as culling. But most surprising to me was almost half of the interviewees believe that humans are separate from nature rather than interconnected through ecological processes. Dr Smit mentioned how this is partly driven by the fact that while 1.9 million people visit Kruger annually, only ~1% actually get out of their cars, walk in the bush, and physically connect with nature. Our disconnect with the natural world is a major issue of our time (shown by the fact that I had to mention ‘in real life’ in the previous point), and protected areas will be fundamental to our individual and societal resilience as we face ever increasing uncertainties on this Earth.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/sccp/p1.jpg&#34; alt=&#34;Example image&#34; /&gt;
+&lt;img src=&#34;/img/sccp/p2.jpg&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -147,6 +208,64 @@
   &lt;iframe src=&#34;//player.vimeo.com/video/338846065&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
  &lt;/div&gt;
 
+</description>
+    </item>
+    
+    <item>
+      <title>A Sustainable Future</title>
+      <link>/project/sustainability/</link>
+      <pubDate>Fri, 07 Sep 2018 16:32:54 +0200</pubDate>
+      
+      <guid>/project/sustainability/</guid>
+      <description>&lt;p&gt;Today civil, political and business leaders are meeting at the &lt;a href=&#34;https://www.un.org/en/climatechange/&#34; target=&#34;_blank&#34;&gt;UN Climate Action Summit&lt;/a&gt; to address the global climate emergency. Ultimately, in order to reduce emissions by 45% by 2030, we will need large corporations and governments to take the lead to ensure that ongoing global development shifts from fossil fuels to renewable energy.&lt;/p&gt;
+
+&lt;p&gt;But while it is mainly a handful of companies that are responsible for 71% of greenhouse gas emissions, we as individuals and consumers can also fight towards and create a more sustainable future. As the lovel figure above by &lt;a href=&#34;http://www.ashleylukashevsky.com/&#34; target=&#34;_blank&#34;&gt;Ashley Lukashevsky&lt;/a&gt; shows, we are all in this together, and together we will rise.&lt;/p&gt;
+
+&lt;p&gt;Therefore, this multi-media post is an ode to small, sustainable actions. And it is important that this is at no means and exhaustive list, and everyone has their own passions and actions that they are attracted to. In the end, the greatest thing we can do is start a conversation on sustainability, as this is the best way to discover new and exciting ways we can transform our society.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;First, here is a fun little song I wrote with the intention spreading the idea of sustainability in a way that is hopefully catchy and creative.&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/361592712&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;hr /&gt;
+
+&lt;p&gt;Then there is the &lt;a href=&#34;https://www.ted.com/talks/leyla_acaroglu_paper_beats_plastic_how_to_rethink_environmental_folklore?language=en&#34; target=&#34;_blank&#34;&gt;TED talk&lt;/a&gt; which I found really interesting, and pointed out many &amp;lsquo;Sustainability Myths&amp;rsquo; that I was previously ignorant of.&lt;/p&gt;
+
+&lt;p&gt;I was also recently ignorant of the CO2 emissions of the internet, until I stumbled upon this lovely &lt;a href=&#34;https://climatecare.org/infographic-the-carbon-footprint-of-the-internet/&#34; target=&#34;_blank&#34;&gt;infographic&lt;/a&gt;. You can also switch your browser from Google to &lt;a href=&#34;https://www.ecosia.org/&#34; target=&#34;_blank&#34;&gt;Ecosia&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;There are also many monetary ways to achieve a lower carbon footprint. One of my favorite new ways is with micro-funding. Find out how you can give micro-loans to green initiatives with &lt;a href=&#34;https://www.kiva.org/&#34; target=&#34;_blank&#34;&gt;Kiva&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;But maybe these actions seem like they will take too much time and energy to implement. No need to fret, the UN has some actions even the laziest of us can do to become more sustainable: find them &lt;a href=&#34;https://www.un.org/sustainabledevelopment/takeaction/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;And here are a few random ways that I came up with to reduce my footprint:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Floss- it&amp;rsquo;s reusable! Floss strings can we washed after use, and are effective at getting out gunk after multiple washes.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If you are like me you loose hairbands and bobbi-pins all the time. Good news is that over people seem to too! I haven&amp;rsquo;t bought a new hair tie in years by picking them up off the ground instead.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Dido to the above with pens.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Learn to be good at mooching off other people! I am still learning to ditch my Ego and ask people to give me off-cuts of their plants, my friends to share clothes with me, my neighbour to lend me their food processor, and my surfing buddies to share their sunscreen. The more we share, the less we buy, and the less we waste. But remember to return the favor and actively share with others!&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Go to the bathroom in nature. I swear, there is no better feeling than doing a number 2 outside and having it become beautiful fertilizer.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Actively try to get outside of your normal social circles. Go to random events, or places where you feel uncomfortable. Have conversations with people with different mindsets. I like to say, &amp;ldquo;I want to live a life that algorithms wouldn&amp;rsquo;t be able to predict.&amp;rdquo;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Spend time alone, get to know and love yourself. This may seem like a bit of a stretch, but I think the more we get to know ourselves, the less we need material goods to make us happy, and the less we stress over work and things that maybe aren&amp;rsquo;t important in the &amp;lsquo;bigger picture&amp;rsquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Volunteer. Swerve for deers. Don&amp;rsquo;t use buds to clean your ears. Talk to those with more or less years. Feel emotions and allow yourself tears. But more than anything, don&amp;rsquo;t become indifferent due to your fears.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Lastly, I would like to end with a quote by Anne Marie Bonneau said, &amp;ldquo;We don&amp;rsquo;t need a handful of people doing zero waste perfectly. We need millions of people doing it imperfectly&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;Thanks for reading!&lt;/p&gt;
 </description>
     </item>
     

@@ -1,0 +1,12 @@
+<PAMDataset>
+  <PAMRasterBand band="1">
+    <Description>Layer_1</Description>
+    <Metadata>
+      <MDI key="LAYER_TYPE">athematic</MDI>
+      <MDI key="STATISTICS_MAXIMUM">926</MDI>
+      <MDI key="STATISTICS_MEAN">395.64114832536</MDI>
+      <MDI key="STATISTICS_MINIMUM">1</MDI>
+      <MDI key="STATISTICS_STDDEV">341.28863637702</MDI>
+    </Metadata>
+  </PAMRasterBand>
+</PAMDataset>

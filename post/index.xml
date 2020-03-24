@@ -13,6 +13,17 @@
     
     
     <item>
+      <title>SDMs</title>
+      <link>/post/sdms/</link>
+      <pubDate>Wed, 25 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/sdms/</guid>
+      <description>Coastal Species Distribution Models This tutorial will discuss how to run Species Distribution Models (SDMs) on coastal species using biomod2 in R.
+We will obtain the predictor environmental variables from Bio-Oracle with the R package sdmpredictors. Since I work on intertidal species, I want to include both terrestrial and marine environmental variables. We will first load and stack the layers.
+It is also important to only include variables that are available at both time points you want to model.</description>
+    </item>
+    
+    <item>
       <title>Coastal Species Distribution Models</title>
       <link>/post/coastal-species-distribution-models/</link>
       <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>

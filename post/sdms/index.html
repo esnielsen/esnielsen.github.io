@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 2.4.0">
+  <meta name="generator" content="Hugo 0.46" />
+  <meta name="author" content="Erica S. Nielsen">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="Coastal Species Distribution Models This tutorial will discuss how to run Species Distribution Models (SDMs) on coastal species using biomod2 in R.
+We will obtain the predictor environmental variables from Bio-Oracle with the R package sdmpredictors. Since I work on intertidal species, I want to include both terrestrial and marine environmental variables. We will first load and stack the layers.
+It is also important to only include variables that are available at both time points you want to model.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/sdms/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#0095eb">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/sdms/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@https://twitter.com/erica_at_work">
+  <meta property="twitter:creator" content="@https://twitter.com/erica_at_work">
+  
+  <meta property="og:site_name" content="">
+  <meta property="og:url" content="/post/sdms/">
+  <meta property="og:title" content="SDMs | ">
+  <meta property="og:description" content="Coastal Species Distribution Models This tutorial will discuss how to run Species Distribution Models (SDMs) on coastal species using biomod2 in R.
+We will obtain the predictor environmental variables from Bio-Oracle with the R package sdmpredictors. Since I work on intertidal species, I want to include both terrestrial and marine environmental variables. We will first load and stack the layers.
+It is also important to only include variables that are available at both time points you want to model."><meta property="og:image" content="/img/headers/p10.jpeg">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2020-03-25T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2020-03-25T00:00:00&#43;00:00">
+  
+
+  
+
+  
+
+  <title>SDMs | </title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/"></a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#publications_selected">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Tutorials</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Blog</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/files/EN.cv.2018.pdf">
+            
+            <span>CV</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a href="/">
+            
+            <span></span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+<div class="article-header">
+  
+  
+    <img src="/img/headers/p10.jpeg" class="article-banner" itemprop="image">
+  
+
+  
+</div>
+
+
+
+  <div class="article-container">
+    <h1 itemprop="name">SDMs</h1>
+
+    
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Erica S. Nielsen">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2020-03-25 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+    <time datetime="2020-03-25 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+      Mar 25, 2020
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Erica S. Nielsen">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    12 min read
+  </span>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <a href="/post/sdms/#disqus_thread"></a>
+  
+
+  
+  
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=SDMs&amp;url=%2fpost%2fsdms%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2fsdms%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fsdms%2f&amp;title=SDMs"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2fsdms%2f&amp;title=SDMs"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=SDMs&amp;body=%2fpost%2fsdms%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      <div id="coastal-species-distribution-models" class="section level2">
+<h2>Coastal Species Distribution Models</h2>
+<p>This tutorial will discuss how to run Species Distribution Models (SDMs) on coastal species using biomod2 in R.</p>
+<p>We will obtain the predictor environmental variables from <a href="http://www.bio-oracle.org/">Bio-Oracle</a> with the R package sdmpredictors. Since I work on intertidal species, I want to include both terrestrial and marine environmental variables. We will first load and stack the layers.</p>
+<p>It is also important to only include variables that are available at both time points you want to model.</p>
+<pre class="r"><code>library(sdmpredictors)
+
+# Download present day environmental variables
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+#download terrestrial features (Temp_max, Temp_min, Temp_range)
+terr &lt;- load_layers( layercodes = c(&quot;WC_bio5&quot;, &quot;WC_bio6&quot;, &quot;WC_bio7&quot;) , equalarea=FALSE, rasterstack=TRUE)
+
+#download marine features
+mar &lt;- load_layers( layercodes = c(&quot;MS_biogeo08_sss_mean_5m&quot;, &quot;MS_biogeo13_sst_mean_5m&quot;) , equalarea=FALSE, rasterstack=TRUE)
+
+#check the chacteristics of each raster stack
+terr</code></pre>
+<pre><code>## class      : RasterStack 
+## dimensions : 1800, 4320, 7776000, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 0.08333333, 0.08333333  (x, y)
+## extent     : -180, 180, -60, 90  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## names      : WC_bio5, WC_bio6, WC_bio7 
+## min values :    -7.3,   -55.5,     5.3 
+## max values :    48.9,    25.8,    72.5</code></pre>
+<pre class="r"><code>mar</code></pre>
+<pre><code>## class      : RasterStack 
+## dimensions : 2160, 4320, 9331200, 2  (nrow, ncol, ncell, nlayers)
+## resolution : 0.08333333, 0.08333333  (x, y)
+## extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## names      : MS_biogeo08_sss_mean_5m, MS_biogeo13_sst_mean_5m 
+## min values :                   -0.05,                   -2.00 
+## max values :                   40.43,                   30.40</code></pre>
+<p>Notice how the two raster stacks have different dimensions. In order to stack our terrestrial and marine rasters, we will need to resample them to have the same dimensions.</p>
+<pre class="r"><code>#Resample the marine by the terrestrial layers and stack into one raster stack
+
+t&lt;-extent(-180, 180, -90, 90) #layer extent from terrestrial stack
+m&lt;-extent(-180, 180, -90, 90) #layer extent from marine stack
+#no need to edit the following 6 lines
+extent_list&lt;-list(t, m)
+extent_list&lt;-lapply(extent_list, as.matrix)
+matrix_extent&lt;-matrix(unlist(extent_list), ncol=length(extent_list))
+rownames(matrix_extent)&lt;-c(&quot;xmin&quot;, &quot;ymin&quot;, &quot;xmax&quot;, &quot;ymax&quot;)
+best_extent&lt;-extent(min(matrix_extent[1,]), max(matrix_extent[3,]), min(matrix_extent[2,]), max(matrix_extent[4,]))
+ranges&lt;-apply(as.matrix(best_extent), 1, diff)
+
+reso&lt;-res(terr) #choose layer you want to keep resolution
+nrow_ncol&lt;-ranges/reso
+s2&lt;-raster(best_extent, nrows=nrow_ncol[2], ncols=nrow_ncol[1], crs=terr@crs) #choose layer crs you want to keep
+
+t.2 &lt;-resample(terr, s2, method=&quot;ngb&quot;) #resample terr by s2
+m.2 &lt;-resample(mar, s2, method=&quot;ngb&quot;) #resample mar by s2
+env=stack(t.2, m.2) #stack resampled layers
+
+# Set study extent
+SA.ext &lt;- extent(10, 40, -37, -22)
+
+# Crop raster layer by extent &amp; plot
+env.c &lt;- crop(env, SA.ext)
+plot(env.c)</code></pre>
+<p><img src="/post/coastal.sdm_files/figure-html/resample%20and%20crop-1.png" width="672" /></p>
+<p>Plotting the environmental layers should give you a figure such as the above. Now we have a single raster stack called ‘env’. We now need to remove highly correlated environmental variables.</p>
+<p>Here we will need to include our species presence data, which should include three columns: columns 1 &amp; 2: x and y coordinates; column 3: presence (1) or absence (0) at each coordinate.</p>
+<p>To check for variable collinearity, we will first create a correlation circle, and then calculate the variance inflation factor, or VIF.</p>
+<pre class="r"><code># Filter environmental variables to account for collinearity
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# Import your presence data and plot
+pres.data &lt;-read.table(&quot;Cpunctatus.pres2.txt&quot;,sep=&quot;\t&quot;,header=T)
+plot(env.c$WC_bio5)
+points(pres.data[,1:2], pch=19, col=&quot;black&quot;)</code></pre>
+<p><img src="/post/coastal.sdm_files/figure-html/vifs-1.png" width="672" /></p>
+<pre class="r"><code># Extract env values for our species locations:
+envdata &lt;- extract(x=env.c, y=cbind(pres.data$x, pres.data$y))
+
+
+# The `dudi.pca` function allows us to perform the PCA over the whole study area. We decide to keep only 2 principal component axes to summarize the whole environmental niche. NB: here be careful that none of your xy presence points are outside of the environmental raster layer, which will give NA values, which will give errors. 
+
+library(ade4)
+
+pca1 &lt;- dudi.pca(envdata, scannf = F, nf = 2)
+round(pca1$eig/sum(pca1$eig)*100, 2)</code></pre>
+<pre><code>## [1] 54.97 28.58 12.85  3.60</code></pre>
+<pre class="r"><code># A preliminary test is to look for potential outliers in the environmental data.
+plot(pca1$li[,1:2]) # PCA scores on first two axes</code></pre>
+<p><img src="/post/coastal.sdm_files/figure-html/vifs-2.png" width="672" /></p>
+<pre class="r"><code>summary(pca1$li)</code></pre>
+<pre><code>##      Axis1              Axis2        
+##  Min.   :-5.08541   Min.   :-1.6900  
+##  1st Qu.:-0.69014   1st Qu.:-0.9985  
+##  Median :-0.02031   Median :-0.3923  
+##  Mean   : 0.00000   Mean   : 0.0000  
+##  3rd Qu.: 1.30403   3rd Qu.: 1.0404  
+##  Max.   : 2.52228   Max.   : 2.5989</code></pre>
+<pre class="r"><code># Plot a correlation circle. 
+s.corcircle(pca1$co)</code></pre>
+<p><img src="/post/coastal.sdm_files/figure-html/vifs-3.png" width="672" /></p>
+<pre class="r"><code># From the correlation circle, we want to select variables on different axes and not in the same/overlapping environmental space. If there are multiple variables in the same quadrant of the circle, we should choose the one with a longer arrow, as that means it varies more over the environmental space, which is preferred. However, it is also important to know which environmental features are more relevant to your study species, and to choose according to the ecology of each species. 
+
+# A note on arrow directions: same direction = highly correlated, orthogonal (this means at a 90 degree angle) = unrelated, opposite directions = negatively correlated
+
+
+# From the plot, we can get rid of variable WC_bio6, and plot again
+
+VARSEL &lt;- c(&quot;WC_bio5&quot;, &quot;WC_bio7&quot;, &quot;MS_biogeo08_sss_mean_5m&quot;, &quot;MS_biogeo13_sst_mean_5m&quot;)
+env.c.2 &lt;- stack(subset(env.c, VARSEL))
+envdata &lt;- extract(x=env.c.2, y=cbind(pres.data$x, pres.data$y))
+pca1 &lt;- dudi.pca(envdata, scannf = F, nf = 2)
+s.corcircle(pca1$co)</code></pre>
+<p><img src="/post/coastal.sdm_files/figure-html/vifs-4.png" width="672" /></p>
+<pre class="r"><code>#Test correlation with VIF
+##Calculate variance inflation factor (VIF). Generally you want to exclude variables with a VIF&gt;10. 
+library(usdm)
+
+vif(env.c.2)</code></pre>
+<pre><code>##                 Variables       VIF
+## 1                 WC_bio5 13.712553
+## 2                 WC_bio7  5.311111
+## 3 MS_biogeo08_sss_mean_5m  2.367307
+## 4 MS_biogeo13_sst_mean_5m  9.803145</code></pre>
+<pre class="r"><code>#Since none of our variables have a VIF &gt; 10, we can keep all variables for the SDMs.
+
+# We can write the raster stack to save in the home directory. 
+writeRaster(env.c.2, filename=&quot;env.c.2.tif&quot;, format=&quot;GTiff&quot;, overwrite=TRUE)</code></pre>
+<p>Now that we have our final set of variables, we can download the same variables for the Last Glacial Maximum (LGM), 21,000 years ago. The environmental features from Bio-Oracle automatically include the lowered sea levels at the LGM which is nice.</p>
+<p>It is generally good practice to include multiple climatic models. Here we will include two models: CCSM4 and MIROC. The oceanic layers are already an ensemble of multiple models, so we will use the ensemble without CCSM with the MIROC terrestrial layers, and the ocean model including CCSM with the CCSM terrestrial layers.</p>
+<pre class="r"><code># Download historical environmental data
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+# Load layers and make sure they are in the same order as your contemporary raster stack (WC_bio5, WC_bio7, SSS, SST)
+
+a.miroc.21 &lt;- load_layers(layercodes = c(&quot;WC_bio5_cclgm&quot;, &quot;WC_bio7_cclgm&quot;), equalarea=FALSE, rasterstack=TRUE, 
+                         datadir=NULL)
+
+a.ccsm.21 &lt;- load_layers(layercodes = c(&quot;WC_bio5_mrlgm&quot;, &quot;WC_bio7_mrlgm&quot;), equalarea=FALSE, rasterstack=TRUE, 
+                        datadir=NULL)
+
+o.ens.adj.21 &lt;- load_layers(layercodes = c(&quot;MS_biogeo08_sss_mean_21kya_adjCCSM&quot;, &quot;MS_biogeo13_sst_mean_21kya_adjCCSM&quot;), equalarea=FALSE, rasterstack=TRUE, 
+                       datadir=NULL)
+
+o.ens.nc.21 &lt;- load_layers(layercodes = c(&quot;MS_biogeo08_sss_mean_21kya_noCCSM&quot;, &quot;MS_biogeo13_sst_mean_21kya_noCCSM&quot;), equalarea=FALSE, rasterstack=TRUE, 
+                            datadir=NULL)
+
+a.miroc.21.2 &lt;-resample(a.miroc.21, s2, method=&quot;ngb&quot;)
+a.ccsm.21.2 &lt;-resample(a.ccsm.21, s2, method=&quot;ngb&quot;) 
+o.ens.adj.21.2 &lt;-resample(o.ens.adj.21, s2, method=&quot;ngb&quot;)
+o.ens.nc.21.2 &lt;-resample(o.ens.nc.21, s2, method=&quot;ngb&quot;)
+
+miroc.21 =stack(a.miroc.21.2, o.ens.nc.21.2 ) 
+ccsm.21 =stack(a.ccsm.21.2, o.ens.adj.21.2 )
+
+miroc.21.crop &lt;- crop(miroc.21, SA.ext)
+ccsm.21.crop &lt;- crop(ccsm.21, SA.ext)
+
+miroc.21.c &lt;- stack(miroc.21.crop)
+ccsm.21.c &lt;- stack(ccsm.21.crop)
+
+writeRaster(miroc.21.c, filename=&quot;miroc.21.tif&quot;, format=&quot;GTiff&quot;, overwrite=TRUE)
+writeRaster(ccsm.21.c, filename=&quot;ccsm.21.tif&quot;, format=&quot;GTiff&quot;, overwrite=TRUE)</code></pre>
+<p>We are now ready to run our SDMs, using the package biomod2. We can use our environmental raster stack (for the present day) and presence data to create pseudo-absence data.</p>
+<pre class="r"><code>library(biomod2)
+
+# Create presence and absence data
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# Convert the column named &quot;PRESENCE&quot; to a character class
+myResp&lt;-as.numeric(pres.data$Cpunctatus)
+
+myRespName &lt;- &#39;Cpunctatus&#39;
+
+# Create presence and pseudo absences
+SPC_PresAbs &lt;- BIOMOD_FormatingData(resp.var = myResp,
+                                    expl.var = env.c.2,
+                                    resp.xy = pres.data[,c(&#39;x&#39;, &#39;y&#39;)],
+                                    resp.name = myRespName,
+                                    PA.nb.rep = 3,
+                                    PA.nb.absences = 10000,
+                                    PA.strategy = &#39;random&#39;) 
+
+##  NOTE: if you get an error that looks like this:
+## &#39;Error in .BIOMOD_FormatingData.check.args(resp.var, expl.var, resp.xy,  : Explanatory variable must be one of numeric, data.frame, matrix, RasterLayer, RasterStack, SpatialPointsDataFrame, SpatialPoints&#39;
+
+#Then simply re-create your raster stack and try again. As such:
+env.c.2 &lt;- stack(env.c.2)
+
+
+SPC_PresAbs &lt;- BIOMOD_FormatingData(resp.var = myResp,
+                                    expl.var = env.c.2,
+                                    resp.xy = pres.data[,c(&#39;x&#39;, &#39;y&#39;)],
+                                    resp.name = myRespName,
+                                    PA.nb.rep = 3,
+                                    PA.nb.absences = 10000,
+                                    PA.strategy = &#39;random&#39;) 
+
+
+# Check the number of absences
+SPC_PresAbs
+
+## Notice how the output here says that there are a different number of pseudo absences than you input in the &#39;PA.nb.absences&#39; parameter. I am guessing this is because the same cell can be chosen as an absence over and over within this step, so I would advise playing with that parameter until you get roughly and equal amount of absences as you have presences. 
+
+# Plot your pseudo absences
+plot(SPC_PresAbs)</code></pre>
+<p><img src="/post/coastal.sdm_files/figure-html/pseudoabs-1.png" width="672" /></p>
+<p>Next we will run model models using our presence and pseudo absence data and environmental features. Here we will run 6 different models, over 10 runs, using 30% of the data for callibration, and 70% for fitting models.</p>
+<p>We will then check how well the model performs with two separate evalution scores: ROC and TSS. Generally, a ROC &gt; 0.8 and TSS &gt; 0.55 are indicative of high model accuracy.</p>
+<pre class="r"><code># Run BIOMOD Models
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Set modeling options (NB: refer to the package vingette for non-default model options)
+MySpc_options &lt;- BIOMOD_ModelingOptions(
+  GLM = list( type = &#39;quadratic&#39;, interaction.level = 1 ),
+  GBM = list( n.trees = 1000 ),
+  GAM = list( algo = &#39;GAM_mgcv&#39; ) )
+
+# Run the models with specific parameters.
+MySpc_models &lt;- BIOMOD_Modeling( data = SPC_PresAbs,
+                                 models = c(&quot;GLM&quot;,&quot;GAM&quot;, &quot;GBM&quot;, &quot;RF&quot;,&quot;MARS&quot;, &quot;FDA&quot;),
+                                 models.options = MySpc_options,
+                                 NbRunEval = 10,
+                                 DataSplit = 70,
+                                 VarImport = 3,
+                                 models.eval.meth=c(&#39;TSS&#39;,&#39;ROC&#39;),
+                                 do.full.models = F )
+
+# Get models evaluation scores
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+MyModels_scores &lt;- get_evaluations(MySpc_models)
+
+MyModels_scores[&quot;ROC&quot;,&quot;Testing.data&quot;,,,]
+MyModels_scores[&quot;TSS&quot;,&quot;Testing.data&quot;,,,]
+
+# Graphically see model scores
+models_scores_graph(MySpc_models, by = &quot;models&quot; , metrics = c(&quot;ROC&quot;,&quot;TSS&quot;), xlim = c(0.5,1), ylim = c(0.5,1))</code></pre>
+<p><img src="/post/coastal.sdm_files/figure-html/run.models-1.png" width="672" /></p>
+<pre class="r"><code>models_scores_graph(MySpc_models, by = &quot;cv_run&quot; , metrics = c(&quot;ROC&quot;,&quot;TSS&quot;), xlim = c(0.5,1), ylim = c(0.5,1))</code></pre>
+<p><img src="/post/coastal.sdm_files/figure-html/run.models-2.png" width="672" /></p>
+<pre class="r"><code>models_scores_graph(MySpc_models, by = &quot;data_set&quot; , metrics = c(&quot;ROC&quot;,&quot;TSS&quot;), xlim = c(0.5,1), ylim = c(0.5,1))</code></pre>
+<p><img src="/post/coastal.sdm_files/figure-html/run.models-3.png" width="672" /></p>
+<p>We can also look at the importance of each environmental variable in explaining the distribution, which is calculated as the variable importance.</p>
+<pre class="r"><code># Variable importance in models
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# Calculate variable importance. The higher a score is, the more important is the variable. We will visualize this as a barplot.
+
+MyModels_var_import &lt;- get_variables_importance(MySpc_models)
+dimnames(MyModels_var_import)</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;WC_bio5&quot;                 &quot;WC_bio7&quot;                
+## [3] &quot;MS_biogeo08_sss_mean_5m&quot; &quot;MS_biogeo13_sst_mean_5m&quot;
+## 
+## [[2]]
+## [1] &quot;GLM&quot;  &quot;GAM&quot;  &quot;GBM&quot;  &quot;RF&quot;   &quot;MARS&quot; &quot;FDA&quot; 
+## 
+## [[3]]
+##  [1] &quot;RUN1&quot;  &quot;RUN2&quot;  &quot;RUN3&quot;  &quot;RUN4&quot;  &quot;RUN5&quot;  &quot;RUN6&quot;  &quot;RUN7&quot;  &quot;RUN8&quot;  &quot;RUN9&quot; 
+## [10] &quot;RUN10&quot;
+## 
+## [[4]]
+## Cpunctatus_PA1 Cpunctatus_PA2 Cpunctatus_PA3 
+##          &quot;PA1&quot;          &quot;PA2&quot;          &quot;PA3&quot;</code></pre>
+<pre class="r"><code># Average variable importance by algorithm
+mVarImp &lt;- apply(MyModels_var_import, c(1,2), median) 
+mVarImp &lt;- apply(mVarImp, 2, function(x) x*(1/sum(x))) # standardize the data
+mVarImp </code></pre>
+<pre><code>##                               GLM     GAM        GBM         RF      MARS
+## WC_bio5                 0.4021596 0.32975 0.16351286 0.29492455 0.4295490
+## WC_bio7                 0.1482750 0.20975 0.11887433 0.09373571 0.1872473
+## MS_biogeo08_sss_mean_5m 0.2201738 0.20675 0.67006308 0.36579790 0.2472784
+## MS_biogeo13_sst_mean_5m 0.2293916 0.25375 0.04754973 0.24554184 0.1359253
+##                               FDA
+## WC_bio5                 0.3247801
+## WC_bio7                 0.1587243
+## MS_biogeo08_sss_mean_5m 0.3504399
+## MS_biogeo13_sst_mean_5m 0.1660557</code></pre>
+<pre class="r"><code>#save as table
+write.table(mVarImp, file=&quot;modelVarImp.txt&quot;, sep=&quot;\t&quot;, quote = FALSE)</code></pre>
+<p>It is also good practice to visualize the response curves pertaining to each environmental variable.</p>
+<pre class="r"><code># Response curves
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# To analyze how each environmental variable influences modelled probability of species presence, we will use an evaluation procedure proposed by Elith et al.(2005). 
+
+# A plot of these predictions allows visualisation of the modeled response(y-axis) to the given variable (x-axis),conditional to the other variables being held constant.
+
+# Here I will show the response curves for the RF model, but you can do for all models:
+
+MySpc_rf  &lt;- BIOMOD_LoadModels(MySpc_models, models=&#39;RF&#39;)
+
+rf_eval_strip &lt;- biomod2::response.plot2(
+  models  = MySpc_rf, Data = get_formal_data(MySpc_models,&#39;expl.var&#39;), 
+  show.variables= get_formal_data(MySpc_models,&#39;expl.var.names&#39;),
+  do.bivariate = FALSE, fixed.var.metric = &#39;median&#39;, legend = FALSE,
+  display_title = FALSE, data_species = get_formal_data(MySpc_models,&#39;resp.var&#39;))</code></pre>
+<p><img src="/post/coastal.sdm_files/figure-html/response.curves-1.png" width="672" /></p>
+<p>Now we will project our models onto the current climate, and see how well they predict the current distribution. Running this script will create a folder in your directory called ‘current’. Note that this will automatically overwrite any other folder of the same name.</p>
+<p>Afterwards we will create the ensemble model, which will combine the 6 model types we specified earlier. Here we will use a TSS cut off of 0.55 and ROC cut off of 0.8.</p>
+<pre class="r"><code># Map individual models onto the current Southern African climate
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MySpc_models_proj_current &lt;- BIOMOD_Projection( modeling.output = MySpc_models,
+                                                new.env = env.c.2,
+                                                proj.name = &quot;current&quot;,
+                                                binary.meth = &quot;ROC&quot;,
+                                                output.format = &quot;.img&quot;,
+                                                do.stack = FALSE )
+
+
+# Plot and compare the maps for the potential current distribution projected by the different models.
+plot(MySpc_models_proj_current,  str.grep=&quot;PA1_RUN1&quot;)</code></pre>
+<p><img src="/post/coastal.sdm_files/figure-html/ensemble.models-1.png" width="672" /></p>
+<pre class="r"><code># If any of the models over or under estimate the distribution, then you can consider leaving them out of the ensemble model. 
+
+
+# Run ensemble models
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MySpc_ensemble_models &lt;- BIOMOD_EnsembleModeling( modeling.output = MySpc_models,
+                                                  chosen.models =&#39;all&#39;,
+                                                  em.by = &#39;all&#39;,  #combine all models
+                                                  eval.metric = &#39;all&#39;,
+                                                  eval.metric.quality.threshold = c(0.55,0.8),
+                                                  models.eval.meth = c(&#39;TSS&#39;,&#39;ROC&#39;),
+                                                  prob.mean = FALSE,
+                                                  prob.cv = TRUE, #coefficient of variation across predictions
+                                                  committee.averaging = TRUE,
+                                                  prob.mean.weight = TRUE,
+                                                  VarImport = 0 )
+
+# Check ensemble scores
+MySpc_ensemble_models_scores &lt;- get_evaluations(MySpc_ensemble_models)
+MySpc_ensemble_models_scores
+
+
+# Ensemble model forecast onto current environment
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+MySpc_ensemble_models_proj_current &lt;- BIOMOD_EnsembleForecasting( 
+  EM.output = MySpc_ensemble_models,
+  projection.output = MySpc_models_proj_current,
+  binary.meth = &quot;ROC&quot;,  #make binary predictions (pres/abs) based on ROC score
+  output.format = &quot;.img&quot;,
+  do.stack = FALSE )
+
+# The projections for current conditions are stored in the &#39;proj_current&#39; directory. 
+get_projected_models(MySpc_ensemble_models_proj_current)
+
+# Plot them all
+plot(MySpc_ensemble_models_proj_current)</code></pre>
+<p><img src="/post/coastal.sdm_files/figure-html/ensemble.models-2.png" width="672" /></p>
+<pre class="r"><code>plot(MySpc_ensemble_models_proj_current, str.grep=&quot;EMcaByTSS&quot;)</code></pre>
+<p><img src="/post/coastal.sdm_files/figure-html/ensemble.models-3.png" width="672" /></p>
+<pre class="r"><code>plot(MySpc_ensemble_models_proj_current, str.grep=&quot;EMwmeanByTSS&quot;)</code></pre>
+<p><img src="/post/coastal.sdm_files/figure-html/ensemble.models-4.png" width="672" /></p>
+<pre class="r"><code># Ensemble model hindcast onto LGM environment
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#Fit model using new environmental variables
+
+#first we need to re-name the raster stack layers to be the same as the &#39;present-day&#39; raster stack we built the model on
+names(miroc.21.c) &lt;- c(&#39;WC_bio5&#39;,&#39;WC_bio7&#39;,&#39;MS_biogeo08_sss_mean_5m&#39;, &#39;MS_biogeo13_sst_mean_5m&#39;)
+
+#Then project the model onto the new environmental layers
+MySpc_models_proj_LGM1 &lt;- BIOMOD_Projection( modeling.output = MySpc_models,
+                                             new.env = miroc.21.c,
+                                             proj.name = &quot;miroc.LGM&quot;,
+                                             binary.meth = c(&quot;ROC&quot;),
+                                             output.format = &quot;.img&quot;,
+                                             do.stack = FALSE)
+
+
+
+#Then run hindcasting ensemble model:
+ MySpc_ensemble_models_proj_LGM1 &lt;- BIOMOD_EnsembleForecasting( 
+   EM.output = MySpc_ensemble_models,
+   projection.output = MySpc_models_proj_LGM1,
+   binary.meth = &quot;ROC&quot;,
+   output.format = &quot;.img&quot;,
+   do.stack = FALSE,
+   build.clamping.mask=F)
+
+# Then do this same for CCSM LGM layers
+names(ccsm.21.c) &lt;- c(&#39;WC_bio5&#39;,&#39;WC_bio7&#39;,&#39;MS_biogeo08_sss_mean_5m&#39;, &#39;MS_biogeo13_sst_mean_5m&#39;)
+MySpc_models_proj_LGM2 &lt;- BIOMOD_Projection( modeling.output = MySpc_models,
+                                             new.env = ccsm.21.c,
+                                             proj.name = &quot;ccsm.LGM&quot;,
+                                             binary.meth = c(&quot;ROC&quot;),
+                                             output.format = &quot;.img&quot;,
+                                             do.stack = FALSE)
+
+ MySpc_ensemble_models_proj_LGM2 &lt;- BIOMOD_EnsembleForecasting( 
+   EM.output = MySpc_ensemble_models,
+   projection.output = MySpc_models_proj_LGM2,
+   binary.meth = &quot;ROC&quot;,
+   output.format = &quot;.img&quot;,
+   do.stack = FALSE,
+   build.clamping.mask=F)</code></pre>
+<p>Finally, we can map the outputs of the models to create a single figure in which they are compared. We will first combine the MIROC and CCSM model outputs, by averaging their values per cell. We will also enlargen the cells to make the output maps easier to read.</p>
+<pre class="r"><code>## Plotting SDM outputs
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+library(rasterVis)
+library(gridExtra)
+library(rgdal)
+
+cc = colorRampPalette( c(&quot;red&quot;, &quot;white&quot;,&quot;blue&quot;))
+
+## Retreive output maps from the different directories
+MyBinCP_curr &lt;- raster::stack(&quot;Cpunctatus/proj_current/individual_projections/Cpunctatus_EMcaByTSS_mergedAlgo_mergedRun_mergedData.img&quot;)
+MyBinCP_c.LGM &lt;- raster::stack(&quot;Cpunctatus/proj_ccsm.LGM/individual_projections/Cpunctatus_EMcaByTSS_mergedAlgo_mergedRun_mergedData.img&quot;)
+MyBinCP_m.LGM &lt;- raster::stack(&quot;Cpunctatus/proj_miroc.LGM/individual_projections/Cpunctatus_EMcaByTSS_mergedAlgo_mergedRun_mergedData.img&quot;)
+
+# Load a shapefile to have as a background map
+SAmap &lt;- readOGR(&quot;Cpunctatus/Africa.shp&quot;)</code></pre>
+<pre><code>## OGR data source with driver: ESRI Shapefile 
+## Source: &quot;/Users/ericaspotswoodnielsen/Desktop/website/SDM.tutorial/Cpunctatus/Africa.shp&quot;, layer: &quot;Africa&quot;
+## with 762 features
+## It has 3 fields</code></pre>
+<pre class="r"><code>SAmap.c &lt;- crop(SAmap, SA.ext)
+
+# Make ensemble outputs combining the miroc and ccsm models (by averaging cell values)
+CP.mean.LGM &lt;- merge(MyBinCP_c.LGM, MyBinCP_m.LGM)
+# Aggregate the cells to make the output more visable (this doubles the size of the cells)
+CP.mean.LGM.agg &lt;- aggregate(CP.mean.LGM, fact=2)
+MyBinCP_c.agg &lt;- aggregate(MyBinCP_curr, fact=2)
+
+CP.sdms &lt;- stack(MyBinCP_c.agg, CP.mean.LGM.agg)
+names(CP.sdms) &lt;- c(&#39;Current&#39;, &#39;LGM&#39;)
+
+levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, fill=&#39;white&#39;, alpha=0.2))</code></pre>
+<p><img src="/post/coastal.sdm_files/figure-html/plot.outputs-1.png" width="672" /></p>
+<p>And here we have the final product, showing the average habitat suitability at two timepoints.</p>
+<dl>
+<dt>Thanks for reading and feel free to let me know if you have any questions.</dt>
+<dd><p>Post written by Erica Nielsen, R scripts written by Nikki Phair and Erica Nielsen ~</p>
+</dd>
+</dl>
+</div>
+
+    </div>
+
+    
+
+
+
+
+
+    
+    
+
+    
+
+    
+<section id="comments">
+  <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "esnielsen-github-io-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+
+    
+    <p class="powered-by">
+      <a href="/privacy/">Privacy Policy</a>
+    </p>
+    
+
+    <p class="powered-by">
+
+      &copy; 2018 &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+    
+
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+
+    
+    
+    
+    <script id="dsq-count-scr" src="//esnielsen-github-io-1.disqus.com/count.js" async></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    <script src="/js/search.js"></script>
+    
+
+    
+    
+
+  </body>
+</html>
+

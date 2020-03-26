@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title></title>
-    <link>/</link>
+    <link>https://esnielsen.github.io/</link>
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,14 +11,14 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>SDMs</title>
-      <link>/post/sdms/</link>
+      <title>Coastal SDMs</title>
+      <link>https://esnielsen.github.io/post/coastal-species-distribution-models/</link>
       <pubDate>Wed, 25 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/sdms/</guid>
+      <guid>https://esnielsen.github.io/post/coastal-species-distribution-models/</guid>
       <description>&lt;div id=&#34;coastal-species-distribution-models&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Coastal Species Distribution Models&lt;/h2&gt;
-&lt;p&gt;This tutorial will discuss how to run Species Distribution Models (SDMs) on coastal species using biomod2 in R.&lt;/p&gt;
+&lt;p&gt;This tutorial will discuss how to run Species Distribution Models (SDMs) on coastal species using biomod2 in R. In this example we will use models to estimate the probability of occurence at two timepoints: present day and the Last Glacial Maximum (LGM). You can do the same with more time points, into the past and/or future.&lt;/p&gt;
 &lt;p&gt;We will obtain the predictor environmental variables from &lt;a href=&#34;http://www.bio-oracle.org/&#34;&gt;Bio-Oracle&lt;/a&gt; with the R package sdmpredictors. Since I work on intertidal species, I want to include both terrestrial and marine environmental variables. We will first load and stack the layers.&lt;/p&gt;
 &lt;p&gt;It is also important to only include variables that are available at both time points you want to model.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(sdmpredictors)
@@ -79,10 +79,10 @@ SA.ext &amp;lt;- extent(10, 40, -37, -22)
 # Crop raster layer by extent &amp;amp; plot
 env.c &amp;lt;- crop(env, SA.ext)
 plot(env.c)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/resample%20and%20crop-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/resample%20and%20crop-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Plotting the environmental layers should give you a figure such as the above. Now we have a single raster stack called ‘env’. We now need to remove highly correlated environmental variables.&lt;/p&gt;
 &lt;p&gt;Here we will need to include our species presence data, which should include three columns: columns 1 &amp;amp; 2: x and y coordinates; column 3: presence (1) or absence (0) at each coordinate.&lt;/p&gt;
-&lt;p&gt;To check for variable collinearity, we will first create a correlation circle, and then calculate the variance inflation factor, or VIF.&lt;/p&gt;
+&lt;p&gt;To check for variable collinearity, we will first extract the environmental data for each coordinate, create a correlation circle, and then calculate the variance inflation factor, or VIF.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Filter environmental variables to account for collinearity
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -90,11 +90,11 @@ plot(env.c)&lt;/code&gt;&lt;/pre&gt;
 pres.data &amp;lt;-read.table(&amp;quot;Cpunctatus.pres2.txt&amp;quot;,sep=&amp;quot;\t&amp;quot;,header=T)
 plot(env.c$WC_bio5)
 points(pres.data[,1:2], pch=19, col=&amp;quot;black&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/vifs-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/vifs-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Extract env values for our species locations:
 envdata &amp;lt;- extract(x=env.c, y=cbind(pres.data$x, pres.data$y))
 
-
+# Run PCA and plot correlation circle
 # The `dudi.pca` function allows us to perform the PCA over the whole study area. We decide to keep only 2 principal component axes to summarize the whole environmental niche. NB: here be careful that none of your xy presence points are outside of the environmental raster layer, which will give NA values, which will give errors. 
 
 library(ade4)
@@ -102,9 +102,9 @@ library(ade4)
 pca1 &amp;lt;- dudi.pca(envdata, scannf = F, nf = 2)
 round(pca1$eig/sum(pca1$eig)*100, 2)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 54.97 28.58 12.85  3.60&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# A preliminary test is to look for potential outliers in the environmental data.
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Plot the PCA to look for potential outliers in the environmental data.
 plot(pca1$li[,1:2]) # PCA scores on first two axes&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/vifs-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/vifs-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(pca1$li)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##      Axis1              Axis2        
 ##  Min.   :-5.08541   Min.   :-1.6900  
@@ -115,22 +115,22 @@ plot(pca1$li[,1:2]) # PCA scores on first two axes&lt;/code&gt;&lt;/pre&gt;
 ##  Max.   : 2.52228   Max.   : 2.5989&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Plot a correlation circle. 
 s.corcircle(pca1$co)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/vifs-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/vifs-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# From the correlation circle, we want to select variables on different axes and not in the same/overlapping environmental space. If there are multiple variables in the same quadrant of the circle, we should choose the one with a longer arrow, as that means it varies more over the environmental space, which is preferred. However, it is also important to know which environmental features are more relevant to your study species, and to choose according to the ecology of each species. 
 
 # A note on arrow directions: same direction = highly correlated, orthogonal (this means at a 90 degree angle) = unrelated, opposite directions = negatively correlated
 
 
-# From the plot, we can get rid of variable WC_bio6, and plot again
+# From the plot, we can get rid of variable WC_bio6, and plot again. 
 
-VARSEL &amp;lt;- c(&amp;quot;WC_bio5&amp;quot;, &amp;quot;WC_bio7&amp;quot;, &amp;quot;MS_biogeo08_sss_mean_5m&amp;quot;, &amp;quot;MS_biogeo13_sst_mean_5m&amp;quot;)
-env.c.2 &amp;lt;- stack(subset(env.c, VARSEL))
-envdata &amp;lt;- extract(x=env.c.2, y=cbind(pres.data$x, pres.data$y))
+VARSEL &amp;lt;- c(&amp;quot;WC_bio5&amp;quot;, &amp;quot;WC_bio7&amp;quot;, &amp;quot;MS_biogeo08_sss_mean_5m&amp;quot;, &amp;quot;MS_biogeo13_sst_mean_5m&amp;quot;) #select variables we want to keep
+env.c.2 &amp;lt;- stack(subset(env.c, VARSEL)) #subset the rasterstack by the retained variables
+envdata &amp;lt;- extract(x=env.c.2, y=cbind(pres.data$x, pres.data$y)) 
 pca1 &amp;lt;- dudi.pca(envdata, scannf = F, nf = 2)
 s.corcircle(pca1$co)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/vifs-4.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#Test correlation with VIF
-##Calculate variance inflation factor (VIF). Generally you want to exclude variables with a VIF&amp;gt;10. 
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/vifs-4.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Additionally assess the correlation with VIF
+## Calculate variance inflation factor (VIF). Generally you want to exclude variables with a VIF&amp;gt;10. 
 library(usdm)
 
 vif(env.c.2)&lt;/code&gt;&lt;/pre&gt;
@@ -139,22 +139,25 @@ vif(env.c.2)&lt;/code&gt;&lt;/pre&gt;
 ## 2                 WC_bio7  5.311111
 ## 3 MS_biogeo08_sss_mean_5m  2.367307
 ## 4 MS_biogeo13_sst_mean_5m  9.803145&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#Since none of our variables have a VIF &amp;gt; 10, we can keep all variables for the SDMs.
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#Since WC_bio5 has VIF &amp;gt; 10, then we will remove to create a final environmental raster stack for our models.
+
+VARSEL2 &amp;lt;- c(&amp;quot;WC_bio7&amp;quot;, &amp;quot;MS_biogeo08_sss_mean_5m&amp;quot;, &amp;quot;MS_biogeo13_sst_mean_5m&amp;quot;) #select variables we want to keep
+env.c.3 &amp;lt;- stack(subset(env.c.2, VARSEL2))
 
 # We can write the raster stack to save in the home directory. 
-writeRaster(env.c.2, filename=&amp;quot;env.c.2.tif&amp;quot;, format=&amp;quot;GTiff&amp;quot;, overwrite=TRUE)&lt;/code&gt;&lt;/pre&gt;
+writeRaster(env.c.3, filename=&amp;quot;env.current.tif&amp;quot;, format=&amp;quot;GTiff&amp;quot;, overwrite=TRUE)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Now that we have our final set of variables, we can download the same variables for the Last Glacial Maximum (LGM), 21,000 years ago. The environmental features from Bio-Oracle automatically include the lowered sea levels at the LGM which is nice.&lt;/p&gt;
-&lt;p&gt;It is generally good practice to include multiple climatic models. Here we will include two models: CCSM4 and MIROC. The oceanic layers are already an ensemble of multiple models, so we will use the ensemble without CCSM with the MIROC terrestrial layers, and the ocean model including CCSM with the CCSM terrestrial layers.&lt;/p&gt;
+&lt;p&gt;It is generally good practice to include multiple climatic models. Here we will include two models: CCSM4 and MIROC. The oceanic layers are already an ensemble of multiple models, so we will use the ensemble without CCSM with the MIROC terrestrial layer, and the ocean model including CCSM with the CCSM terrestrial layer.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Download historical environmental data
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 # Load layers and make sure they are in the same order as your contemporary raster stack (WC_bio5, WC_bio7, SSS, SST)
 
-a.miroc.21 &amp;lt;- load_layers(layercodes = c(&amp;quot;WC_bio5_cclgm&amp;quot;, &amp;quot;WC_bio7_cclgm&amp;quot;), equalarea=FALSE, rasterstack=TRUE, 
+a.miroc.21 &amp;lt;- load_layers(layercodes = c(&amp;quot;WC_bio7_cclgm&amp;quot;), equalarea=FALSE, rasterstack=TRUE, 
                          datadir=NULL)
 
-a.ccsm.21 &amp;lt;- load_layers(layercodes = c(&amp;quot;WC_bio5_mrlgm&amp;quot;, &amp;quot;WC_bio7_mrlgm&amp;quot;), equalarea=FALSE, rasterstack=TRUE, 
+a.ccsm.21 &amp;lt;- load_layers(layercodes = c(&amp;quot;WC_bio7_mrlgm&amp;quot;), equalarea=FALSE, rasterstack=TRUE, 
                         datadir=NULL)
 
 o.ens.adj.21 &amp;lt;- load_layers(layercodes = c(&amp;quot;MS_biogeo08_sss_mean_21kya_adjCCSM&amp;quot;, &amp;quot;MS_biogeo13_sst_mean_21kya_adjCCSM&amp;quot;), equalarea=FALSE, rasterstack=TRUE, 
@@ -192,14 +195,22 @@ myRespName &amp;lt;- &amp;#39;Cpunctatus&amp;#39;
 
 # Create presence and pseudo absences
 SPC_PresAbs &amp;lt;- BIOMOD_FormatingData(resp.var = myResp,
-                                    expl.var = env.c.2,
+                                    expl.var = env.c.3,
                                     resp.xy = pres.data[,c(&amp;#39;x&amp;#39;, &amp;#39;y&amp;#39;)],
                                     resp.name = myRespName,
                                     PA.nb.rep = 3,
                                     PA.nb.absences = 10000,
-                                    PA.strategy = &amp;#39;random&amp;#39;) 
-
-##  NOTE: if you get an error that looks like this:
+                                    PA.strategy = &amp;#39;random&amp;#39;) &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## -=-=-=-=-=-=-=-=-=-=-=-=-= Cpunctatus Data Formating -=-=-=-=-=-=-=-=-=-=-=-=-=
+## 
+##       ! No data has been set aside for modeling evaluation
+##    &amp;gt; Pseudo Absences Selection checkings...
+##    &amp;gt; random pseudo absences selection
+##    &amp;gt; Pseudo absences are selected in explanatory variables
+##          ! Some NAs have been automaticly removed from your data
+## -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Done -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;##  NOTE: if you get an error that looks like this:
 ## &amp;#39;Error in .BIOMOD_FormatingData.check.args(resp.var, expl.var, resp.xy,  : Explanatory variable must be one of numeric, data.frame, matrix, RasterLayer, RasterStack, SpatialPointsDataFrame, SpatialPoints&amp;#39;
 
 #Then simply re-create your raster stack and try again. As such:
@@ -207,22 +218,51 @@ env.c.2 &amp;lt;- stack(env.c.2)
 
 
 SPC_PresAbs &amp;lt;- BIOMOD_FormatingData(resp.var = myResp,
-                                    expl.var = env.c.2,
+                                    expl.var = env.c.3,
                                     resp.xy = pres.data[,c(&amp;#39;x&amp;#39;, &amp;#39;y&amp;#39;)],
                                     resp.name = myRespName,
                                     PA.nb.rep = 3,
                                     PA.nb.absences = 10000,
-                                    PA.strategy = &amp;#39;random&amp;#39;) 
-
-
-# Check the number of absences
-SPC_PresAbs
-
-## Notice how the output here says that there are a different number of pseudo absences than you input in the &amp;#39;PA.nb.absences&amp;#39; parameter. I am guessing this is because the same cell can be chosen as an absence over and over within this step, so I would advise playing with that parameter until you get roughly and equal amount of absences as you have presences. 
+                                    PA.strategy = &amp;#39;random&amp;#39;) &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## -=-=-=-=-=-=-=-=-=-=-=-=-= Cpunctatus Data Formating -=-=-=-=-=-=-=-=-=-=-=-=-=
+## 
+##       ! No data has been set aside for modeling evaluation
+##    &amp;gt; Pseudo Absences Selection checkings...
+##    &amp;gt; random pseudo absences selection
+##    &amp;gt; Pseudo absences are selected in explanatory variables
+##          ! Some NAs have been automaticly removed from your data
+## -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Done -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Check the number of absences
+SPC_PresAbs&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## -=-=-=-=-=-=-=-=-=-=-=-=-= &amp;#39;BIOMOD.formated.data.PA&amp;#39; -=-=-=-=-=-=-=-=-=-=-=-=-=
+## 
+## sp.name =  Cpunctatus
+## 
+##   1163 presences,  0 true absences and  323 undifined points in dataset
+## 
+## 
+##   3 explanatory variables
+## 
+##     WC_bio7      MS_biogeo08_sss_mean_5m MS_biogeo13_sst_mean_5m
+##  Min.   :11.50   Min.   :34.78           Min.   :12.97          
+##  1st Qu.:14.30   1st Qu.:35.30           1st Qu.:16.39          
+##  Median :16.40   Median :35.33           Median :18.35          
+##  Mean   :16.26   Mean   :35.27           Mean   :18.52          
+##  3rd Qu.:17.50   3rd Qu.:35.34           3rd Qu.:21.04          
+##  Max.   :22.30   Max.   :35.38           Max.   :26.01          
+## 
+## 
+##  3 Pseudo Absences dataset available ( PA1 PA2 PA3 ) with  151 
+## absences in each (true abs + pseudo abs)
+## 
+## -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## Notice how the output here says that there are a different number of pseudo absences than you input in the &amp;#39;PA.nb.absences&amp;#39; parameter. I am guessing this is because the same cell can be chosen as an absence over and over within this step, so I would advise playing with that parameter until you get roughly and equal amount of absences as you have presences. 
 
 # Plot your pseudo absences
 plot(SPC_PresAbs)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/pseudoabs-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/pseudoabs-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Next we will run model models using our presence and pseudo absence data and environmental features. Here we will run 6 different models, over 10 runs, using 30% of the data for callibration, and 70% for fitting models.&lt;/p&gt;
 &lt;p&gt;We will then check how well the model performs with two separate evalution scores: ROC and TSS. Generally, a ROC &amp;gt; 0.8 and TSS &amp;gt; 0.55 are indicative of high model accuracy.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Run BIOMOD Models
@@ -252,11 +292,11 @@ MyModels_scores[&amp;quot;TSS&amp;quot;,&amp;quot;Testing.data&amp;quot;,,,]
 
 # Graphically see model scores
 models_scores_graph(MySpc_models, by = &amp;quot;models&amp;quot; , metrics = c(&amp;quot;ROC&amp;quot;,&amp;quot;TSS&amp;quot;), xlim = c(0.5,1), ylim = c(0.5,1))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/run.models-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/run.models-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;models_scores_graph(MySpc_models, by = &amp;quot;cv_run&amp;quot; , metrics = c(&amp;quot;ROC&amp;quot;,&amp;quot;TSS&amp;quot;), xlim = c(0.5,1), ylim = c(0.5,1))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/run.models-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/run.models-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;models_scores_graph(MySpc_models, by = &amp;quot;data_set&amp;quot; , metrics = c(&amp;quot;ROC&amp;quot;,&amp;quot;TSS&amp;quot;), xlim = c(0.5,1), ylim = c(0.5,1))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/run.models-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/run.models-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;We can also look at the importance of each environmental variable in explaining the distribution, which is calculated as the variable importance.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variable importance in models
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -266,8 +306,8 @@ models_scores_graph(MySpc_models, by = &amp;quot;models&amp;quot; , metrics = c(
 MyModels_var_import &amp;lt;- get_variables_importance(MySpc_models)
 dimnames(MyModels_var_import)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [[1]]
-## [1] &amp;quot;WC_bio5&amp;quot;                 &amp;quot;WC_bio7&amp;quot;                
-## [3] &amp;quot;MS_biogeo08_sss_mean_5m&amp;quot; &amp;quot;MS_biogeo13_sst_mean_5m&amp;quot;
+## [1] &amp;quot;WC_bio7&amp;quot;                 &amp;quot;MS_biogeo08_sss_mean_5m&amp;quot;
+## [3] &amp;quot;MS_biogeo13_sst_mean_5m&amp;quot;
 ## 
 ## [[2]]
 ## [1] &amp;quot;GLM&amp;quot;  &amp;quot;GAM&amp;quot;  &amp;quot;GBM&amp;quot;  &amp;quot;RF&amp;quot;   &amp;quot;MARS&amp;quot; &amp;quot;FDA&amp;quot; 
@@ -283,16 +323,14 @@ dimnames(MyModels_var_import)&lt;/code&gt;&lt;/pre&gt;
 mVarImp &amp;lt;- apply(MyModels_var_import, c(1,2), median) 
 mVarImp &amp;lt;- apply(mVarImp, 2, function(x) x*(1/sum(x))) # standardize the data
 mVarImp &lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##                               GLM     GAM        GBM         RF      MARS
-## WC_bio5                 0.4021596 0.32975 0.16351286 0.29492455 0.4295490
-## WC_bio7                 0.1482750 0.20975 0.11887433 0.09373571 0.1872473
-## MS_biogeo08_sss_mean_5m 0.2201738 0.20675 0.67006308 0.36579790 0.2472784
-## MS_biogeo13_sst_mean_5m 0.2293916 0.25375 0.04754973 0.24554184 0.1359253
+&lt;pre&gt;&lt;code&gt;##                               GLM       GAM       GBM        RF      MARS
+## WC_bio7                 0.2578125 0.1979434 0.1516144 0.1860687 0.2718195
+## MS_biogeo08_sss_mean_5m 0.3320313 0.4531766 0.7033224 0.4394084 0.4386095
+## MS_biogeo13_sst_mean_5m 0.4101563 0.3488799 0.1450632 0.3745229 0.2895710
 ##                               FDA
-## WC_bio5                 0.3247801
-## WC_bio7                 0.1587243
-## MS_biogeo08_sss_mean_5m 0.3504399
-## MS_biogeo13_sst_mean_5m 0.1660557&lt;/code&gt;&lt;/pre&gt;
+## WC_bio7                 0.1478463
+## MS_biogeo08_sss_mean_5m 0.4384944
+## MS_biogeo13_sst_mean_5m 0.4136593&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#save as table
 write.table(mVarImp, file=&amp;quot;modelVarImp.txt&amp;quot;, sep=&amp;quot;\t&amp;quot;, quote = FALSE)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;It is also good practice to visualize the response curves pertaining to each environmental variable.&lt;/p&gt;
@@ -303,7 +341,7 @@ write.table(mVarImp, file=&amp;quot;modelVarImp.txt&amp;quot;, sep=&amp;quot;\t&
 
 # A plot of these predictions allows visualisation of the modeled response(y-axis) to the given variable (x-axis),conditional to the other variables being held constant.
 
-# Here I will show the response curves for the RF model, but you can do for all models:
+# Here I will show the response curves for the RF model, but you can do this for all models:
 
 MySpc_rf  &amp;lt;- BIOMOD_LoadModels(MySpc_models, models=&amp;#39;RF&amp;#39;)
 
@@ -312,14 +350,14 @@ rf_eval_strip &amp;lt;- biomod2::response.plot2(
   show.variables= get_formal_data(MySpc_models,&amp;#39;expl.var.names&amp;#39;),
   do.bivariate = FALSE, fixed.var.metric = &amp;#39;median&amp;#39;, legend = FALSE,
   display_title = FALSE, data_species = get_formal_data(MySpc_models,&amp;#39;resp.var&amp;#39;))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/response.curves-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/response.curves-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Now we will project our models onto the current climate, and see how well they predict the current distribution. Running this script will create a folder in your directory called ‘current’. Note that this will automatically overwrite any other folder of the same name.&lt;/p&gt;
 &lt;p&gt;Afterwards we will create the ensemble model, which will combine the 6 model types we specified earlier. Here we will use a TSS cut off of 0.55 and ROC cut off of 0.8.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Map individual models onto the current Southern African climate
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 MySpc_models_proj_current &amp;lt;- BIOMOD_Projection( modeling.output = MySpc_models,
-                                                new.env = env.c.2,
+                                                new.env = env.c.3,
                                                 proj.name = &amp;quot;current&amp;quot;,
                                                 binary.meth = &amp;quot;ROC&amp;quot;,
                                                 output.format = &amp;quot;.img&amp;quot;,
@@ -328,7 +366,7 @@ MySpc_models_proj_current &amp;lt;- BIOMOD_Projection( modeling.output = MySpc_m
 
 # Plot and compare the maps for the potential current distribution projected by the different models.
 plot(MySpc_models_proj_current,  str.grep=&amp;quot;PA1_RUN1&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/ensemble.models-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/ensemble.models-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# If any of the models over or under estimate the distribution, then you can consider leaving them out of the ensemble model. 
 
 
@@ -366,17 +404,17 @@ get_projected_models(MySpc_ensemble_models_proj_current)
 
 # Plot them all
 plot(MySpc_ensemble_models_proj_current)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/ensemble.models-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/ensemble.models-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(MySpc_ensemble_models_proj_current, str.grep=&amp;quot;EMcaByTSS&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/ensemble.models-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/ensemble.models-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(MySpc_ensemble_models_proj_current, str.grep=&amp;quot;EMwmeanByTSS&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/ensemble.models-4.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/ensemble.models-4.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Ensemble model hindcast onto LGM environment
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #Fit model using new environmental variables
 
-#first we need to re-name the raster stack layers to be the same as the &amp;#39;present-day&amp;#39; raster stack we built the model on
-names(miroc.21.c) &amp;lt;- c(&amp;#39;WC_bio5&amp;#39;,&amp;#39;WC_bio7&amp;#39;,&amp;#39;MS_biogeo08_sss_mean_5m&amp;#39;, &amp;#39;MS_biogeo13_sst_mean_5m&amp;#39;)
+#First we need to re-name the raster stack layers to be the same as the &amp;#39;present-day&amp;#39; raster stack we built the model on
+names(miroc.21.c) &amp;lt;- c(&amp;#39;WC_bio7&amp;#39;,&amp;#39;MS_biogeo08_sss_mean_5m&amp;#39;, &amp;#39;MS_biogeo13_sst_mean_5m&amp;#39;)
 
 #Then project the model onto the new environmental layers
 MySpc_models_proj_LGM1 &amp;lt;- BIOMOD_Projection( modeling.output = MySpc_models,
@@ -398,7 +436,7 @@ MySpc_models_proj_LGM1 &amp;lt;- BIOMOD_Projection( modeling.output = MySpc_mode
    build.clamping.mask=F)
 
 # Then do this same for CCSM LGM layers
-names(ccsm.21.c) &amp;lt;- c(&amp;#39;WC_bio5&amp;#39;,&amp;#39;WC_bio7&amp;#39;,&amp;#39;MS_biogeo08_sss_mean_5m&amp;#39;, &amp;#39;MS_biogeo13_sst_mean_5m&amp;#39;)
+names(ccsm.21.c) &amp;lt;- c(&amp;#39;WC_bio7&amp;#39;,&amp;#39;MS_biogeo08_sss_mean_5m&amp;#39;, &amp;#39;MS_biogeo13_sst_mean_5m&amp;#39;)
 MySpc_models_proj_LGM2 &amp;lt;- BIOMOD_Projection( modeling.output = MySpc_models,
                                              new.env = ccsm.21.c,
                                              proj.name = &amp;quot;ccsm.LGM&amp;quot;,
@@ -428,7 +466,7 @@ MyBinCP_curr &amp;lt;- raster::stack(&amp;quot;Cpunctatus/proj_current/individua
 MyBinCP_c.LGM &amp;lt;- raster::stack(&amp;quot;Cpunctatus/proj_ccsm.LGM/individual_projections/Cpunctatus_EMcaByTSS_mergedAlgo_mergedRun_mergedData.img&amp;quot;)
 MyBinCP_m.LGM &amp;lt;- raster::stack(&amp;quot;Cpunctatus/proj_miroc.LGM/individual_projections/Cpunctatus_EMcaByTSS_mergedAlgo_mergedRun_mergedData.img&amp;quot;)
 
-# Load a shapefile to have as a background map
+# Load a shapefile to have as a background map. You can find shapefiles either on the web or from R packages such as &amp;#39;rnaturalearth&amp;#39;
 SAmap &amp;lt;- readOGR(&amp;quot;Cpunctatus/Africa.shp&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## OGR data source with driver: ESRI Shapefile 
 ## Source: &amp;quot;/Users/ericaspotswoodnielsen/Desktop/website/SDM.tutorial/Cpunctatus/Africa.shp&amp;quot;, layer: &amp;quot;Africa&amp;quot;
@@ -436,33 +474,33 @@ SAmap &amp;lt;- readOGR(&amp;quot;Cpunctatus/Africa.shp&amp;quot;)&lt;/code&gt;&
 ## It has 3 fields&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;SAmap.c &amp;lt;- crop(SAmap, SA.ext)
 
-# Make ensemble outputs combining the miroc and ccsm models (by averaging cell values)
+# Make ensemble output maps by combining the miroc and ccsm models (by averaging cell values)
 CP.mean.LGM &amp;lt;- merge(MyBinCP_c.LGM, MyBinCP_m.LGM)
+
 # Aggregate the cells to make the output more visable (this doubles the size of the cells)
 CP.mean.LGM.agg &amp;lt;- aggregate(CP.mean.LGM, fact=2)
 MyBinCP_c.agg &amp;lt;- aggregate(MyBinCP_curr, fact=2)
 
+# Stack the current and LGM output layers
 CP.sdms &amp;lt;- stack(MyBinCP_c.agg, CP.mean.LGM.agg)
 names(CP.sdms) &amp;lt;- c(&amp;#39;Current&amp;#39;, &amp;#39;LGM&amp;#39;)
 
+#Plot the current and LGM rasters in single plot
 levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, fill=&amp;#39;white&amp;#39;, alpha=0.2))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/plot.outputs-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/plot.outputs-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;And here we have the final product, showing the average habitat suitability at two timepoints.&lt;/p&gt;
-&lt;dl&gt;
-&lt;dt&gt;Thanks for reading and feel free to let me know if you have any questions.&lt;/dt&gt;
-&lt;dd&gt;&lt;p&gt;Post written by Erica Nielsen, R scripts written by Nikki Phair and Erica Nielsen ~&lt;/p&gt;
-&lt;/dd&gt;
-&lt;/dl&gt;
+&lt;p&gt;Thanks for reading, and feel free to let me know if you have any questions!&lt;/p&gt;
+&lt;p&gt;Post written by Erica Nielsen, R scripts written by Nikki Phair and Erica Nielsen.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
     
     <item>
       <title>My Dance Your PhD Entry!</title>
-      <link>/project/dance-your-phd-entry/</link>
+      <link>https://esnielsen.github.io/project/dance-your-phd-entry/</link>
       <pubDate>Fri, 21 Feb 2020 16:32:54 +0200</pubDate>
       
-      <guid>/project/dance-your-phd-entry/</guid>
+      <guid>https://esnielsen.github.io/project/dance-your-phd-entry/</guid>
       <description>&lt;p&gt;Below is my entry for the 2020 &amp;lsquo;Dance Your PhD&amp;rsquo; video contest created by &lt;a href=&#34;http://gonzolabs.org/dance/&#34; target=&#34;_blank&#34;&gt;Gonzo Labs&lt;/a&gt; and &lt;a href=&#34;https://www.sciencemag.org/projects/dance-your-phd&#34; target=&#34;_blank&#34;&gt;Science Magazine&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;With this video I aimed to describe a chapter of my PhD via dance, but also hoped to achieve the following:&lt;/p&gt;
@@ -488,107 +526,11 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     </item>
     
     <item>
-      <title>Coastal Species Distribution Models</title>
-      <link>/post/coastal-species-distribution-models/</link>
-      <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/coastal-species-distribution-models/</guid>
-      <description>&lt;p&gt;This tutorial will go through how to run Species Distribution Models (SDMs) on coastal species using biomod2 in R.&lt;/p&gt;
-
-&lt;p&gt;We will obtain the predictor environmental variables from &lt;a href=&#34;http://www.bio-oracle.org/&#34; target=&#34;_blank&#34;&gt;Bio-Oracle&lt;/a&gt; with the R package sdmpredictors. Since I work on intertidal species, I want to include both terrestrial and marine environmental variables. We will first load and stack the layers.&lt;/p&gt;
-
-&lt;p&gt;It is also important to only include variables that are available at both time points you want to model.&lt;/p&gt;
-
-&lt;script src=&#34;//gist.github.com/esnielsen/4170042f638a89b0ded49cf03958fc0c.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;Because the terrestrial and marine layers have different dimensions, we will need to resample them so that we can combine them into a single raster stack.&lt;/p&gt;
-
-&lt;script src=&#34;//gist.github.com/esnielsen/6686615bdf05e71b62fe7fb368aa29fc.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;Plotting the environmental layers should give you a figure such as this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;/img/sdm/fig1.pdf&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Now we have a single raster stack called &amp;lsquo;env&amp;rsquo;. We now need to remove highly correlated environmental variables.&lt;/p&gt;
-
-&lt;script src=&#34;//gist.github.com/esnielsen/02d91b891093a9fd8273ffd52d1e8684.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;Here we will need to include our species presence data, which should include three columns: columns 1 &amp;amp; 2: x and y coordinates; column 3: presence (1) or absence (0) at each coordinate.&lt;/p&gt;
-
-&lt;p&gt;To check for variable collinearity, we will first create a correlation circle, and then calculate the variance inflation factor, or VIF.&lt;/p&gt;
-
-&lt;p&gt;The correlation circle should look something like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;/img/sdm/fig5.pdf&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;From the correlation circle, we want to select variables on different axes and not in the same/overlapping environmental space. If there are multiple variables in the same quadrant of the circle, we should choose the one with a longer arrow, as that means it varies more over the environmental space, which is preferred. However, it is also important to know which environmental features are more relevant to your study species, and to choose according to the ecology of each species.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;A note on arrow directions: same direction = highly correlated, orthogonal (this means at a 90 degree angle) = unrelated, opposite directions = negatively correlated&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;From the VIF we want to only include variables with a VIF&amp;lt; 10.&lt;/p&gt;
-
-&lt;p&gt;Looking at both the correlation circle, and from the VIFs, we will select the following variables: Tmax, T_range, SSS, and SST. After selecting these variables our correlation circle looks like so:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;/img/sdm/fig6.pdf&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Now that we have our final set of variables, we can download the same variables for the Last Glacial Maximum (LGM), 21,000 years ago. The environmental features from Bio-Oracle automatically include the lowered sea levels at the LGM which is nice.&lt;/p&gt;
-
-&lt;p&gt;It is generally good practice to include multiple climatic models. Here we will include two models: CCSM4 and MIROC. The oceanic layers are already an ensemble of multiple models, so we will use the ensemble without CCSM with the MIROC terrestrial layers, and the ocean model including CCSM with the CCSM terrestrial layers.&lt;/p&gt;
-
-&lt;script src=&#34;//gist.github.com/esnielsen/b278c7c8a4e65865925e8e97b1a90ad8.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;Now we can use our environmental raster stack and presence data to create pseudo-absence data.&lt;/p&gt;
-
-&lt;script src=&#34;//gist.github.com/esnielsen/7c03987d0d08cb01d9dca0c80497a8d9.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;The output maps for the pseudo-absences looks like so:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;/img/sdm/fig7.pdf&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Next we will run model models using our presence and pseudo absence data and environmental features. Here we will run 6 different models, over 10 runs, using 30% of the data for callibration, and 70% for fitting models.&lt;/p&gt;
-
-&lt;script src=&#34;//gist.github.com/esnielsen/4f3cf3ac1c570b22e7c3d0cb5cdc6989.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;Then we can evaluate the models. We will graph the model scores. A TSS of above ~0.55 and ROC of above ~ 0.8 are indicative of well performing models.&lt;/p&gt;
-
-&lt;p&gt;The graphs should look similar to this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;/img/sdm/fig8.pdf&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;We can also look at the importance of each environmental variable in explaining the distribution, which is calculated as the variable importance. It is also good practice to visualize the response curves pertaining to each environmental variable.&lt;/p&gt;
-
-&lt;p&gt;Now we will project our models onto the current climate, and compare how well they predict the current distribution. Running this script will create a folder in your directory called &amp;lsquo;current&amp;rsquo;. Note that this will automatically overwrite any other folder of the same name.&lt;/p&gt;
-
-&lt;p&gt;Afterwards we will create the ensemble model, which will combine the 6 model types we specified earlier. Here we will use a TSS cut off of 0.55 and ROC cut off of 0.8.&lt;/p&gt;
-
-&lt;script src=&#34;//gist.github.com/esnielsen/43b975aa182bedfff50ef88fff71248f.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;The output of our ensemble model looks like so:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;/img/sdm/fig10.pdf&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Finally, we can project our models onto future layers. We will first combine the MIROC and CCSM model outputs, by averaging their values per cell. We will also enlargen the cells to make the output maps easier to read.&lt;/p&gt;
-
-&lt;script src=&#34;//gist.github.com/esnielsen/1def0bae8f97ce53a871fb637b0d57e8.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;Our final figure showing habitat suitability for all models at two timepoints looks like so:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;/img/sdm/fig11.pdf&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Thanks for reading and feel free to let me know if you have any questions :)&lt;/p&gt;
-
-&lt;p&gt;Post written by Erica Nielsen, R scripts written by Nikki Phair and Erica Nielsen.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>2019 Conservation Symposium Review</title>
-      <link>/project/sccp_2019/</link>
+      <link>https://esnielsen.github.io/project/sccp_2019/</link>
       <pubDate>Sat, 14 Dec 2019 16:32:54 +0200</pubDate>
       
-      <guid>/project/sccp_2019/</guid>
+      <guid>https://esnielsen.github.io/project/sccp_2019/</guid>
       <description>&lt;p&gt;On Nov 4-7th 2019 I had the opportunity to attend The Conservation Symposium, which aims to bring together those working on conservation issues within South Africa.&lt;/p&gt;
 
 &lt;p&gt;I enjoy this conference because it takes me out of my academia bubble and transports me into the ‘on the ground’ conservation practice realm. Students and academics make up a small portion of the attendees, outnumbered by NGOs, consulting companies, government organizations, attorneys, reporters, and filmmakers.&lt;/p&gt;
@@ -605,17 +547,17 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
 &lt;li&gt;&lt;p&gt;Lastly, there were some very interesting talks on how people perceive our parks within the country. Nyiko Mutileni gave a talk on her work where she interviewed local communities just a few km outside of Man’ombe Nature Reserve, asking if they have every entered the reserve, and if they benefit from the reserve. Many local people had never even heard of the park, only ~3% had entered the park, and most believed they did not benefit from the park because they could no longer access natural resources. Another talk by Dr Izak Smit described how he interviewed visitors of Kruger National Park to understand how they perceived conservation. Most visitors do not believe that conservation areas should be focused on making money, or that we humans should actively manage nature through ‘harsh’ management such as culling. But most surprising to me was almost half of the interviewees believe that humans are separate from nature rather than interconnected through ecological processes. Dr Smit mentioned how this is partly driven by the fact that while 1.9 million people visit Kruger annually, only ~1% actually get out of their cars, walk in the bush, and physically connect with nature. Our disconnect with the natural world is a major issue of our time (shown by the fact that I had to mention ‘in real life’ in the previous point), and protected areas will be fundamental to our individual and societal resilience as we face ever increasing uncertainties on this Earth.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/sccp/p1.jpg&#34; alt=&#34;Example image&#34; /&gt;
-&lt;img src=&#34;/img/sccp/p2.jpg&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/img/sccp/p1.jpg&#34; alt=&#34;Example image&#34; /&gt;
+&lt;img src=&#34;https://esnielsen.github.io/img/sccp/p2.jpg&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Youth 4 Conservation</title>
-      <link>/project/youth4cons/</link>
+      <link>https://esnielsen.github.io/project/youth4cons/</link>
       <pubDate>Sun, 22 Sep 2019 16:32:54 +0200</pubDate>
       
-      <guid>/project/youth4cons/</guid>
+      <guid>https://esnielsen.github.io/project/youth4cons/</guid>
       <description>&lt;p&gt;Below is my entry to the Youth4Conservation video contest for the 2019 South African &lt;a href=&#34;https://conservationsym2019.dryfta.com/&#34; target=&#34;_blank&#34;&gt;Conservation Symposium&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;The &lt;a href=&#34;https://youth4conservation.co.za/&#34; target=&#34;_blank&#34;&gt;Youth4Conservation&lt;/a&gt; movement partners young volunteers with local conservation organisations to help tackle critical conservation issues within South Africa.&lt;/p&gt;
@@ -636,10 +578,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>2019 WIOMSA Symposium Review</title>
-      <link>/project/wiomsa/</link>
+      <link>https://esnielsen.github.io/project/wiomsa/</link>
       <pubDate>Fri, 14 Dec 2018 16:32:54 +0200</pubDate>
       
-      <guid>/project/wiomsa/</guid>
+      <guid>https://esnielsen.github.io/project/wiomsa/</guid>
       <description>&lt;p&gt;During July 1-5 2019, I attended the 11th Western Indian Ocean Marine Science Association (WIOMSA) symposium at the University of Mauritius with two of my colleagues Nikki and Molly.&lt;/p&gt;
 
 &lt;p&gt;WIOMSA is always a great conference as it covers a variety of scientific disciplines and has a strong focus on integrating research and management within the region. Some of the highlights were:&lt;/p&gt;
@@ -666,10 +608,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>Get Genetic With It</title>
-      <link>/project/getgenetic/</link>
+      <link>https://esnielsen.github.io/project/getgenetic/</link>
       <pubDate>Fri, 14 Dec 2018 16:32:54 +0200</pubDate>
       
-      <guid>/project/getgenetic/</guid>
+      <guid>https://esnielsen.github.io/project/getgenetic/</guid>
       <description>&lt;p&gt;Below is my entry to the &lt;a href=&#34;https://evolutionfilmfestival.org/2019/02/11/enter-the-8th-annual-evolution-video-contest/&#34; target=&#34;_blank&#34;&gt;Evolution Film Contest&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;_&lt;/p&gt;
@@ -694,10 +636,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>A Sustainable Future</title>
-      <link>/project/sustainability/</link>
+      <link>https://esnielsen.github.io/project/sustainability/</link>
       <pubDate>Fri, 07 Sep 2018 16:32:54 +0200</pubDate>
       
-      <guid>/project/sustainability/</guid>
+      <guid>https://esnielsen.github.io/project/sustainability/</guid>
       <description>&lt;p&gt;Today civil, political and business leaders are meeting at the &lt;a href=&#34;https://www.un.org/en/climatechange/&#34; target=&#34;_blank&#34;&gt;UN Climate Action Summit&lt;/a&gt; to address the global climate emergency. Ultimately, in order to reduce emissions by 45% by 2030, we will need large corporations and governments to take the lead to ensure that ongoing global development shifts from fossil fuels to renewable energy.&lt;/p&gt;
 
 &lt;p&gt;But while it is mainly a handful of companies that are responsible for 71% of greenhouse gas emissions, we as individuals and consumers can also fight towards and create a more sustainable future. As the lovel figure above by &lt;a href=&#34;http://www.ashleylukashevsky.com/&#34; target=&#34;_blank&#34;&gt;Ashley Lukashevsky&lt;/a&gt; shows, we are all in this together, and together we will rise.&lt;/p&gt;
@@ -752,10 +694,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>Representation</title>
-      <link>/project/respresentation/</link>
+      <link>https://esnielsen.github.io/project/respresentation/</link>
       <pubDate>Fri, 07 Sep 2018 16:32:54 +0200</pubDate>
       
-      <guid>/project/respresentation/</guid>
+      <guid>https://esnielsen.github.io/project/respresentation/</guid>
       <description>&lt;p&gt;Designing Marine Protected Areas, or MPAS, can be difficult, and we still have a lot to learn - as beautifully portrayed in the comic above by &lt;a href=&#34;https://www.ohdakuwaqa.com/&#34; target=&#34;_blank&#34;&gt;Anju Sabu&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;There are complex and dynamic social-ecological systems that need to be weighed and balanced to create an arrangement of MPAs that best protect the natural environment, and provide for various cultural and economic uses of marine resources.&lt;/p&gt;
@@ -836,10 +778,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>Women in STEM</title>
-      <link>/project/women-in-stem/</link>
+      <link>https://esnielsen.github.io/project/women-in-stem/</link>
       <pubDate>Fri, 07 Sep 2018 16:32:54 +0200</pubDate>
       
-      <guid>/project/women-in-stem/</guid>
+      <guid>https://esnielsen.github.io/project/women-in-stem/</guid>
       <description>&lt;p&gt;I have always loved Cindi Lauper&amp;rsquo;s style and her iconic song, &amp;lsquo;Girls just want to have fun&amp;rsquo;, and when I saw this photo (see above) from the Women&amp;rsquo;s March, I knew I needed to make my own rendition of the song. I hope you enjoy!&lt;/p&gt;
 
 
@@ -902,10 +844,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>Pool-seq Programs for Population Genomics</title>
-      <link>/post/a-guide-to-ngs-pool-seq-programs/</link>
+      <link>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</link>
       <pubDate>Fri, 07 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/a-guide-to-ngs-pool-seq-programs/</guid>
+      <guid>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</guid>
       <description>&lt;p&gt;As Pooled sequencing gains popularity in the world of genomics, more and more programs are being introduced to specifically handle Pool-seq data. However, for students such as myself, it can be difficult to find the right program for each step of the bioinformatics process, and to know the correct data format and parameters used with each individual program.&lt;/p&gt;
 
 &lt;p&gt;Here is a short recap of the Pool-seq bioinformatic programs that I have gathered, including input and output files, and any additional notes I had on the program.&lt;/p&gt;
@@ -1034,39 +976,39 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>Privacy Policy</title>
-      <link>/privacy/</link>
+      <link>https://esnielsen.github.io/privacy/</link>
       <pubDate>Thu, 28 Jun 2018 00:00:00 +0200</pubDate>
       
-      <guid>/privacy/</guid>
+      <guid>https://esnielsen.github.io/privacy/</guid>
       <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Complex signatures of genomic variation of two non-model marine species in a homogeneous environment</title>
-      <link>/publication/person-re-identification/</link>
+      <link>https://esnielsen.github.io/publication/person-re-identification/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0200</pubDate>
       
-      <guid>/publication/person-re-identification/</guid>
+      <guid>https://esnielsen.github.io/publication/person-re-identification/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Example Talk</title>
-      <link>/talk/example-talk/</link>
+      <link>https://esnielsen.github.io/talk/example-talk/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0200</pubDate>
       
-      <guid>/talk/example-talk/</guid>
+      <guid>https://esnielsen.github.io/talk/example-talk/</guid>
       <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://sourcethemes.com/academic/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Multispecies genetic objectives in spatial conservation planning</title>
-      <link>/publication/clothing-search/</link>
+      <link>https://esnielsen.github.io/publication/clothing-search/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0200</pubDate>
       
-      <guid>/publication/clothing-search/</guid>
+      <guid>https://esnielsen.github.io/publication/clothing-search/</guid>
       <description></description>
     </item>
     

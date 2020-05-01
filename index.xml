@@ -850,7 +850,7 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
       <guid>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</guid>
       <description>&lt;p&gt;As Pooled sequencing gains popularity in the world of genomics, more and more programs are being introduced to specifically handle Pool-seq data. However, for students such as myself, it can be difficult to find the right program for each step of the bioinformatics process, and to know the correct data format and parameters used with each individual program.&lt;/p&gt;
 
-&lt;p&gt;Here is a short recap of the Pool-seq bioinformatic programs that I have gathered, including input and output files, and any additional notes I had on the program.&lt;/p&gt;
+&lt;p&gt;Here is a short recap of the Pool-seq bioinformatic programs that I have gathered (in no particular order), including input and output files, and any additional notes I had on the program.&lt;/p&gt;
 
 &lt;p&gt;~&lt;/p&gt;
 
@@ -876,7 +876,7 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
 
 &lt;p&gt;output: global and per-SNP FST values, a pairwise FST matrix, Baypass or Selestim input files&lt;/p&gt;
 
-&lt;p&gt;Notes: If you would like to have confidence intervals for poolfstat pairwise FST values, feel free to email me and I can send through custom written bash/R scripts. Also remember that the poolsize list is haploid!&lt;/p&gt;
+&lt;p&gt;Notes: Remember that the poolsize list is haploid!&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://www1.montpellier.inra.fr/CBGP/software/baypass/&#34; target=&#34;_blank&#34;&gt;BayPass&lt;/a&gt; -&lt;/p&gt;
 

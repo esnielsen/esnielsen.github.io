@@ -29,7 +29,7 @@ We will obtain the predictor environmental variables from Bio-Oracle with the R 
       
       <guid>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</guid>
       <description>As Pooled sequencing gains popularity in the world of genomics, more and more programs are being introduced to specifically handle Pool-seq data. However, for students such as myself, it can be difficult to find the right program for each step of the bioinformatics process, and to know the correct data format and parameters used with each individual program.
-Here is a short recap of the Pool-seq bioinformatic programs that I have gathered, including input and output files, and any additional notes I had on the program.</description>
+Here is a short recap of the Pool-seq bioinformatic programs that I have gathered (in no particular order), including input and output files, and any additional notes I had on the program.</description>
     </item>
     
   </channel>

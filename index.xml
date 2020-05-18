@@ -1012,5 +1012,128 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
       <description></description>
     </item>
     
+    <item>
+      <title></title>
+      <link>https://esnielsen.github.io/project/climate.convos/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://esnielsen.github.io/project/climate.convos/</guid>
+      <description>
+
+&lt;h1 id=&#34;project-summary-to-display-on-homepage&#34;&gt;Project summary to display on homepage.&lt;/h1&gt;
+
+&lt;p&gt;summary = &amp;ldquo;Some questions to sparks climate change conversations&amp;rdquo;&lt;/p&gt;
+
+&lt;h1 id=&#34;optional-image-to-display-on-homepage-relative-to-static-img-folder&#34;&gt;Optional image to display on homepage (relative to &lt;code&gt;static/img/&lt;/code&gt; folder).&lt;/h1&gt;
+
+&lt;p&gt;image_preview = &amp;ldquo;headers/p13.jpeg&amp;rdquo;&lt;/p&gt;
+
+&lt;h1 id=&#34;tags-can-be-used-for-filtering-projects&#34;&gt;Tags: can be used for filtering projects.&lt;/h1&gt;
+
+&lt;h1 id=&#34;example-tags-machine-learning-deep-learning&#34;&gt;Example: &lt;code&gt;tags = [&amp;quot;machine-learning&amp;quot;, &amp;quot;deep-learning&amp;quot;]&lt;/code&gt;&lt;/h1&gt;
+
+&lt;h1 id=&#34;tags-tutorial&#34;&gt;tags = [&amp;ldquo;Tutorial&amp;rdquo;]&lt;/h1&gt;
+
+&lt;h1 id=&#34;optional-featured-image-relative-to-static-img-folder&#34;&gt;Optional featured image (relative to &lt;code&gt;static/img/&lt;/code&gt; folder).&lt;/h1&gt;
+
+&lt;p&gt;[header]
+image = &amp;ldquo;headers/p13.jpeg&amp;rdquo;&lt;/p&gt;
+
+&lt;h1 id=&#34;optional-external-url-for-project-replaces-project-detail-page&#34;&gt;Optional external URL for project (replaces project detail page).&lt;/h1&gt;
+
+&lt;h1 id=&#34;external-link-http-example-org&#34;&gt;external_link = &amp;ldquo;&lt;a href=&#34;http://example.org&amp;quot;&#34; target=&#34;_blank&#34;&gt;http://example.org&amp;quot;&lt;/a&gt;&lt;/h1&gt;
+
+&lt;h1 id=&#34;does-the-project-detail-page-use-math-formatting&#34;&gt;Does the project detail page use math formatting?&lt;/h1&gt;
+
+&lt;p&gt;math = false&lt;/p&gt;
+
+&lt;p&gt;+++&lt;/p&gt;
+
+&lt;p&gt;During the COVID-19 pandemic, I have spent a lot of time trying to reflect and reconnect. Many of us are having conversations with those we haven&amp;rsquo;t spoken to in a while, and having conversations we normally wouldn&amp;rsquo;t.&lt;/p&gt;
+
+&lt;p&gt;As a self-proclaimed &amp;lsquo;Climate Change Person&amp;rsquo;, I am often looking to have conversations with regards to what I believe is the greatest threat our species and planet are facing (aka the climate crisis/6th mass extinction/human-induced snowballing interactions of doom). And even though we are currently in a pandemic, I still find myself wanting to talk about COVID-19 and the chaos it has created in relation to the climate crisis.&lt;/p&gt;
+
+&lt;p&gt;That being said, I rarely find myself having climate conversations. And it seems like I am not alone. Only &lt;a href=&#34;https://www.climaterealityproject.org/blog/take-number-harvey-edition-19-percent&#34; target=&#34;_blank&#34;&gt;19% of Americans&lt;/a&gt; discuss the climate crisis least once a month. After seeing this, I asked myself &amp;ldquo;WHY?&amp;rdquo;. Then, I answered myself (I talk to myself a lot), &amp;ldquo;Because it&amp;rsquo;s not like I can just bring it up easily.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;I think we often think talking about the climate crisis has to be in a formal, direct, and emotionally heated manner. But it can start with a simple question. Below are some questions I came up to help myself to jumpstart conversations, and hopefully they will reach and help some fellow climate conversationalist wanna-bes. Because in the words of Voltaire, &amp;lsquo;Judge a man by his questions rather than his answers&amp;rsquo;.&lt;/p&gt;
+
+&lt;p&gt;???? Questions to lead into climate change discussion:&lt;/p&gt;
+
+&lt;p&gt;What is your favorite plant/animal? Why? Have you seen it in the wild?&lt;/p&gt;
+
+&lt;p&gt;What is your favorite memory in nature?&lt;/p&gt;
+
+&lt;p&gt;Would you rather explore the deep ocean or into the densest forests?&lt;/p&gt;
+
+&lt;p&gt;Do you think we should spend money on restoring Earth or colonizing new planets?&lt;/p&gt;
+
+&lt;p&gt;What is your favorite disaster movie?&lt;/p&gt;
+
+&lt;p&gt;What do you think the benefits/dangers of current technology are?&lt;/p&gt;
+
+&lt;p&gt;If you could make any change to the Earth, what would it be?&lt;/p&gt;
+
+&lt;p&gt;What do you think is the biggest problem we will face in the future? What do you think is the biggest problem we have faced in the past?&lt;/p&gt;
+
+&lt;p&gt;How far do you think the influences of your actions go?&lt;/p&gt;
+
+&lt;p&gt;Have you ever experienced fake news? What was it? How did you find out?&lt;/p&gt;
+
+&lt;p&gt;What are your hopes for your children?&lt;/p&gt;
+
+&lt;p&gt;What do you value most about nature?&lt;/p&gt;
+
+&lt;p&gt;What would you say your privileges are? How can you use them to help those that are under-privileged?&lt;/p&gt;
+
+&lt;p&gt;When was the last time you were influenced by something/someone?&lt;/p&gt;
+
+&lt;p&gt;Where do you get your information about the world?&lt;/p&gt;
+
+&lt;p&gt;What do you want your legacy to be?&lt;/p&gt;
+
+&lt;p&gt;What is your relationship with food? Would you be interested in growing your own food?&lt;/p&gt;
+
+&lt;p&gt;What kind of traditions do you practice, and what role to the play in your life? Do you think they should adapt with new generations?&lt;/p&gt;
+
+&lt;p&gt;What freedoms are you thankful for?&lt;/p&gt;
+
+&lt;p&gt;???? Questions once on the topic of climate change:&lt;/p&gt;
+
+&lt;p&gt;Do you think humans have a moral responsibility to protect other living things?&lt;/p&gt;
+
+&lt;p&gt;What is your relationship with nature/the climate? How do you think that relationship will look like in the future?&lt;/p&gt;
+
+&lt;p&gt;What are the things you think humanity is doing right?&lt;/p&gt;
+
+&lt;p&gt;Do you think we as humans are part of ecosystems? Or are we in control of them?&lt;/p&gt;
+
+&lt;p&gt;What is something you want to learn more about with regards to nature/climate?&lt;/p&gt;
+
+&lt;p&gt;What emotions come up when you think about our history/future on Earth?&lt;/p&gt;
+
+&lt;p&gt;What are some changes you want to make but are struggling to? What do you think are the biggest roadblocks to creating change?&lt;/p&gt;
+
+&lt;p&gt;Do you worry about climate change? Why/why not? Why do you think some people may think the opposite?&lt;/p&gt;
+
+&lt;p&gt;Do you feel guilty about doing anything which is bad for the environment? Have others made you feel guilty, do you think you have made others feel guilty?&lt;/p&gt;
+
+&lt;p&gt;What actions do you think we need to take for a better future or re-create how things were in the past?&lt;/p&gt;
+
+&lt;p&gt;What are some things humanity is doing right?&lt;/p&gt;
+
+&lt;p&gt;What are some changes you&amp;rsquo;ve seen in your hometown with regards to the climate? Has it affected your life? Do you think it will in the future?&lt;/p&gt;
+
+&lt;p&gt;What jobs do you think are the most important now/will be the most important in the future?&lt;/p&gt;
+
+&lt;p&gt;What are actions you want to take to be more environmentally friendly?  Where did you learn about these? What are some you&amp;rsquo;ve made in the past? What moved you to make them?&lt;/p&gt;
+
+&lt;p&gt;??????&lt;/p&gt;
+
+&lt;p&gt;And that&amp;rsquo;s all I came up with for now! Feel free to add your own and share with the hashtag: #ask4climate&lt;/p&gt;
+
+&lt;p&gt;Happy discussing :)&lt;/p&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>

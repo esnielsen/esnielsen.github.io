@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Fri, 21 Feb 2020 16:32:54 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 22 Apr 2020 16:32:54 +0200</lastBuildDate>
     
 	<atom:link href="https://esnielsen.github.io/project/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Ask4Climate questions</title>
+      <link>https://esnielsen.github.io/project/climate.convos/</link>
+      <pubDate>Wed, 22 Apr 2020 16:32:54 +0200</pubDate>
+      
+      <guid>https://esnielsen.github.io/project/climate.convos/</guid>
+      <description>During the COVID-19 pandemic, I have spent a lot of time trying to reflect and reconnect. Many of us are having conversations with those we haven&amp;rsquo;t spoken to in a while, and having conversations we normally wouldn&amp;rsquo;t. And in a vulnerable situation like a pandemic, conversations are often going deeper than the usual small talk (which is why I chose the cartoon above by the amazing Doug Savage).
+As a self-proclaimed &amp;lsquo;Climate Change Person&amp;rsquo;, I am often looking to have conversations with regards to what I believe is the greatest threat our species and planet are facing (aka the climate crisis/6th mass extinction/human-induced snowballing interactions of doom).</description>
+    </item>
     
     <item>
       <title>My Dance Your PhD Entry!</title>
@@ -99,18 +109,6 @@ But, we have come a long way in understanding how to best create this balance, o
   I originally learned how to play the song on the ukulele following this tutorial. The lyrics and tabs below:
 __
 Women in STEM</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://esnielsen.github.io/project/climate.convos/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://esnielsen.github.io/project/climate.convos/</guid>
-      <description>Project summary to display on homepage. summary = &amp;ldquo;Some questions to sparks climate change conversations&amp;rdquo;
-Optional image to display on homepage (relative to static/img/ folder). image_preview = &amp;ldquo;headers/p13.jpeg&amp;rdquo;
-Tags: can be used for filtering projects. Example: tags = [&amp;quot;machine-learning&amp;quot;, &amp;quot;deep-learning&amp;quot;] tags = [&amp;ldquo;Tutorial&amp;rdquo;] Optional featured image (relative to static/img/ folder). [header] image = &amp;ldquo;headers/p13.jpeg&amp;rdquo;
-Optional external URL for project (replaces project detail page). external_link = &amp;ldquo;http://example.org&amp;quot; Does the project detail page use math formatting?</description>
     </item>
     
   </channel>

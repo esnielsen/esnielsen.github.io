@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title></title>
-    <link>/</link>
+    <link>https://esnielsen.github.io/</link>
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,11 +12,11 @@
     
     <item>
       <title>TalkClimate2Me questions</title>
-      <link>/project/climate.convos/</link>
+      <link>https://esnielsen.github.io/project/climate.convos/</link>
       <pubDate>Wed, 22 Apr 2020 16:32:54 +0200</pubDate>
       
-      <guid>/project/climate.convos/</guid>
-      <description>&lt;p&gt;During the COVID-19 pandemic, I have spent a lot of time trying to reflect and reconnect. Many of us are having conversations with those we haven&amp;rsquo;t spoken to in a while, and having conversations we normally wouldn&amp;rsquo;t.&lt;/p&gt;
+      <guid>https://esnielsen.github.io/project/climate.convos/</guid>
+      <description>&lt;p&gt;During the COVID-19 pandemic, I have spent a lot of time trying to reflect and reconnect. Many of us are having conversations with those we haven&amp;rsquo;t spoken to in a while, and discussing topics we normally wouldn&amp;rsquo;t.&lt;/p&gt;
 
 &lt;p&gt;As a self-proclaimed &amp;lsquo;Climate Change Person&amp;rsquo;, I am often looking to have conversations with regards to what I believe is the greatest threat our species and planet are facing (aka the climate crisis/6th mass extinction/human-induced snowballing interactions of doom). And even though we are currently in a pandemic worth talking about, I still find myself wanting to talk about COVID-19 and the chaos it has created in relation to the climate crisis.&lt;/p&gt;
 
@@ -34,9 +34,9 @@
 
 &lt;p&gt;Do you think we should spend money on restoring Earth or colonizing new planets?&lt;/p&gt;
 
-&lt;p&gt;What is your favorite disaster movie?&lt;/p&gt;
+&lt;p&gt;What is your favorite disaster movie? Do you think natural disasters are getting worse?&lt;/p&gt;
 
-&lt;p&gt;What do you think the benefits/dangers of current technology are?&lt;/p&gt;
+&lt;p&gt;What do you think the benefits/dangers of current technology are? Do you think technology is helping or hurting our relationship with nature?&lt;/p&gt;
 
 &lt;p&gt;If you could make any change to the Earth, what would it be?&lt;/p&gt;
 
@@ -60,7 +60,7 @@
 
 &lt;p&gt;What is your relationship with food?&lt;/p&gt;
 
-&lt;p&gt;What kind of traditions do you practice, and what role to the play in your life? Do you think they should adapt with new generations?&lt;/p&gt;
+&lt;p&gt;What kind of traditions do you practice, and what role do they play in your life? Do you think traditions should adapt with new generations?&lt;/p&gt;
 
 &lt;p&gt;What freedoms are you thankful for?&lt;/p&gt;
 
@@ -86,7 +86,7 @@
 
 &lt;p&gt;Do you feel guilty about doing anything which is bad for the environment? Have others made you feel guilty? Do you think you have made others feel guilty?&lt;/p&gt;
 
-&lt;p&gt;What actions do you think we need to take for a better future or to re-create how things were in the past?&lt;/p&gt;
+&lt;p&gt;What actions should we take for a better future / to re-create how things were in the past?&lt;/p&gt;
 
 &lt;p&gt;What systems need to change the most to tackle the climate crisis?&lt;/p&gt;
 
@@ -108,10 +108,10 @@
     
     <item>
       <title>Coastal SDMs</title>
-      <link>/post/coastal-species-distribution-models/</link>
+      <link>https://esnielsen.github.io/post/coastal-species-distribution-models/</link>
       <pubDate>Wed, 25 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/coastal-species-distribution-models/</guid>
+      <guid>https://esnielsen.github.io/post/coastal-species-distribution-models/</guid>
       <description>&lt;div id=&#34;coastal-species-distribution-models&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Coastal Species Distribution Models&lt;/h2&gt;
 &lt;p&gt;This tutorial will discuss how to run Species Distribution Models (SDMs) on coastal species using biomod2 in R. In this example we will use models to estimate the probability of occurence at two timepoints: present day and the Last Glacial Maximum (LGM). You can do the same with more time points, into the past and/or future.&lt;/p&gt;
@@ -175,7 +175,7 @@ SA.ext &amp;lt;- extent(10, 40, -37, -22)
 # Crop raster layer by extent &amp;amp; plot
 env.c &amp;lt;- crop(env, SA.ext)
 plot(env.c)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/resample%20and%20crop-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/resample%20and%20crop-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Plotting the environmental layers should give you a figure such as the above. Now we have a single raster stack called ‘env’. We now need to remove highly correlated environmental variables.&lt;/p&gt;
 &lt;p&gt;Here we will need to include our species presence data, which should include three columns: columns 1 &amp;amp; 2: x and y coordinates; column 3: presence (1) or absence (0) at each coordinate.&lt;/p&gt;
 &lt;p&gt;To check for variable collinearity, we will first extract the environmental data for each coordinate, create a correlation circle, and then calculate the variance inflation factor, or VIF.&lt;/p&gt;
@@ -186,7 +186,7 @@ plot(env.c)&lt;/code&gt;&lt;/pre&gt;
 pres.data &amp;lt;-read.table(&amp;quot;Cpunctatus.pres2.txt&amp;quot;,sep=&amp;quot;\t&amp;quot;,header=T)
 plot(env.c$WC_bio5)
 points(pres.data[,1:2], pch=19, col=&amp;quot;black&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/vifs-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/vifs-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Extract env values for our species locations:
 envdata &amp;lt;- extract(x=env.c, y=cbind(pres.data$x, pres.data$y))
 
@@ -200,7 +200,7 @@ round(pca1$eig/sum(pca1$eig)*100, 2)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 54.97 28.58 12.85  3.60&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Plot the PCA to look for potential outliers in the environmental data.
 plot(pca1$li[,1:2]) # PCA scores on first two axes&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/vifs-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/vifs-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(pca1$li)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##      Axis1              Axis2        
 ##  Min.   :-5.08541   Min.   :-1.6900  
@@ -211,7 +211,7 @@ plot(pca1$li[,1:2]) # PCA scores on first two axes&lt;/code&gt;&lt;/pre&gt;
 ##  Max.   : 2.52228   Max.   : 2.5989&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Plot a correlation circle. 
 s.corcircle(pca1$co)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/vifs-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/vifs-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# From the correlation circle, we want to select variables on different axes and not in the same/overlapping environmental space. If there are multiple variables in the same quadrant of the circle, we should choose the one with a longer arrow, as that means it varies more over the environmental space, which is preferred. However, it is also important to know which environmental features are more relevant to your study species, and to choose according to the ecology of each species. 
 
 # A note on arrow directions: same direction = highly correlated, orthogonal (this means at a 90 degree angle) = unrelated, opposite directions = negatively correlated
@@ -224,7 +224,7 @@ env.c.2 &amp;lt;- stack(subset(env.c, VARSEL)) #subset the rasterstack by the re
 envdata &amp;lt;- extract(x=env.c.2, y=cbind(pres.data$x, pres.data$y)) 
 pca1 &amp;lt;- dudi.pca(envdata, scannf = F, nf = 2)
 s.corcircle(pca1$co)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/vifs-4.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/vifs-4.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Additionally assess the correlation with VIF
 ## Calculate variance inflation factor (VIF). Generally you want to exclude variables with a VIF&amp;gt;10. 
 library(usdm)
@@ -358,7 +358,7 @@ SPC_PresAbs&lt;/code&gt;&lt;/pre&gt;
 
 # Plot your pseudo absences
 plot(SPC_PresAbs)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/pseudoabs-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/pseudoabs-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Next we will run model models using our presence and pseudo absence data and environmental features. Here we will run 6 different models, over 10 runs, using 30% of the data for callibration, and 70% for fitting models.&lt;/p&gt;
 &lt;p&gt;We will then check how well the model performs with two separate evalution scores: ROC and TSS. Generally, a ROC &amp;gt; 0.8 and TSS &amp;gt; 0.55 are indicative of high model accuracy.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Run BIOMOD Models
@@ -388,11 +388,11 @@ MyModels_scores[&amp;quot;TSS&amp;quot;,&amp;quot;Testing.data&amp;quot;,,,]
 
 # Graphically see model scores
 models_scores_graph(MySpc_models, by = &amp;quot;models&amp;quot; , metrics = c(&amp;quot;ROC&amp;quot;,&amp;quot;TSS&amp;quot;), xlim = c(0.5,1), ylim = c(0.5,1))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/run.models-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/run.models-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;models_scores_graph(MySpc_models, by = &amp;quot;cv_run&amp;quot; , metrics = c(&amp;quot;ROC&amp;quot;,&amp;quot;TSS&amp;quot;), xlim = c(0.5,1), ylim = c(0.5,1))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/run.models-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/run.models-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;models_scores_graph(MySpc_models, by = &amp;quot;data_set&amp;quot; , metrics = c(&amp;quot;ROC&amp;quot;,&amp;quot;TSS&amp;quot;), xlim = c(0.5,1), ylim = c(0.5,1))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/run.models-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/run.models-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;We can also look at the importance of each environmental variable in explaining the distribution, which is calculated as the variable importance.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variable importance in models
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -446,7 +446,7 @@ rf_eval_strip &amp;lt;- biomod2::response.plot2(
   show.variables= get_formal_data(MySpc_models,&amp;#39;expl.var.names&amp;#39;),
   do.bivariate = FALSE, fixed.var.metric = &amp;#39;median&amp;#39;, legend = FALSE,
   display_title = FALSE, data_species = get_formal_data(MySpc_models,&amp;#39;resp.var&amp;#39;))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/response.curves-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/response.curves-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Now we will project our models onto the current climate, and see how well they predict the current distribution. Running this script will create a folder in your directory called ‘current’. Note that this will automatically overwrite any other folder of the same name.&lt;/p&gt;
 &lt;p&gt;Afterwards we will create the ensemble model, which will combine the 6 model types we specified earlier. Here we will use a TSS cut off of 0.55 and ROC cut off of 0.8.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Map individual models onto the current Southern African climate
@@ -462,7 +462,7 @@ MySpc_models_proj_current &amp;lt;- BIOMOD_Projection( modeling.output = MySpc_m
 
 # Plot and compare the maps for the potential current distribution projected by the different models.
 plot(MySpc_models_proj_current,  str.grep=&amp;quot;PA1_RUN1&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/ensemble.models-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/ensemble.models-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# If any of the models over or under estimate the distribution, then you can consider leaving them out of the ensemble model. 
 
 
@@ -500,11 +500,11 @@ get_projected_models(MySpc_ensemble_models_proj_current)
 
 # Plot them all
 plot(MySpc_ensemble_models_proj_current)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/ensemble.models-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/ensemble.models-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(MySpc_ensemble_models_proj_current, str.grep=&amp;quot;EMcaByTSS&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/ensemble.models-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/ensemble.models-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(MySpc_ensemble_models_proj_current, str.grep=&amp;quot;EMwmeanByTSS&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/ensemble.models-4.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/ensemble.models-4.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Ensemble model hindcast onto LGM environment
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #Fit model using new environmental variables
@@ -583,7 +583,7 @@ names(CP.sdms) &amp;lt;- c(&amp;#39;Current&amp;#39;, &amp;#39;LGM&amp;#39;)
 
 #Plot the current and LGM rasters in single plot
 levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, fill=&amp;#39;white&amp;#39;, alpha=0.2))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/plot.outputs-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/plot.outputs-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;And here we have the final product, showing the average habitat suitability at two timepoints.&lt;/p&gt;
 &lt;p&gt;Thanks for reading, and feel free to let me know if you have any questions!&lt;/p&gt;
 &lt;p&gt;Post written by Erica Nielsen, R scripts written by Nikki Phair and Erica Nielsen.&lt;/p&gt;
@@ -593,10 +593,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>My Dance Your PhD Entry!</title>
-      <link>/project/dance-your-phd-entry/</link>
+      <link>https://esnielsen.github.io/project/dance-your-phd-entry/</link>
       <pubDate>Fri, 21 Feb 2020 16:32:54 +0200</pubDate>
       
-      <guid>/project/dance-your-phd-entry/</guid>
+      <guid>https://esnielsen.github.io/project/dance-your-phd-entry/</guid>
       <description>&lt;p&gt;Below is my entry for the 2020 &amp;lsquo;Dance Your PhD&amp;rsquo; video contest created by &lt;a href=&#34;http://gonzolabs.org/dance/&#34; target=&#34;_blank&#34;&gt;Gonzo Labs&lt;/a&gt; and &lt;a href=&#34;https://www.sciencemag.org/projects/dance-your-phd&#34; target=&#34;_blank&#34;&gt;Science Magazine&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;With this video I aimed to describe a chapter of my PhD via dance, but also hoped to achieve the following:&lt;/p&gt;
@@ -623,10 +623,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>2019 Conservation Symposium Review</title>
-      <link>/project/sccp_2019/</link>
+      <link>https://esnielsen.github.io/project/sccp_2019/</link>
       <pubDate>Sat, 14 Dec 2019 16:32:54 +0200</pubDate>
       
-      <guid>/project/sccp_2019/</guid>
+      <guid>https://esnielsen.github.io/project/sccp_2019/</guid>
       <description>&lt;p&gt;On Nov 4-7th 2019 I had the opportunity to attend The Conservation Symposium, which aims to bring together those working on conservation issues within South Africa.&lt;/p&gt;
 
 &lt;p&gt;I enjoy this conference because it takes me out of my academia bubble and transports me into the ‘on the ground’ conservation practice realm. Students and academics make up a small portion of the attendees, outnumbered by NGOs, consulting companies, government organizations, attorneys, reporters, and filmmakers.&lt;/p&gt;
@@ -643,17 +643,17 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
 &lt;li&gt;&lt;p&gt;Lastly, there were some very interesting talks on how people perceive our parks within the country. Nyiko Mutileni gave a talk on her work where she interviewed local communities just a few km outside of Man’ombe Nature Reserve, asking if they have every entered the reserve, and if they benefit from the reserve. Many local people had never even heard of the park, only ~3% had entered the park, and most believed they did not benefit from the park because they could no longer access natural resources. Another talk by Dr Izak Smit described how he interviewed visitors of Kruger National Park to understand how they perceived conservation. Most visitors do not believe that conservation areas should be focused on making money, or that we humans should actively manage nature through ‘harsh’ management such as culling. But most surprising to me was almost half of the interviewees believe that humans are separate from nature rather than interconnected through ecological processes. Dr Smit mentioned how this is partly driven by the fact that while 1.9 million people visit Kruger annually, only ~1% actually get out of their cars, walk in the bush, and physically connect with nature. Our disconnect with the natural world is a major issue of our time (shown by the fact that I had to mention ‘in real life’ in the previous point), and protected areas will be fundamental to our individual and societal resilience as we face ever increasing uncertainties on this Earth.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/sccp/p1.jpg&#34; alt=&#34;Example image&#34; /&gt;
-&lt;img src=&#34;/img/sccp/p2.jpg&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/img/sccp/p1.jpg&#34; alt=&#34;Example image&#34; /&gt;
+&lt;img src=&#34;https://esnielsen.github.io/img/sccp/p2.jpg&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Youth 4 Conservation</title>
-      <link>/project/youth4cons/</link>
+      <link>https://esnielsen.github.io/project/youth4cons/</link>
       <pubDate>Sun, 22 Sep 2019 16:32:54 +0200</pubDate>
       
-      <guid>/project/youth4cons/</guid>
+      <guid>https://esnielsen.github.io/project/youth4cons/</guid>
       <description>&lt;p&gt;Below is my entry to the Youth4Conservation video contest for the 2019 South African &lt;a href=&#34;https://conservationsym2019.dryfta.com/&#34; target=&#34;_blank&#34;&gt;Conservation Symposium&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;The &lt;a href=&#34;https://youth4conservation.co.za/&#34; target=&#34;_blank&#34;&gt;Youth4Conservation&lt;/a&gt; movement partners young volunteers with local conservation organisations to help tackle critical conservation issues within South Africa.&lt;/p&gt;
@@ -674,10 +674,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>2019 WIOMSA Symposium Review</title>
-      <link>/project/wiomsa/</link>
+      <link>https://esnielsen.github.io/project/wiomsa/</link>
       <pubDate>Fri, 14 Dec 2018 16:32:54 +0200</pubDate>
       
-      <guid>/project/wiomsa/</guid>
+      <guid>https://esnielsen.github.io/project/wiomsa/</guid>
       <description>&lt;p&gt;During July 1-5 2019, I attended the 11th Western Indian Ocean Marine Science Association (WIOMSA) symposium at the University of Mauritius with two of my colleagues Nikki and Molly.&lt;/p&gt;
 
 &lt;p&gt;WIOMSA is always a great conference as it covers a variety of scientific disciplines and has a strong focus on integrating research and management within the region. Some of the highlights were:&lt;/p&gt;
@@ -704,10 +704,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>Get Genetic With It</title>
-      <link>/project/getgenetic/</link>
+      <link>https://esnielsen.github.io/project/getgenetic/</link>
       <pubDate>Fri, 14 Dec 2018 16:32:54 +0200</pubDate>
       
-      <guid>/project/getgenetic/</guid>
+      <guid>https://esnielsen.github.io/project/getgenetic/</guid>
       <description>&lt;p&gt;Below is my entry to the &lt;a href=&#34;https://evolutionfilmfestival.org/2019/02/11/enter-the-8th-annual-evolution-video-contest/&#34; target=&#34;_blank&#34;&gt;Evolution Film Contest&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;_&lt;/p&gt;
@@ -732,10 +732,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>A Sustainable Future</title>
-      <link>/project/sustainability/</link>
+      <link>https://esnielsen.github.io/project/sustainability/</link>
       <pubDate>Fri, 07 Sep 2018 16:32:54 +0200</pubDate>
       
-      <guid>/project/sustainability/</guid>
+      <guid>https://esnielsen.github.io/project/sustainability/</guid>
       <description>&lt;p&gt;Today civil, political and business leaders are meeting at the &lt;a href=&#34;https://www.un.org/en/climatechange/&#34; target=&#34;_blank&#34;&gt;UN Climate Action Summit&lt;/a&gt; to address the global climate emergency. Ultimately, in order to reduce emissions by 45% by 2030, we will need large corporations and governments to take the lead to ensure that ongoing global development shifts from fossil fuels to renewable energy.&lt;/p&gt;
 
 &lt;p&gt;But while it is mainly a handful of companies that are responsible for 71% of greenhouse gas emissions, we as individuals and consumers can also fight towards and create a more sustainable future. As the lovel figure above by &lt;a href=&#34;http://www.ashleylukashevsky.com/&#34; target=&#34;_blank&#34;&gt;Ashley Lukashevsky&lt;/a&gt; shows, we are all in this together, and together we will rise.&lt;/p&gt;
@@ -790,10 +790,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>Representation</title>
-      <link>/project/respresentation/</link>
+      <link>https://esnielsen.github.io/project/respresentation/</link>
       <pubDate>Fri, 07 Sep 2018 16:32:54 +0200</pubDate>
       
-      <guid>/project/respresentation/</guid>
+      <guid>https://esnielsen.github.io/project/respresentation/</guid>
       <description>&lt;p&gt;Designing Marine Protected Areas, or MPAS, can be difficult, and we still have a lot to learn - as beautifully portrayed in the comic above by &lt;a href=&#34;https://www.ohdakuwaqa.com/&#34; target=&#34;_blank&#34;&gt;Anju Sabu&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;There are complex and dynamic social-ecological systems that need to be weighed and balanced to create an arrangement of MPAs that best protect the natural environment, and provide for various cultural and economic uses of marine resources.&lt;/p&gt;
@@ -874,10 +874,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>Women in STEM</title>
-      <link>/project/women-in-stem/</link>
+      <link>https://esnielsen.github.io/project/women-in-stem/</link>
       <pubDate>Fri, 07 Sep 2018 16:32:54 +0200</pubDate>
       
-      <guid>/project/women-in-stem/</guid>
+      <guid>https://esnielsen.github.io/project/women-in-stem/</guid>
       <description>&lt;p&gt;I have always loved Cindi Lauper&amp;rsquo;s style and her iconic song, &amp;lsquo;Girls just want to have fun&amp;rsquo;, and when I saw this photo (see above) from the Women&amp;rsquo;s March, I knew I needed to make my own rendition of the song. I hope you enjoy!&lt;/p&gt;
 
 
@@ -940,10 +940,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>Pool-seq Programs for Population Genomics</title>
-      <link>/post/a-guide-to-ngs-pool-seq-programs/</link>
+      <link>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</link>
       <pubDate>Fri, 07 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/a-guide-to-ngs-pool-seq-programs/</guid>
+      <guid>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</guid>
       <description>&lt;p&gt;As Pooled sequencing gains popularity in the world of genomics, more and more programs are being introduced to specifically handle Pool-seq data. However, for students such as myself, it can be difficult to find the right program for each step of the bioinformatics process, and to know the correct data format and parameters used with each individual program.&lt;/p&gt;
 
 &lt;p&gt;Here is a short recap of the Pool-seq bioinformatic programs that I have gathered (in no particular order), including input and output files, and any additional notes I had on the program.&lt;/p&gt;
@@ -1072,39 +1072,39 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>Privacy Policy</title>
-      <link>/privacy/</link>
+      <link>https://esnielsen.github.io/privacy/</link>
       <pubDate>Thu, 28 Jun 2018 00:00:00 +0200</pubDate>
       
-      <guid>/privacy/</guid>
+      <guid>https://esnielsen.github.io/privacy/</guid>
       <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Complex signatures of genomic variation of two non-model marine species in a homogeneous environment</title>
-      <link>/publication/person-re-identification/</link>
+      <link>https://esnielsen.github.io/publication/person-re-identification/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0200</pubDate>
       
-      <guid>/publication/person-re-identification/</guid>
+      <guid>https://esnielsen.github.io/publication/person-re-identification/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Example Talk</title>
-      <link>/talk/example-talk/</link>
+      <link>https://esnielsen.github.io/talk/example-talk/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0200</pubDate>
       
-      <guid>/talk/example-talk/</guid>
+      <guid>https://esnielsen.github.io/talk/example-talk/</guid>
       <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://sourcethemes.com/academic/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Multispecies genetic objectives in spatial conservation planning</title>
-      <link>/publication/clothing-search/</link>
+      <link>https://esnielsen.github.io/publication/clothing-search/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0200</pubDate>
       
-      <guid>/publication/clothing-search/</guid>
+      <guid>https://esnielsen.github.io/publication/clothing-search/</guid>
       <description></description>
     </item>
     

@@ -2,32 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tutorials on </title>
-    <link>https://esnielsen.github.io/post/</link>
+    <link>/post/</link>
     <description>Recent content in Tutorials on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
     <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0200</lastBuildDate>
     
-	<atom:link href="https://esnielsen.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Coastal SDMs</title>
-      <link>https://esnielsen.github.io/post/coastal-species-distribution-models/</link>
+      <link>/post/coastal-species-distribution-models/</link>
       <pubDate>Wed, 25 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://esnielsen.github.io/post/coastal-species-distribution-models/</guid>
+      <guid>/post/coastal-species-distribution-models/</guid>
       <description>Coastal Species Distribution Models This tutorial will discuss how to run Species Distribution Models (SDMs) on coastal species using biomod2 in R. In this example we will use models to estimate the probability of occurence at two timepoints: present day and the Last Glacial Maximum (LGM). You can do the same with more time points, into the past and/or future.
 We will obtain the predictor environmental variables from Bio-Oracle with the R package sdmpredictors.</description>
     </item>
     
     <item>
       <title>Pool-seq Programs for Population Genomics</title>
-      <link>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</link>
+      <link>/post/a-guide-to-ngs-pool-seq-programs/</link>
       <pubDate>Fri, 07 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</guid>
+      <guid>/post/a-guide-to-ngs-pool-seq-programs/</guid>
       <description>As Pooled sequencing gains popularity in the world of genomics, more and more programs are being introduced to specifically handle Pool-seq data. However, for students such as myself, it can be difficult to find the right program for each step of the bioinformatics process, and to know the correct data format and parameters used with each individual program.
 Here is a short recap of the Pool-seq bioinformatic programs that I have gathered (in no particular order), including input and output files, and any additional notes I had on the program.</description>
     </item>

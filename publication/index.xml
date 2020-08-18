@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Publications on </title>
-    <link>/publication/</link>
+    <link>https://esnielsen.github.io/publication/</link>
     <description>Recent content in Publications on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
     <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0200</lastBuildDate>
     
-	<atom:link href="/publication/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://esnielsen.github.io/publication/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Complex signatures of genomic variation of two non-model marine species in a homogeneous environment</title>
-      <link>/publication/person-re-identification/</link>
+      <link>https://esnielsen.github.io/publication/person-re-identification/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0200</pubDate>
       
-      <guid>/publication/person-re-identification/</guid>
+      <guid>https://esnielsen.github.io/publication/person-re-identification/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Multispecies genetic objectives in spatial conservation planning</title>
-      <link>/publication/clothing-search/</link>
+      <link>https://esnielsen.github.io/publication/clothing-search/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0200</pubDate>
       
-      <guid>/publication/clothing-search/</guid>
+      <guid>https://esnielsen.github.io/publication/clothing-search/</guid>
       <description></description>
     </item>
     

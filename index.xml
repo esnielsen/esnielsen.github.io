@@ -644,6 +644,24 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     </item>
     
     <item>
+      <title>A comparison of genetic and genomic approaches to represent evolutionary potential in conservation planning </title>
+      <link>/publication/bio.cons.2020/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0200</pubDate>
+      
+      <guid>/publication/bio.cons.2020/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Multi-model seascape genomics identifies distinct environmental drivers of selection among sympatric marine species</title>
+      <link>/publication/bmc.eb.2020/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0200</pubDate>
+      
+      <guid>/publication/bmc.eb.2020/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>2019 Conservation Symposium Review</title>
       <link>/project/sccp_2019/</link>
       <pubDate>Sat, 14 Dec 2019 16:32:54 +0200</pubDate>
@@ -1099,25 +1117,6 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
       
       <guid>/privacy/</guid>
       <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Complex signatures of genomic variation of two non-model marine species in a homogeneous environment</title>
-      <link>/publication/person-re-identification/</link>
-      <pubDate>Tue, 01 May 2018 00:00:00 +0200</pubDate>
-      
-      <guid>/publication/person-re-identification/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Example Talk</title>
-      <link>/talk/example-talk/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 +0200</pubDate>
-      
-      <guid>/talk/example-talk/</guid>
-      <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://sourcethemes.com/academic/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
     

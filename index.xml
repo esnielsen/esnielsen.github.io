@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title></title>
-    <link>/</link>
+    <link>https://esnielsen.github.io/</link>
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,11 +11,214 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Pool-Seq Analyses: PoolFstat &amp; BayPass</title>
+      <link>https://esnielsen.github.io/post/pool-seq-analyses-poolfstat-baypass/</link>
+      <pubDate>Sun, 06 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://esnielsen.github.io/post/pool-seq-analyses-poolfstat-baypass/</guid>
+      <description>&lt;div id=&#34;population-structure-outlier-detection-for-pool-seq-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Population structure &amp;amp; outlier detection for Pool-seq data&lt;/h2&gt;
+&lt;p&gt;This tutorial will discuss how to call SNPs and assess population structure from Pool-Seq data. Specifically, it will go through how to take a sync file from Popoolation, call SNPs with PoolFstat, filter SNPs to account for linkage disequilibrium, and infer population differentiation and identify outliers with BayPass.&lt;/p&gt;
+&lt;p&gt;To start, we need a sync file, which I generated using &lt;a href=&#34;https://sourceforge.net/p/popoolation2/wiki/Manual/&#34;&gt;Popoolation2&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We will use this as the input for &lt;a href=&#34;https://cran.r-project.org/web/packages/poolfstat/poolfstat.pdf&#34;&gt;PoolFstat&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Note in all of the scripts below I will have the heading ‘SG’ just to indicate the species name.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;################################# USING POOLFSTAT ###############################
+##################################################################################
+
+library(poolfstat)
+library(&amp;quot;WriteXLS&amp;quot;)
+
+##### Convert sync file to poolfstat file, and call SNPS
+
+# We first have to give haploid sizes of each pool. Here, I had mostly 40 individuals per pool, and since I am working with diploid species, we multiply that by 2,  to get 80 individuals for most pools.
+psizes &amp;lt;- as.numeric(c(&amp;#39;80&amp;#39;, &amp;#39;80&amp;#39;, &amp;#39;80&amp;#39;, &amp;#39;80&amp;#39;, &amp;#39;80&amp;#39;, &amp;#39;80&amp;#39;, &amp;#39;80&amp;#39;, &amp;#39;80&amp;#39;, &amp;#39;78&amp;#39;, &amp;#39;80&amp;#39;, &amp;#39;80&amp;#39;, &amp;#39;80&amp;#39;, &amp;#39;80&amp;#39;, &amp;#39;60&amp;#39;))
+
+# Then we give the names of each pool/sample.
+pnames &amp;lt;- as.character(c(&amp;#39;PN&amp;#39;, &amp;#39;HB&amp;#39;, &amp;#39;BB&amp;#39;, &amp;#39;LB&amp;#39;, &amp;#39;JB&amp;#39;, &amp;#39;SP&amp;#39;, &amp;#39;BT&amp;#39;, &amp;#39;CA&amp;#39;, &amp;#39;MB&amp;#39;, &amp;#39;KY&amp;#39;, &amp;#39;CF&amp;#39;, &amp;#39;PA&amp;#39;, &amp;#39;HH&amp;#39;, &amp;#39;HL&amp;#39;))
+
+# Here is where we read the sync file and call SNPs. The input file must have the &amp;#39;.sync&amp;#39; extension, and can also be gzipped, like in the example below. The parameters to note are: 
+
+#1) min.rc =  the minimum # reads that an allele needs to have (across all pools) to be called 
+#2) min.cov.per.pool = the minimum allowed read count per pool for SNP to be called
+#3) max.cov.per.pool = the maximum read count per pool for SNP to be called 
+#4) min.maf = the minimum allele frequency (over all pools) for a SNP to be called (note this is obtained from dividing the read counts for the minor allele over the total read coverage) 
+#5) nlines.per.readblock = number of lines in sync file to be read simultaneously 
+
+SG.pooldata &amp;lt;- popsync2pooldata(sync.file = &amp;quot;SG.dn.b.sync.gz&amp;quot;, poolsizes = psizes, poolnames = pnames,
+                                     min.rc = 4, min.cov.per.pool = 20, max.cov.per.pool = 400,
+                                     min.maf = 0.01, noindel = TRUE, nlines.per.readblock = 1e+06)
+
+##### From this file we can compute global and per SNP FSTs
+SG.snp.fsts &amp;lt;- computeFST(SG.pooldata, method = &amp;quot;Anova&amp;quot;, snp.index = NA)
+
+##### And we can compute pairwise FSTs
+SG.pair.fst &amp;lt;- computePairwiseFSTmatrix(SG.pooldata, method = &amp;quot;Anova&amp;quot;,
+                                        min.cov.per.pool = 20, max.cov.per.pool = 400,
+                                        min.maf = 0.01,
+                                        output.snp.values = FALSE)
+
+##### If you want to save the pairwise matrix, you can do the following:
+SG.p.fst &amp;lt;- SG.pair.fst$PairwiseFSTmatrix
+SG.p.fst &amp;lt;- as.data.frame(SG.p.fst)
+WriteXLS(SG.p.fst, &amp;quot;SG.p.fst.xls&amp;quot;)
+
+###### Next, we will convert the poolfstat file to BayPass input files
+
+#### Here you get three output files = genobaypass (allele counts), poolsize (haploid size per pool), &amp;amp; snpdet (snp info matrix). These will automatically be written in your working directory. Note the subsample size here can be used to sample to a smaller number of SNPs. If the subsample size is &amp;lt;0, then all SNPs are included in the BayPass files.
+pooldata2genobaypass(SG.pooldata, writing.dir = getwd(), subsamplesize = -1)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;From here, you may want to filter the SNP dataset to account for linkage disequilibrium. If so, you can use this custom script that randomly selects one SNP per every 1000 base pairs along each contig:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;################################# LD PRUNING ###############################
+##################################################################################
+
+# To run the script below, you need to take the snpdet output from the poolfstat2baypass command above, and give the columns headers. Importantly, the first column must be titled &amp;quot;scaffold&amp;quot; and the second column must be titled &amp;quot;pos&amp;quot; (these are the contig and position columns).Here I called this file &amp;#39;snpdet.pruning.txt&amp;#39;
+
+# Read input file
+data&amp;lt;-read.table(&amp;quot;snpdet.pruning.txt&amp;quot;,sep=&amp;quot;\t&amp;quot;,header=T)
+
+# Initiate data for LD pruning
+data_LD&amp;lt;-NULL
+
+# Window for LD pruning, here at 1000 bp (select 1 SNP per 1000 base pairs)
+window&amp;lt;-1000
+
+# Print every unique contig, and for every contig, randomly subsample 1 SNP per 1000 bp window
+scaffold_ID&amp;lt;-unique(data$scaffold)
+for(i in 1:length(scaffold_ID)){
+  print(scaffold_ID[i])
+  subset&amp;lt;-data[which(data$scaffold==scaffold_ID[i]),]
+for(j in 0:10){
+  print(window*j+1)
+  subset_bin_i&amp;lt;-subset[which(subset$pos&amp;gt;=window*j &amp;amp; subset$pos&amp;lt;=window*(j+1)),]
+  random&amp;lt;-sample(1:length(subset_bin_i[,1]),1)
+  subsubset&amp;lt;-subset_bin_i[random,]
+  data_LD&amp;lt;-rbind(data_LD,subsubset)
+}
+}
+
+# Get the unique LD pruned SNP list
+uniq.LD &amp;lt;- unique(data_LD)
+
+# Write to excel file
+WriteXLS(uniq.LD, &amp;quot;SG.LD.list.xls&amp;quot;)
+
+####### SUBSET BAYPASS FILE  ###########
+
+# Here we are going to filter our BayPass input files to now only relate to the LD-pruned SNPs. To do this, we first need to combine the .genobaypass and .snpdet outptut files from above. So in excel or text editor, have the first columns relate to the .snpdet output, then add the .genobaypass columns following. In other words, your input file here is the contig position, allele states, and then allele counts. Make sure the columns do not have headers. Here I called this file &amp;#39;SG.snpdet.geno.txt&amp;#39;
+
+library(dplyr)
+
+# Read the .genobaypass/.snpdet file type explained above, relating to all SNPs
+snp.data&amp;lt;-read.table(&amp;quot;SG.snpdet.geno.txt&amp;quot;,sep=&amp;quot;&amp;quot;,header=F)
+
+# Read your LD SNP list. To make this text file, I just took the first two columns of the SG.LD.list excel file just created, and turned that into a text file. So basically a text file with first column being contig, and second column being position for all LD-pruned SNPs (but with no column headers)
+ld.data&amp;lt;-read.table(&amp;quot;SG.LD.index.txt&amp;quot;,sep=&amp;quot;\t&amp;quot;,header=F)
+
+# Filter the list of all SNPs to now only list the LD pruned SNPs
+snp.data.f &amp;lt;- dplyr::inner_join(snp.data, ld.data)
+
+# Write out as new file, and then from there you can split back up into new .snpdet and .genobaypass input files
+write.table(snp.data.f, file=&amp;quot;SG.LD.snpdet.geno.txt&amp;quot;, col.names = F, row.names= F, quote = F)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we are ready to input our LD-pruned BayPass files into &lt;a href=&#34;http://www1.montpellier.inra.fr/CBGP/software/baypass/files/BayPass_manual_2.1.pdf&#34;&gt;BayPass&lt;/a&gt;. Here we will use a combination of bash and R scripts to run through BayPass analyses. I will briefly show the main commands used in the bash scripts, and explain how they are used in combination with the R scripts.&lt;/p&gt;
+&lt;p&gt;The first step is to make sure you have compiled BayPass and have it with all of your input files in your working directory (not in R directory but Terminal type of program). Then you need to understand which of the model types you want to run. The standard core model is used to asses population structure, and identify outlier SNPs using a ‘FST type approach’. Alternatively, the auxiliary covariate model can be used to identify outlier SNPs using a ‘GEA type approach’, similar to BayEnv. Here we will just use the core model. The bash script will look something like this:&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: red;&#34;&gt;g_baypass -npop 14 -gfile SG.genobaypass -poolsizefile SG.poolsize -d0yij 8 -outprefix SG.BP -npilot 100&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Here’s some parameter explanations:&lt;/p&gt;
+&lt;p&gt;-npop = number of pools&lt;/p&gt;
+&lt;p&gt;-gfile &amp;amp; -poolsizefiles are relating to your input file names&lt;/p&gt;
+&lt;p&gt;-d0yij = is something to do with the initial read counts and their distribution seeded into the model, and is specifically for Pool-seq data. I followed the tip in the manual that says to set it to 1/5th of the minimum pool size&lt;/p&gt;
+&lt;p&gt;-outprefix = the header of the output files&lt;/p&gt;
+&lt;p&gt;-npilot = number of pilot runs&lt;/p&gt;
+&lt;p&gt;So after you run the above, you should then get a number of output files. What we will need for the next part in R, is the following: ’_mat_omega.out’, ’_summary_beta_params.out’, ’_summary_pi_xtx.out’. You also need to make sure you have the ‘baypass_utils.R’ R code that comes with the program, as we will be running some of these scripts now.&lt;/p&gt;
+&lt;p&gt;Now we will go into R, to both visualize the results, but also to create the pseudo observation dataset (POD), which will be used to identify outlier SNPs.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;################################# BAYPASS CREATE POD ###############################
+##################################################################################
+
+source(&amp;quot;baypass_utils.R&amp;quot;)
+require(corrplot) ; require(ape)
+library(WriteXLS)
+
+# Read omega matrix BayPass output
+SG.omega=as.matrix(read.table(&amp;quot;SG.BP_mat_omega.out&amp;quot;))
+
+# Identify pool names for plotting
+colnames(SG.omega) &amp;lt;- c(&amp;quot;PN&amp;quot;,&amp;quot;HB&amp;quot;,&amp;quot;BB&amp;quot;,&amp;quot;LB&amp;quot;,&amp;quot;JB&amp;quot;,&amp;quot;SP&amp;quot;,&amp;quot;BT&amp;quot;,&amp;quot;CA&amp;quot;,&amp;quot;MB&amp;quot;,
+            &amp;quot;KY&amp;quot;,&amp;quot;CF&amp;quot;,&amp;quot;PA&amp;quot;,&amp;quot;HH&amp;quot;, &amp;quot;HL&amp;quot;)
+rownames(SG.omega) &amp;lt;- c(&amp;quot;PN&amp;quot;,&amp;quot;HB&amp;quot;,&amp;quot;BB&amp;quot;,&amp;quot;LB&amp;quot;,&amp;quot;JB&amp;quot;,&amp;quot;SP&amp;quot;,&amp;quot;BT&amp;quot;,&amp;quot;CA&amp;quot;,&amp;quot;MB&amp;quot;,
+            &amp;quot;KY&amp;quot;,&amp;quot;CF&amp;quot;,&amp;quot;PA&amp;quot;,&amp;quot;HH&amp;quot;, &amp;quot;HL&amp;quot;)
+
+# Create a correlation matrix of the omega values, which can be used to assess genomic differentiation between pools
+cor.mat=cov2cor(SG.omega)
+corrplot(cor.mat,method=&amp;quot;color&amp;quot;,mar=c(2,1,2,2)+0.1,
+         main=expression(&amp;quot;Correlation map based on&amp;quot;~hat(Omega)))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/2020-12-06-pool-seq-analyses-poolfstat-baypass.en_files/figure-html/BayPass%20create%20POD-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# We can also assess population differentiation with hierarchical clustering:
+bta14.tree=as.phylo(hclust(as.dist(1-cor.mat**2)))
+plot(bta14.tree,type=&amp;quot;p&amp;quot;,
+     main=expression(&amp;quot;Hier. clust. tree based on&amp;quot;~hat(Omega)~&amp;quot;(&amp;quot;*d[ij]*&amp;quot;=1-&amp;quot;*rho[ij]*&amp;quot;)&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/2020-12-06-pool-seq-analyses-poolfstat-baypass.en_files/figure-html/BayPass%20create%20POD-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Read the xtx BayPass output
+SG.snp.res=read.table(&amp;quot;SG.BP_summary_pi_xtx.out&amp;quot;,h=T)
+
+# Get the Pi Beta distribution for POD generation
+SG.pi.beta.coef=read.table(&amp;quot;SG.BP_summary_beta_params.out&amp;quot;,h=T)$Mean
+
+# Upload original data to get read counts
+SG.data&amp;lt;-geno2YN(&amp;quot;SG.genobaypass&amp;quot;)
+
+# Simulate POD dataset to use for outlier SNP detection
+simu.SG &amp;lt;-simulate.baypass(omega.mat=SG.omega,nsnp=10000,sample.size=SG.data$NN,
+                           beta.pi=SG.pi.beta.coef,pi.maf=0,suffix=&amp;quot;SG.BP.sim&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 1000 SNP simulated out of 10000 
+## 2000 SNP simulated out of 10000 
+## 3000 SNP simulated out of 10000 
+## 4000 SNP simulated out of 10000 
+## 5000 SNP simulated out of 10000 
+## 6000 SNP simulated out of 10000 
+## 7000 SNP simulated out of 10000 
+## 8000 SNP simulated out of 10000 
+## 9000 SNP simulated out of 10000 
+## 10000 SNP simulated out of 10000&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The above R script will give you new BayPass input files with the suffix of ‘SG.BP.sim’. We will now run BayPass again with these new gfile, using a bash script such as:&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: red;&#34;&gt;g_baypass -npop 14 -gfile G.SG.BP.sim -poolsizefile SG.poolsize -d0yij 8 -outprefix SG.BP.sim -npilot 100&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;After we have re-run BayPass with the simulated POD input files, we will come back into the R workspace.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;################################# BAYPASS GET OUTLIERS ###############################
+##################################################################################
+
+source(&amp;quot;baypass_utils.R&amp;quot;)
+library(WriteXLS)
+
+# Read the new omega matrix and compare to original. Here you want similar values between the two
+SG.pod.omega=as.matrix(read.table(&amp;quot;SG.BP.sim_mat_omega.out&amp;quot;))
+plot(SG.pod.omega,SG.omega) ; abline(a=0,b=1)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/2020-12-06-pool-seq-analyses-poolfstat-baypass.en_files/figure-html/BayPass%20identify%20outliers-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Get the Forstner and Moonen Distance (FMD) between simulated and original posterior estimates (here a smaller value is better) 
+fmd.dist(SG.pod.omega,SG.omega)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 1.028579&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Look at POD xtx values, and identify SNPs where the xtx values are above the 99% significance threshold from the POD. So in the plot, it is those loci (dots) which are above the abline
+SG.pod.xtx=read.table(&amp;quot;SG.BP.sim_summary_pi_xtx.out&amp;quot;,h=T)$M_XtX
+SG.pod.thresh=quantile(SG.pod.xtx,probs=0.99)
+plot(SG.snp.res$M_XtX)
+abline(h=SG.pod.thresh,lty=2)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/2020-12-06-pool-seq-analyses-poolfstat-baypass.en_files/figure-html/BayPass%20identify%20outliers-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Obtain the xtx threshold. Any SNPs with an xtx value greater than this are identified as outlier SNPs
+SG.pod.thresh&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      99% 
+## 18.82108&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Here I just saved the xtx values per SNP list, and then in excel/text editor filtered out the SNPs with an xtx greater than the threshold value as outliers.
+SG.snp.scores &amp;lt;- as.data.frame(SG.snp.res$M_XtX)
+write.table(SG.snp.scores, file=&amp;quot;SG.snp.scores.txt&amp;quot;, sep=&amp;quot;\t&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;From here you can also run the auxiliary model in BayPass to identify outliers associated with environmental variables. To do this, you do not need to run the R code above, but rather simply run another version of the bash script, and identify outliers based on their Bayes Factor values (i.e. SNPs with dB &amp;gt; 20, from the dB column of the *_summary_betai_reg.out output file).&lt;/p&gt;
+&lt;p&gt;I hope this tutorial helps my fellow Pool-Seq peeps! I know there are probably more eloquent ways to run these analyses, but this should at least get the job done. As always, feel free to contact me if you have any questions :)&lt;/p&gt;
+&lt;p&gt;Happy analyzing!&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>IMCC6 Talk</title>
-      <link>/project/imcc6.talk/</link>
+      <link>https://esnielsen.github.io/project/imcc6.talk/</link>
       <pubDate>Sat, 22 Aug 2020 16:32:54 +0200</pubDate>
       
-      <guid>/project/imcc6.talk/</guid>
+      <guid>https://esnielsen.github.io/project/imcc6.talk/</guid>
       <description>&lt;p&gt;Below is my oral presentation at the 2020 &lt;a href=&#34;https://conbio.org/mini-sites/imcc6/&#34; target=&#34;_blank&#34;&gt;International Marine Conservation Congress&lt;/a&gt;, in which I condense my PhD into a ten minute talk (which is a great science communication exercise!).&lt;/p&gt;
 
 &lt;p&gt;This was my first online conference, which I really enjoyed because if you missed anything you could watch it later, asking questions wasn&amp;rsquo;t as intimidating as in person, and talks were spread out over two weeks which made the whole experience less draining than an in person conference! As I mention in my talk, online is definitely the future of conservation conferences!&lt;/p&gt;
@@ -34,10 +237,10 @@
     
     <item>
       <title>TalkClimate2Me questions</title>
-      <link>/project/climate.convos/</link>
+      <link>https://esnielsen.github.io/project/climate.convos/</link>
       <pubDate>Wed, 22 Apr 2020 16:32:54 +0200</pubDate>
       
-      <guid>/project/climate.convos/</guid>
+      <guid>https://esnielsen.github.io/project/climate.convos/</guid>
       <description>&lt;p&gt;During the COVID-19 pandemic, I have spent a lot of time trying to reflect and reconnect. Many of us are having conversations with those we haven&amp;rsquo;t spoken to in a while, and discussing topics we normally wouldn&amp;rsquo;t.&lt;/p&gt;
 
 &lt;p&gt;As a self-proclaimed &amp;lsquo;Climate Change Person&amp;rsquo;, I am often looking to have conversations with regards to what I believe is the greatest threat our species and planet are facing (aka the climate crisis/6th mass extinction/human-induced snowballing interactions of doom). And even though we are currently in a pandemic worth talking about, I still find myself wanting to talk about COVID-19 and the chaos it has created in relation to the climate crisis.&lt;/p&gt;
@@ -130,10 +333,10 @@
     
     <item>
       <title>Coastal SDMs</title>
-      <link>/post/coastal-species-distribution-models/</link>
+      <link>https://esnielsen.github.io/post/coastal-species-distribution-models/</link>
       <pubDate>Wed, 25 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/coastal-species-distribution-models/</guid>
+      <guid>https://esnielsen.github.io/post/coastal-species-distribution-models/</guid>
       <description>&lt;div id=&#34;coastal-species-distribution-models&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Coastal Species Distribution Models&lt;/h2&gt;
 &lt;p&gt;This tutorial will discuss how to run Species Distribution Models (SDMs) on coastal species using biomod2 in R. In this example we will use models to estimate the probability of occurence at two timepoints: present day and the Last Glacial Maximum (LGM). You can do the same with more time points, into the past and/or future.&lt;/p&gt;
@@ -197,7 +400,7 @@ SA.ext &amp;lt;- extent(10, 40, -37, -22)
 # Crop raster layer by extent &amp;amp; plot
 env.c &amp;lt;- crop(env, SA.ext)
 plot(env.c)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/resample%20and%20crop-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/resample%20and%20crop-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Plotting the environmental layers should give you a figure such as the above. Now we have a single raster stack called ‘env’. We now need to remove highly correlated environmental variables.&lt;/p&gt;
 &lt;p&gt;Here we will need to include our species presence data, which should include three columns: columns 1 &amp;amp; 2: x and y coordinates; column 3: presence (1) or absence (0) at each coordinate.&lt;/p&gt;
 &lt;p&gt;To check for variable collinearity, we will first extract the environmental data for each coordinate, create a correlation circle, and then calculate the variance inflation factor, or VIF.&lt;/p&gt;
@@ -208,7 +411,7 @@ plot(env.c)&lt;/code&gt;&lt;/pre&gt;
 pres.data &amp;lt;-read.table(&amp;quot;Cpunctatus.pres2.txt&amp;quot;,sep=&amp;quot;\t&amp;quot;,header=T)
 plot(env.c$WC_bio5)
 points(pres.data[,1:2], pch=19, col=&amp;quot;black&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/vifs-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/vifs-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Extract env values for our species locations:
 envdata &amp;lt;- extract(x=env.c, y=cbind(pres.data$x, pres.data$y))
 
@@ -222,7 +425,7 @@ round(pca1$eig/sum(pca1$eig)*100, 2)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 54.97 28.58 12.85  3.60&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Plot the PCA to look for potential outliers in the environmental data.
 plot(pca1$li[,1:2]) # PCA scores on first two axes&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/vifs-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/vifs-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(pca1$li)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##      Axis1              Axis2        
 ##  Min.   :-5.08541   Min.   :-1.6900  
@@ -233,7 +436,7 @@ plot(pca1$li[,1:2]) # PCA scores on first two axes&lt;/code&gt;&lt;/pre&gt;
 ##  Max.   : 2.52228   Max.   : 2.5989&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Plot a correlation circle. 
 s.corcircle(pca1$co)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/vifs-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/vifs-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# From the correlation circle, we want to select variables on different axes and not in the same/overlapping environmental space. If there are multiple variables in the same quadrant of the circle, we should choose the one with a longer arrow, as that means it varies more over the environmental space, which is preferred. However, it is also important to know which environmental features are more relevant to your study species, and to choose according to the ecology of each species. 
 
 # A note on arrow directions: same direction = highly correlated, orthogonal (this means at a 90 degree angle) = unrelated, opposite directions = negatively correlated
@@ -246,7 +449,7 @@ env.c.2 &amp;lt;- stack(subset(env.c, VARSEL)) #subset the rasterstack by the re
 envdata &amp;lt;- extract(x=env.c.2, y=cbind(pres.data$x, pres.data$y)) 
 pca1 &amp;lt;- dudi.pca(envdata, scannf = F, nf = 2)
 s.corcircle(pca1$co)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/vifs-4.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/vifs-4.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Additionally assess the correlation with VIF
 ## Calculate variance inflation factor (VIF). Generally you want to exclude variables with a VIF&amp;gt;10. 
 library(usdm)
@@ -380,7 +583,7 @@ SPC_PresAbs&lt;/code&gt;&lt;/pre&gt;
 
 # Plot your pseudo absences
 plot(SPC_PresAbs)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/pseudoabs-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/pseudoabs-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Next we will run model models using our presence and pseudo absence data and environmental features. Here we will run 6 different models, over 10 runs, using 30% of the data for callibration, and 70% for fitting models.&lt;/p&gt;
 &lt;p&gt;We will then check how well the model performs with two separate evalution scores: ROC and TSS. Generally, a ROC &amp;gt; 0.8 and TSS &amp;gt; 0.55 are indicative of high model accuracy.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Run BIOMOD Models
@@ -410,11 +613,11 @@ MyModels_scores[&amp;quot;TSS&amp;quot;,&amp;quot;Testing.data&amp;quot;,,,]
 
 # Graphically see model scores
 models_scores_graph(MySpc_models, by = &amp;quot;models&amp;quot; , metrics = c(&amp;quot;ROC&amp;quot;,&amp;quot;TSS&amp;quot;), xlim = c(0.5,1), ylim = c(0.5,1))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/run.models-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/run.models-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;models_scores_graph(MySpc_models, by = &amp;quot;cv_run&amp;quot; , metrics = c(&amp;quot;ROC&amp;quot;,&amp;quot;TSS&amp;quot;), xlim = c(0.5,1), ylim = c(0.5,1))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/run.models-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/run.models-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;models_scores_graph(MySpc_models, by = &amp;quot;data_set&amp;quot; , metrics = c(&amp;quot;ROC&amp;quot;,&amp;quot;TSS&amp;quot;), xlim = c(0.5,1), ylim = c(0.5,1))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/run.models-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/run.models-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;We can also look at the importance of each environmental variable in explaining the distribution, which is calculated as the variable importance.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variable importance in models
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -468,7 +671,7 @@ rf_eval_strip &amp;lt;- biomod2::response.plot2(
   show.variables= get_formal_data(MySpc_models,&amp;#39;expl.var.names&amp;#39;),
   do.bivariate = FALSE, fixed.var.metric = &amp;#39;median&amp;#39;, legend = FALSE,
   display_title = FALSE, data_species = get_formal_data(MySpc_models,&amp;#39;resp.var&amp;#39;))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/response.curves-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/response.curves-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Now we will project our models onto the current climate, and see how well they predict the current distribution. Running this script will create a folder in your directory called ‘current’. Note that this will automatically overwrite any other folder of the same name.&lt;/p&gt;
 &lt;p&gt;Afterwards we will create the ensemble model, which will combine the 6 model types we specified earlier. Here we will use a TSS cut off of 0.55 and ROC cut off of 0.8.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Map individual models onto the current Southern African climate
@@ -484,7 +687,7 @@ MySpc_models_proj_current &amp;lt;- BIOMOD_Projection( modeling.output = MySpc_m
 
 # Plot and compare the maps for the potential current distribution projected by the different models.
 plot(MySpc_models_proj_current,  str.grep=&amp;quot;PA1_RUN1&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/ensemble.models-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/ensemble.models-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# If any of the models over or under estimate the distribution, then you can consider leaving them out of the ensemble model. 
 
 
@@ -522,11 +725,11 @@ get_projected_models(MySpc_ensemble_models_proj_current)
 
 # Plot them all
 plot(MySpc_ensemble_models_proj_current)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/ensemble.models-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/ensemble.models-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(MySpc_ensemble_models_proj_current, str.grep=&amp;quot;EMcaByTSS&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/ensemble.models-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/ensemble.models-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(MySpc_ensemble_models_proj_current, str.grep=&amp;quot;EMwmeanByTSS&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/ensemble.models-4.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/ensemble.models-4.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Ensemble model hindcast onto LGM environment
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #Fit model using new environmental variables
@@ -605,7 +808,7 @@ names(CP.sdms) &amp;lt;- c(&amp;#39;Current&amp;#39;, &amp;#39;LGM&amp;#39;)
 
 #Plot the current and LGM rasters in single plot
 levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, fill=&amp;#39;white&amp;#39;, alpha=0.2))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/coastal.sdm_files/figure-html/plot.outputs-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/post/coastal.sdm_files/figure-html/plot.outputs-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;And here we have the final product, showing the average habitat suitability at two timepoints.&lt;/p&gt;
 &lt;p&gt;Thanks for reading, and feel free to let me know if you have any questions!&lt;/p&gt;
 &lt;p&gt;Post written by Erica Nielsen, R scripts written by Nikki Phair and Erica Nielsen.&lt;/p&gt;
@@ -615,10 +818,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>My Dance Your PhD Entry!</title>
-      <link>/project/dance-your-phd-entry/</link>
+      <link>https://esnielsen.github.io/project/dance-your-phd-entry/</link>
       <pubDate>Fri, 21 Feb 2020 16:32:54 +0200</pubDate>
       
-      <guid>/project/dance-your-phd-entry/</guid>
+      <guid>https://esnielsen.github.io/project/dance-your-phd-entry/</guid>
       <description>&lt;p&gt;Below is my entry for the 2020 &amp;lsquo;Dance Your PhD&amp;rsquo; video contest created by &lt;a href=&#34;http://gonzolabs.org/dance/&#34; target=&#34;_blank&#34;&gt;Gonzo Labs&lt;/a&gt; and &lt;a href=&#34;https://www.sciencemag.org/projects/dance-your-phd&#34; target=&#34;_blank&#34;&gt;Science Magazine&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;With this video I aimed to describe a chapter of my PhD via dance, but also hoped to achieve the following:&lt;/p&gt;
@@ -645,28 +848,28 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>A comparison of genetic and genomic approaches to represent evolutionary potential in conservation planning </title>
-      <link>/publication/bio.cons.2020/</link>
+      <link>https://esnielsen.github.io/publication/bio.cons.2020/</link>
       <pubDate>Wed, 01 Jan 2020 00:00:00 +0200</pubDate>
       
-      <guid>/publication/bio.cons.2020/</guid>
+      <guid>https://esnielsen.github.io/publication/bio.cons.2020/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Multi-model seascape genomics identifies distinct environmental drivers of selection among sympatric marine species</title>
-      <link>/publication/bmc.eb.2020/</link>
+      <link>https://esnielsen.github.io/publication/bmc.eb.2020/</link>
       <pubDate>Wed, 01 Jan 2020 00:00:00 +0200</pubDate>
       
-      <guid>/publication/bmc.eb.2020/</guid>
+      <guid>https://esnielsen.github.io/publication/bmc.eb.2020/</guid>
       <description></description>
     </item>
     
     <item>
       <title>2019 Conservation Symposium Review</title>
-      <link>/project/sccp_2019/</link>
+      <link>https://esnielsen.github.io/project/sccp_2019/</link>
       <pubDate>Sat, 14 Dec 2019 16:32:54 +0200</pubDate>
       
-      <guid>/project/sccp_2019/</guid>
+      <guid>https://esnielsen.github.io/project/sccp_2019/</guid>
       <description>&lt;p&gt;On Nov 4-7th 2019 I had the opportunity to attend The Conservation Symposium, which aims to bring together those working on conservation issues within South Africa.&lt;/p&gt;
 
 &lt;p&gt;I enjoy this conference because it takes me out of my academia bubble and transports me into the ‘on the ground’ conservation practice realm. Students and academics make up a small portion of the attendees, outnumbered by NGOs, consulting companies, government organizations, attorneys, reporters, and filmmakers.&lt;/p&gt;
@@ -683,17 +886,17 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
 &lt;li&gt;&lt;p&gt;Lastly, there were some very interesting talks on how people perceive our parks within the country. Nyiko Mutileni gave a talk on her work where she interviewed local communities just a few km outside of Man’ombe Nature Reserve, asking if they have every entered the reserve, and if they benefit from the reserve. Many local people had never even heard of the park, only ~3% had entered the park, and most believed they did not benefit from the park because they could no longer access natural resources. Another talk by Dr Izak Smit described how he interviewed visitors of Kruger National Park to understand how they perceived conservation. Most visitors do not believe that conservation areas should be focused on making money, or that we humans should actively manage nature through ‘harsh’ management such as culling. But most surprising to me was almost half of the interviewees believe that humans are separate from nature rather than interconnected through ecological processes. Dr Smit mentioned how this is partly driven by the fact that while 1.9 million people visit Kruger annually, only ~1% actually get out of their cars, walk in the bush, and physically connect with nature. Our disconnect with the natural world is a major issue of our time (shown by the fact that I had to mention ‘in real life’ in the previous point), and protected areas will be fundamental to our individual and societal resilience as we face ever increasing uncertainties on this Earth.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/sccp/p1.jpg&#34; alt=&#34;Example image&#34; /&gt;
-&lt;img src=&#34;/img/sccp/p2.jpg&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/img/sccp/p1.jpg&#34; alt=&#34;Example image&#34; /&gt;
+&lt;img src=&#34;https://esnielsen.github.io/img/sccp/p2.jpg&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Youth 4 Conservation</title>
-      <link>/project/youth4cons/</link>
+      <link>https://esnielsen.github.io/project/youth4cons/</link>
       <pubDate>Sun, 22 Sep 2019 16:32:54 +0200</pubDate>
       
-      <guid>/project/youth4cons/</guid>
+      <guid>https://esnielsen.github.io/project/youth4cons/</guid>
       <description>&lt;p&gt;Below is my entry to the Youth4Conservation video contest for the 2019 South African &lt;a href=&#34;https://conservationsym2019.dryfta.com/&#34; target=&#34;_blank&#34;&gt;Conservation Symposium&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;The &lt;a href=&#34;https://youth4conservation.co.za/&#34; target=&#34;_blank&#34;&gt;Youth4Conservation&lt;/a&gt; movement partners young volunteers with local conservation organisations to help tackle critical conservation issues within South Africa.&lt;/p&gt;
@@ -714,10 +917,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>2019 WIOMSA Symposium Review</title>
-      <link>/project/wiomsa/</link>
+      <link>https://esnielsen.github.io/project/wiomsa/</link>
       <pubDate>Fri, 14 Dec 2018 16:32:54 +0200</pubDate>
       
-      <guid>/project/wiomsa/</guid>
+      <guid>https://esnielsen.github.io/project/wiomsa/</guid>
       <description>&lt;p&gt;During July 1-5 2019, I attended the 11th Western Indian Ocean Marine Science Association (WIOMSA) symposium at the University of Mauritius with two of my colleagues Nikki and Molly.&lt;/p&gt;
 
 &lt;p&gt;WIOMSA is always a great conference as it covers a variety of scientific disciplines and has a strong focus on integrating research and management within the region. Some of the highlights were:&lt;/p&gt;
@@ -744,10 +947,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>Get Genetic With It</title>
-      <link>/project/getgenetic/</link>
+      <link>https://esnielsen.github.io/project/getgenetic/</link>
       <pubDate>Fri, 14 Dec 2018 16:32:54 +0200</pubDate>
       
-      <guid>/project/getgenetic/</guid>
+      <guid>https://esnielsen.github.io/project/getgenetic/</guid>
       <description>&lt;p&gt;Below is my entry to the &lt;a href=&#34;https://evolutionfilmfestival.org/2019/02/11/enter-the-8th-annual-evolution-video-contest/&#34; target=&#34;_blank&#34;&gt;Evolution Film Contest&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;_&lt;/p&gt;
@@ -772,10 +975,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>A Sustainable Future</title>
-      <link>/project/sustainability/</link>
+      <link>https://esnielsen.github.io/project/sustainability/</link>
       <pubDate>Fri, 07 Sep 2018 16:32:54 +0200</pubDate>
       
-      <guid>/project/sustainability/</guid>
+      <guid>https://esnielsen.github.io/project/sustainability/</guid>
       <description>&lt;p&gt;Today civil, political and business leaders are meeting at the &lt;a href=&#34;https://www.un.org/en/climatechange/&#34; target=&#34;_blank&#34;&gt;UN Climate Action Summit&lt;/a&gt; to address the global climate emergency. Ultimately, in order to reduce emissions by 45% by 2030, we will need large corporations and governments to take the lead to ensure that ongoing global development shifts from fossil fuels to renewable energy.&lt;/p&gt;
 
 &lt;p&gt;But while it is mainly a handful of companies that are responsible for 71% of greenhouse gas emissions, we as individuals and consumers can also fight towards and create a more sustainable future. As the lovel figure above by &lt;a href=&#34;http://www.ashleylukashevsky.com/&#34; target=&#34;_blank&#34;&gt;Ashley Lukashevsky&lt;/a&gt; shows, we are all in this together, and together we will rise.&lt;/p&gt;
@@ -830,10 +1033,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>Representation</title>
-      <link>/project/respresentation/</link>
+      <link>https://esnielsen.github.io/project/respresentation/</link>
       <pubDate>Fri, 07 Sep 2018 16:32:54 +0200</pubDate>
       
-      <guid>/project/respresentation/</guid>
+      <guid>https://esnielsen.github.io/project/respresentation/</guid>
       <description>&lt;p&gt;Designing Marine Protected Areas, or MPAS, can be difficult, and we still have a lot to learn - as beautifully portrayed in the comic above by &lt;a href=&#34;https://www.ohdakuwaqa.com/&#34; target=&#34;_blank&#34;&gt;Anju Sabu&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;There are complex and dynamic social-ecological systems that need to be weighed and balanced to create an arrangement of MPAs that best protect the natural environment, and provide for various cultural and economic uses of marine resources.&lt;/p&gt;
@@ -914,10 +1117,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>Women in STEM</title>
-      <link>/project/women-in-stem/</link>
+      <link>https://esnielsen.github.io/project/women-in-stem/</link>
       <pubDate>Fri, 07 Sep 2018 16:32:54 +0200</pubDate>
       
-      <guid>/project/women-in-stem/</guid>
+      <guid>https://esnielsen.github.io/project/women-in-stem/</guid>
       <description>&lt;p&gt;I have always loved Cindi Lauper&amp;rsquo;s style and her iconic song, &amp;lsquo;Girls just want to have fun&amp;rsquo;, and when I saw this photo (see above) from the Women&amp;rsquo;s March, I knew I needed to make my own rendition of the song. I hope you enjoy!&lt;/p&gt;
 
 
@@ -980,10 +1183,10 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     
     <item>
       <title>Pool-seq Programs for Population Genomics</title>
-      <link>/post/a-guide-to-ngs-pool-seq-programs/</link>
+      <link>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</link>
       <pubDate>Fri, 07 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/a-guide-to-ngs-pool-seq-programs/</guid>
+      <guid>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</guid>
       <description>&lt;p&gt;As Pooled sequencing gains popularity in the world of genomics, more and more programs are being introduced to specifically handle Pool-seq data. However, for students such as myself, it can be difficult to find the right program for each step of the bioinformatics process, and to know the correct data format and parameters used with each individual program.&lt;/p&gt;
 
 &lt;p&gt;Here is a short recap of the Pool-seq bioinformatic programs that I have gathered (in no particular order), including input and output files, and any additional notes I had on the program.&lt;/p&gt;
@@ -1107,16 +1310,6 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
 &lt;p&gt;~&lt;/p&gt;
 
 &lt;p&gt;Happy analysing!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Privacy Policy</title>
-      <link>/privacy/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 +0200</pubDate>
-      
-      <guid>/privacy/</guid>
-      <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
 </description>
     </item>
     

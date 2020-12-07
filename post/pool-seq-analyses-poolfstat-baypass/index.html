@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 2.4.0">
+  <meta name="generator" content="Hugo 0.46" />
+  <meta name="author" content="Erica S. Nielsen">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="Population structure &amp; outlier detection for Pool-seq data This tutorial will discuss how to call SNPs and assess population structure from Pool-Seq data. Specifically, it will go through how to take a sync file from Popoolation, call SNPs with PoolFstat, filter SNPs to account for linkage disequilibrium, and infer population differentiation and identify outliers with BayPass.
+To start, we need a sync file, which I generated using Popoolation2.
+We will use this as the input for PoolFstat.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://esnielsen.github.io/post/pool-seq-analyses-poolfstat-baypass/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#0095eb">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  
+  
+
+  
+  <link rel="alternate" href="https://esnielsen.github.io/index.xml" type="application/rss+xml" title="">
+  <link rel="feed" href="https://esnielsen.github.io/index.xml" type="application/rss+xml" title="">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://esnielsen.github.io/post/pool-seq-analyses-poolfstat-baypass/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@https://twitter.com/erica_at_work">
+  <meta property="twitter:creator" content="@https://twitter.com/erica_at_work">
+  
+  <meta property="og:site_name" content="">
+  <meta property="og:url" content="https://esnielsen.github.io/post/pool-seq-analyses-poolfstat-baypass/">
+  <meta property="og:title" content="Pool-Seq Analyses: PoolFstat &amp; BayPass | ">
+  <meta property="og:description" content="Population structure &amp; outlier detection for Pool-seq data This tutorial will discuss how to call SNPs and assess population structure from Pool-Seq data. Specifically, it will go through how to take a sync file from Popoolation, call SNPs with PoolFstat, filter SNPs to account for linkage disequilibrium, and infer population differentiation and identify outliers with BayPass.
+To start, we need a sync file, which I generated using Popoolation2.
+We will use this as the input for PoolFstat."><meta property="og:image" content="https://esnielsen.github.io/img/headers/p17.png">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2020-12-06T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2020-12-06T00:00:00&#43;00:00">
+  
+
+  
+
+  
+
+  <title>Pool-Seq Analyses: PoolFstat &amp; BayPass | </title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/"></a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#publications_selected">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Tutorials</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Blog</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/files/ESN.CV.2020.pdf">
+            
+            <span>CV</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a href="/">
+            
+            <span></span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+<div class="article-header">
+  
+  
+    <img src="/img/headers/p17.png" class="article-banner" itemprop="image">
+  
+
+  
+</div>
+
+
+
+  <div class="article-container">
+    <h1 itemprop="name">Pool-Seq Analyses: PoolFstat &amp; BayPass</h1>
+
+    
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Erica S. Nielsen">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2020-12-06 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+    <time datetime="2020-12-06 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+      Dec 6, 2020
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Erica S. Nielsen">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    9 min read
+  </span>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <a href="https://esnielsen.github.io/post/pool-seq-analyses-poolfstat-baypass/#disqus_thread"></a>
+  
+
+  
+  
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Pool-Seq%20Analyses%3a%20PoolFstat%20%26%20BayPass&amp;url=https%3a%2f%2fesnielsen.github.io%2fpost%2fpool-seq-analyses-poolfstat-baypass%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fesnielsen.github.io%2fpost%2fpool-seq-analyses-poolfstat-baypass%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fesnielsen.github.io%2fpost%2fpool-seq-analyses-poolfstat-baypass%2f&amp;title=Pool-Seq%20Analyses%3a%20PoolFstat%20%26%20BayPass"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fesnielsen.github.io%2fpost%2fpool-seq-analyses-poolfstat-baypass%2f&amp;title=Pool-Seq%20Analyses%3a%20PoolFstat%20%26%20BayPass"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Pool-Seq%20Analyses%3a%20PoolFstat%20%26%20BayPass&amp;body=https%3a%2f%2fesnielsen.github.io%2fpost%2fpool-seq-analyses-poolfstat-baypass%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      <div id="population-structure-outlier-detection-for-pool-seq-data" class="section level2">
+<h2>Population structure &amp; outlier detection for Pool-seq data</h2>
+<p>This tutorial will discuss how to call SNPs and assess population structure from Pool-Seq data. Specifically, it will go through how to take a sync file from Popoolation, call SNPs with PoolFstat, filter SNPs to account for linkage disequilibrium, and infer population differentiation and identify outliers with BayPass.</p>
+<p>To start, we need a sync file, which I generated using <a href="https://sourceforge.net/p/popoolation2/wiki/Manual/">Popoolation2</a>.</p>
+<p>We will use this as the input for <a href="https://cran.r-project.org/web/packages/poolfstat/poolfstat.pdf">PoolFstat</a>.</p>
+<p>Note in all of the scripts below I will have the heading ‘SG’ just to indicate the species name.</p>
+<pre class="r"><code>################################# USING POOLFSTAT ###############################
+##################################################################################
+
+library(poolfstat)
+library(&quot;WriteXLS&quot;)
+
+##### Convert sync file to poolfstat file, and call SNPS
+
+# We first have to give haploid sizes of each pool. Here, I had mostly 40 individuals per pool, and since I am working with diploid species, we multiply that by 2,  to get 80 individuals for most pools.
+psizes &lt;- as.numeric(c(&#39;80&#39;, &#39;80&#39;, &#39;80&#39;, &#39;80&#39;, &#39;80&#39;, &#39;80&#39;, &#39;80&#39;, &#39;80&#39;, &#39;78&#39;, &#39;80&#39;, &#39;80&#39;, &#39;80&#39;, &#39;80&#39;, &#39;60&#39;))
+
+# Then we give the names of each pool/sample.
+pnames &lt;- as.character(c(&#39;PN&#39;, &#39;HB&#39;, &#39;BB&#39;, &#39;LB&#39;, &#39;JB&#39;, &#39;SP&#39;, &#39;BT&#39;, &#39;CA&#39;, &#39;MB&#39;, &#39;KY&#39;, &#39;CF&#39;, &#39;PA&#39;, &#39;HH&#39;, &#39;HL&#39;))
+
+# Here is where we read the sync file and call SNPs. The input file must have the &#39;.sync&#39; extension, and can also be gzipped, like in the example below. The parameters to note are: 
+
+#1) min.rc =  the minimum # reads that an allele needs to have (across all pools) to be called 
+#2) min.cov.per.pool = the minimum allowed read count per pool for SNP to be called
+#3) max.cov.per.pool = the maximum read count per pool for SNP to be called 
+#4) min.maf = the minimum allele frequency (over all pools) for a SNP to be called (note this is obtained from dividing the read counts for the minor allele over the total read coverage) 
+#5) nlines.per.readblock = number of lines in sync file to be read simultaneously 
+
+SG.pooldata &lt;- popsync2pooldata(sync.file = &quot;SG.dn.b.sync.gz&quot;, poolsizes = psizes, poolnames = pnames,
+                                     min.rc = 4, min.cov.per.pool = 20, max.cov.per.pool = 400,
+                                     min.maf = 0.01, noindel = TRUE, nlines.per.readblock = 1e+06)
+
+##### From this file we can compute global and per SNP FSTs
+SG.snp.fsts &lt;- computeFST(SG.pooldata, method = &quot;Anova&quot;, snp.index = NA)
+
+##### And we can compute pairwise FSTs
+SG.pair.fst &lt;- computePairwiseFSTmatrix(SG.pooldata, method = &quot;Anova&quot;,
+                                        min.cov.per.pool = 20, max.cov.per.pool = 400,
+                                        min.maf = 0.01,
+                                        output.snp.values = FALSE)
+
+##### If you want to save the pairwise matrix, you can do the following:
+SG.p.fst &lt;- SG.pair.fst$PairwiseFSTmatrix
+SG.p.fst &lt;- as.data.frame(SG.p.fst)
+WriteXLS(SG.p.fst, &quot;SG.p.fst.xls&quot;)
+
+###### Next, we will convert the poolfstat file to BayPass input files
+
+#### Here you get three output files = genobaypass (allele counts), poolsize (haploid size per pool), &amp; snpdet (snp info matrix). These will automatically be written in your working directory. Note the subsample size here can be used to sample to a smaller number of SNPs. If the subsample size is &lt;0, then all SNPs are included in the BayPass files.
+pooldata2genobaypass(SG.pooldata, writing.dir = getwd(), subsamplesize = -1)</code></pre>
+<p>From here, you may want to filter the SNP dataset to account for linkage disequilibrium. If so, you can use this custom script that randomly selects one SNP per every 1000 base pairs along each contig:</p>
+<pre class="r"><code>################################# LD PRUNING ###############################
+##################################################################################
+
+# To run the script below, you need to take the snpdet output from the poolfstat2baypass command above, and give the columns headers. Importantly, the first column must be titled &quot;scaffold&quot; and the second column must be titled &quot;pos&quot; (these are the contig and position columns).Here I called this file &#39;snpdet.pruning.txt&#39;
+
+# Read input file
+data&lt;-read.table(&quot;snpdet.pruning.txt&quot;,sep=&quot;\t&quot;,header=T)
+
+# Initiate data for LD pruning
+data_LD&lt;-NULL
+
+# Window for LD pruning, here at 1000 bp (select 1 SNP per 1000 base pairs)
+window&lt;-1000
+
+# Print every unique contig, and for every contig, randomly subsample 1 SNP per 1000 bp window
+scaffold_ID&lt;-unique(data$scaffold)
+for(i in 1:length(scaffold_ID)){
+  print(scaffold_ID[i])
+  subset&lt;-data[which(data$scaffold==scaffold_ID[i]),]
+for(j in 0:10){
+  print(window*j+1)
+  subset_bin_i&lt;-subset[which(subset$pos&gt;=window*j &amp; subset$pos&lt;=window*(j+1)),]
+  random&lt;-sample(1:length(subset_bin_i[,1]),1)
+  subsubset&lt;-subset_bin_i[random,]
+  data_LD&lt;-rbind(data_LD,subsubset)
+}
+}
+
+# Get the unique LD pruned SNP list
+uniq.LD &lt;- unique(data_LD)
+
+# Write to excel file
+WriteXLS(uniq.LD, &quot;SG.LD.list.xls&quot;)
+
+####### SUBSET BAYPASS FILE  ###########
+
+# Here we are going to filter our BayPass input files to now only relate to the LD-pruned SNPs. To do this, we first need to combine the .genobaypass and .snpdet outptut files from above. So in excel or text editor, have the first columns relate to the .snpdet output, then add the .genobaypass columns following. In other words, your input file here is the contig position, allele states, and then allele counts. Make sure the columns do not have headers. Here I called this file &#39;SG.snpdet.geno.txt&#39;
+
+library(dplyr)
+
+# Read the .genobaypass/.snpdet file type explained above, relating to all SNPs
+snp.data&lt;-read.table(&quot;SG.snpdet.geno.txt&quot;,sep=&quot;&quot;,header=F)
+
+# Read your LD SNP list. To make this text file, I just took the first two columns of the SG.LD.list excel file just created, and turned that into a text file. So basically a text file with first column being contig, and second column being position for all LD-pruned SNPs (but with no column headers)
+ld.data&lt;-read.table(&quot;SG.LD.index.txt&quot;,sep=&quot;\t&quot;,header=F)
+
+# Filter the list of all SNPs to now only list the LD pruned SNPs
+snp.data.f &lt;- dplyr::inner_join(snp.data, ld.data)
+
+# Write out as new file, and then from there you can split back up into new .snpdet and .genobaypass input files
+write.table(snp.data.f, file=&quot;SG.LD.snpdet.geno.txt&quot;, col.names = F, row.names= F, quote = F)</code></pre>
+<p>Now we are ready to input our LD-pruned BayPass files into <a href="http://www1.montpellier.inra.fr/CBGP/software/baypass/files/BayPass_manual_2.1.pdf">BayPass</a>. Here we will use a combination of bash and R scripts to run through BayPass analyses. I will briefly show the main commands used in the bash scripts, and explain how they are used in combination with the R scripts.</p>
+<p>The first step is to make sure you have compiled BayPass and have it with all of your input files in your working directory (not in R directory but Terminal type of program). Then you need to understand which of the model types you want to run. The standard core model is used to asses population structure, and identify outlier SNPs using a ‘FST type approach’. Alternatively, the auxiliary covariate model can be used to identify outlier SNPs using a ‘GEA type approach’, similar to BayEnv. Here we will just use the core model. The bash script will look something like this:</p>
+<p><span style="color: red;">g_baypass -npop 14 -gfile SG.genobaypass -poolsizefile SG.poolsize -d0yij 8 -outprefix SG.BP -npilot 100</span></p>
+<p>Here’s some parameter explanations:</p>
+<p>-npop = number of pools</p>
+<p>-gfile &amp; -poolsizefiles are relating to your input file names</p>
+<p>-d0yij = is something to do with the initial read counts and their distribution seeded into the model, and is specifically for Pool-seq data. I followed the tip in the manual that says to set it to 1/5th of the minimum pool size</p>
+<p>-outprefix = the header of the output files</p>
+<p>-npilot = number of pilot runs</p>
+<p>So after you run the above, you should then get a number of output files. What we will need for the next part in R, is the following: ’_mat_omega.out’, ’_summary_beta_params.out’, ’_summary_pi_xtx.out’. You also need to make sure you have the ‘baypass_utils.R’ R code that comes with the program, as we will be running some of these scripts now.</p>
+<p>Now we will go into R, to both visualize the results, but also to create the pseudo observation dataset (POD), which will be used to identify outlier SNPs.</p>
+<pre class="r"><code>################################# BAYPASS CREATE POD ###############################
+##################################################################################
+
+source(&quot;baypass_utils.R&quot;)
+require(corrplot) ; require(ape)
+library(WriteXLS)
+
+# Read omega matrix BayPass output
+SG.omega=as.matrix(read.table(&quot;SG.BP_mat_omega.out&quot;))
+
+# Identify pool names for plotting
+colnames(SG.omega) &lt;- c(&quot;PN&quot;,&quot;HB&quot;,&quot;BB&quot;,&quot;LB&quot;,&quot;JB&quot;,&quot;SP&quot;,&quot;BT&quot;,&quot;CA&quot;,&quot;MB&quot;,
+            &quot;KY&quot;,&quot;CF&quot;,&quot;PA&quot;,&quot;HH&quot;, &quot;HL&quot;)
+rownames(SG.omega) &lt;- c(&quot;PN&quot;,&quot;HB&quot;,&quot;BB&quot;,&quot;LB&quot;,&quot;JB&quot;,&quot;SP&quot;,&quot;BT&quot;,&quot;CA&quot;,&quot;MB&quot;,
+            &quot;KY&quot;,&quot;CF&quot;,&quot;PA&quot;,&quot;HH&quot;, &quot;HL&quot;)
+
+# Create a correlation matrix of the omega values, which can be used to assess genomic differentiation between pools
+cor.mat=cov2cor(SG.omega)
+corrplot(cor.mat,method=&quot;color&quot;,mar=c(2,1,2,2)+0.1,
+         main=expression(&quot;Correlation map based on&quot;~hat(Omega)))</code></pre>
+<p><img src="/post/2020-12-06-pool-seq-analyses-poolfstat-baypass.en_files/figure-html/BayPass%20create%20POD-1.png" width="672" /></p>
+<pre class="r"><code># We can also assess population differentiation with hierarchical clustering:
+bta14.tree=as.phylo(hclust(as.dist(1-cor.mat**2)))
+plot(bta14.tree,type=&quot;p&quot;,
+     main=expression(&quot;Hier. clust. tree based on&quot;~hat(Omega)~&quot;(&quot;*d[ij]*&quot;=1-&quot;*rho[ij]*&quot;)&quot;))</code></pre>
+<p><img src="/post/2020-12-06-pool-seq-analyses-poolfstat-baypass.en_files/figure-html/BayPass%20create%20POD-2.png" width="672" /></p>
+<pre class="r"><code># Read the xtx BayPass output
+SG.snp.res=read.table(&quot;SG.BP_summary_pi_xtx.out&quot;,h=T)
+
+# Get the Pi Beta distribution for POD generation
+SG.pi.beta.coef=read.table(&quot;SG.BP_summary_beta_params.out&quot;,h=T)$Mean
+
+# Upload original data to get read counts
+SG.data&lt;-geno2YN(&quot;SG.genobaypass&quot;)
+
+# Simulate POD dataset to use for outlier SNP detection
+simu.SG &lt;-simulate.baypass(omega.mat=SG.omega,nsnp=10000,sample.size=SG.data$NN,
+                           beta.pi=SG.pi.beta.coef,pi.maf=0,suffix=&quot;SG.BP.sim&quot;)</code></pre>
+<pre><code>## 1000 SNP simulated out of 10000 
+## 2000 SNP simulated out of 10000 
+## 3000 SNP simulated out of 10000 
+## 4000 SNP simulated out of 10000 
+## 5000 SNP simulated out of 10000 
+## 6000 SNP simulated out of 10000 
+## 7000 SNP simulated out of 10000 
+## 8000 SNP simulated out of 10000 
+## 9000 SNP simulated out of 10000 
+## 10000 SNP simulated out of 10000</code></pre>
+<p>The above R script will give you new BayPass input files with the suffix of ‘SG.BP.sim’. We will now run BayPass again with these new gfile, using a bash script such as:</p>
+<p><span style="color: red;">g_baypass -npop 14 -gfile G.SG.BP.sim -poolsizefile SG.poolsize -d0yij 8 -outprefix SG.BP.sim -npilot 100</span></p>
+<p>After we have re-run BayPass with the simulated POD input files, we will come back into the R workspace.</p>
+<pre class="r"><code>################################# BAYPASS GET OUTLIERS ###############################
+##################################################################################
+
+source(&quot;baypass_utils.R&quot;)
+library(WriteXLS)
+
+# Read the new omega matrix and compare to original. Here you want similar values between the two
+SG.pod.omega=as.matrix(read.table(&quot;SG.BP.sim_mat_omega.out&quot;))
+plot(SG.pod.omega,SG.omega) ; abline(a=0,b=1)</code></pre>
+<p><img src="/post/2020-12-06-pool-seq-analyses-poolfstat-baypass.en_files/figure-html/BayPass%20identify%20outliers-1.png" width="672" /></p>
+<pre class="r"><code># Get the Forstner and Moonen Distance (FMD) between simulated and original posterior estimates (here a smaller value is better) 
+fmd.dist(SG.pod.omega,SG.omega)</code></pre>
+<pre><code>## [1] 1.028579</code></pre>
+<pre class="r"><code># Look at POD xtx values, and identify SNPs where the xtx values are above the 99% significance threshold from the POD. So in the plot, it is those loci (dots) which are above the abline
+SG.pod.xtx=read.table(&quot;SG.BP.sim_summary_pi_xtx.out&quot;,h=T)$M_XtX
+SG.pod.thresh=quantile(SG.pod.xtx,probs=0.99)
+plot(SG.snp.res$M_XtX)
+abline(h=SG.pod.thresh,lty=2)</code></pre>
+<p><img src="/post/2020-12-06-pool-seq-analyses-poolfstat-baypass.en_files/figure-html/BayPass%20identify%20outliers-2.png" width="672" /></p>
+<pre class="r"><code># Obtain the xtx threshold. Any SNPs with an xtx value greater than this are identified as outlier SNPs
+SG.pod.thresh</code></pre>
+<pre><code>##      99% 
+## 18.82108</code></pre>
+<pre class="r"><code># Here I just saved the xtx values per SNP list, and then in excel/text editor filtered out the SNPs with an xtx greater than the threshold value as outliers.
+SG.snp.scores &lt;- as.data.frame(SG.snp.res$M_XtX)
+write.table(SG.snp.scores, file=&quot;SG.snp.scores.txt&quot;, sep=&quot;\t&quot;)</code></pre>
+<p>From here you can also run the auxiliary model in BayPass to identify outliers associated with environmental variables. To do this, you do not need to run the R code above, but rather simply run another version of the bash script, and identify outliers based on their Bayes Factor values (i.e. SNPs with dB &gt; 20, from the dB column of the *_summary_betai_reg.out output file).</p>
+<p>I hope this tutorial helps my fellow Pool-Seq peeps! I know there are probably more eloquent ways to run these analyses, but this should at least get the job done. As always, feel free to contact me if you have any questions :)</p>
+<p>Happy analyzing!</p>
+</div>
+
+    </div>
+
+    
+
+
+
+
+
+    
+    
+
+    
+
+    
+<section id="comments">
+  <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "esnielsen-github-io-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+
+    
+    <p class="powered-by">
+      <a href="https://esnielsen.github.io/privacy/">Privacy Policy</a>
+    </p>
+    
+
+    <p class="powered-by">
+
+      &copy; 2018 &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+    
+
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+
+    
+    
+    
+    <script id="dsq-count-scr" src="//esnielsen-github-io-1.disqus.com/count.js" async></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    <script src="/js/search.js"></script>
+    
+
+    
+    
+
+  </body>
+</html>
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Poolseq on </title>
+    <link>https://esnielsen.github.io/tags/poolseq/</link>
+    <description>Recent content in Poolseq on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Sun, 06 Dec 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://esnielsen.github.io/tags/poolseq/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Pool-Seq Analyses: PoolFstat &amp; BayPass</title>
+      <link>https://esnielsen.github.io/post/pool-seq-analyses-poolfstat-baypass/</link>
+      <pubDate>Sun, 06 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://esnielsen.github.io/post/pool-seq-analyses-poolfstat-baypass/</guid>
+      <description>Population structure &amp;amp; outlier detection for Pool-seq data This tutorial will discuss how to call SNPs and assess population structure from Pool-Seq data. Specifically, it will go through how to take a sync file from Popoolation, call SNPs with PoolFstat, filter SNPs to account for linkage disequilibrium, and infer population differentiation and identify outliers with BayPass.
+To start, we need a sync file, which I generated using Popoolation2.
+We will use this as the input for PoolFstat.</description>
+    </item>
+    
+  </channel>
+</rss>

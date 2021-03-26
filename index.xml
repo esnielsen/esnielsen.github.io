@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sun, 15 Oct 2017 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 15 Oct 2017 00:00:00 -0700</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
@@ -849,7 +849,7 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     <item>
       <title>A comparison of genetic and genomic approaches to represent evolutionary potential in conservation planning </title>
       <link>https://esnielsen.github.io/publication/bio.cons.2020/</link>
-      <pubDate>Wed, 01 Jan 2020 00:00:00 +0200</pubDate>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 -0800</pubDate>
       
       <guid>https://esnielsen.github.io/publication/bio.cons.2020/</guid>
       <description></description>
@@ -858,7 +858,7 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     <item>
       <title>Multi-model seascape genomics identifies distinct environmental drivers of selection among sympatric marine species</title>
       <link>https://esnielsen.github.io/publication/bmc.eb.2020/</link>
-      <pubDate>Wed, 01 Jan 2020 00:00:00 +0200</pubDate>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 -0800</pubDate>
       
       <guid>https://esnielsen.github.io/publication/bmc.eb.2020/</guid>
       <description></description>

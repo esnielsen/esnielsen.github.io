@@ -979,7 +979,7 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
       <pubDate>Fri, 07 Sep 2018 16:32:54 +0200</pubDate>
       
       <guid>https://esnielsen.github.io/project/sustainability/</guid>
-      <description>&lt;p&gt;Today civil, political and business leaders are meeting at the &lt;a href=&#34;https://www.un.org/en/climatechange/&#34; target=&#34;_blank&#34;&gt;UN Climate Action Summit&lt;/a&gt; to address the global climate emergency. Ultimately, in order to reduce emissions by 45% by 2030, we will need large corporations and governments to take the lead to ensure that ongoing global development shifts from fossil fuels to renewable energy.&lt;/p&gt;
+      <description>&lt;p&gt;The Earth is changing, and rapidly. In the midst of a global pandemic, &lt;a href=&#34;https://climate.nasa.gov/climate_resources/139/video-global-warming-from-1880-to-2020/&#34; target=&#34;_blank&#34;&gt;2020 tied with 2016 as the warmest year ON RECORD&lt;/a&gt;. Ultimately, in order to reduce emissions by 45% by 2030, we will need large corporations and governments to take the lead to ensure that ongoing global development shifts from fossil fuels to renewable energy.&lt;/p&gt;
 
 &lt;p&gt;But while it is mainly a handful of companies that are responsible for 71% of greenhouse gas emissions, we as individuals and consumers can also fight towards and create a more sustainable future. As the lovel figure above by &lt;a href=&#34;http://www.ashleylukashevsky.com/&#34; target=&#34;_blank&#34;&gt;Ashley Lukashevsky&lt;/a&gt; shows, we are all in this together, and together we will rise.&lt;/p&gt;
 
@@ -997,6 +997,14 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
 
 &lt;hr /&gt;
 
+&lt;p&gt;Probably one of the biggest ways to increase your impact in the fight against climate change is to speak up. Have conversations about climate change, and try to diversify your social circle to learn from those with different views on the climate crisis. You can also reach out to your local NGOs, send letters/emails to your elected officials, and question practices in your workplace.&lt;/p&gt;
+
+&lt;p&gt;Vote!&lt;/p&gt;
+
+&lt;p&gt;I also find this &lt;a href=&#34;https://onlinepublichealth.gwu.edu/how-to-reduce-climate-change/#top&#34; target=&#34;_blank&#34;&gt;nice resource&lt;/a&gt; which has several options to reduce your carbon footprint depending on the time, money, and effort you&amp;rsquo;re willing to spend.&lt;/p&gt;
+
+&lt;p&gt;In addition, indigenous people are &lt;a href=&#34;https://news.trust.org/item/20210420094705-ft6ou&#34; target=&#34;_blank&#34;&gt;arguably the leaders in protecting and conserving natural environments&lt;/a&gt; which are essential to absorb and retain carbon. Thus, you can support indigenous efforts, such as donating movements like &lt;a href=&#34;https://landback.org/donate/&#34; target=&#34;_blank&#34;&gt;LANDBACK&lt;/a&gt;.&lt;/p&gt;
+
 &lt;p&gt;Then there is the &lt;a href=&#34;https://www.ted.com/talks/leyla_acaroglu_paper_beats_plastic_how_to_rethink_environmental_folklore?language=en&#34; target=&#34;_blank&#34;&gt;TED talk&lt;/a&gt; which I found really interesting, and pointed out many &amp;lsquo;Sustainability Myths&amp;rsquo; that I was previously ignorant of.&lt;/p&gt;
 
 &lt;p&gt;I was also recently ignorant of the CO2 emissions of the internet, until I stumbled upon this lovely &lt;a href=&#34;https://climatecare.org/infographic-the-carbon-footprint-of-the-internet/&#34; target=&#34;_blank&#34;&gt;infographic&lt;/a&gt;. You can also switch your browser from Google to &lt;a href=&#34;https://www.ecosia.org/&#34; target=&#34;_blank&#34;&gt;Ecosia&lt;/a&gt;.&lt;/p&gt;
@@ -1004,26 +1012,6 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
 &lt;p&gt;There are also many monetary ways to achieve a lower carbon footprint. One of my favorite new ways is with micro-funding. Find out how you can give micro-loans to green initiatives with &lt;a href=&#34;https://www.kiva.org/&#34; target=&#34;_blank&#34;&gt;Kiva&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;But maybe these actions seem like they will take too much time and energy to implement. No need to fret, the UN has some actions even the laziest of us can do to become more sustainable: find them &lt;a href=&#34;https://www.un.org/sustainabledevelopment/takeaction/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;And here are a few random ways that I came up with to reduce my footprint:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Floss- it&amp;rsquo;s reusable! Floss strings can we washed after use, and are effective at getting out gunk after multiple washes.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;If you are like me you loose hairbands and bobbi-pins all the time. Good news is that over people seem to too! I haven&amp;rsquo;t bought a new hair tie in years by picking them up off the ground instead.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Dido to the above with pens.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Learn to be good at mooching off other people! I am still learning to ditch my Ego and ask people to give me off-cuts of their plants, my friends to share clothes with me, my neighbour to lend me their food processor, and my surfing buddies to share their sunscreen. The more we share, the less we buy, and the less we waste. But remember to return the favor and actively share with others!&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Go to the bathroom in nature. I swear, there is no better feeling than doing a number 2 outside and having it become beautiful fertilizer.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Actively try to get outside of your normal social circles. Go to random events, or places where you feel uncomfortable. Have conversations with people with different mindsets. I like to say, &amp;ldquo;I want to live a life that algorithms wouldn&amp;rsquo;t be able to predict.&amp;rdquo;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Spend time alone, get to know and love yourself. This may seem like a bit of a stretch, but I think the more we get to know ourselves, the less we need material goods to make us happy, and the less we stress over work and things that maybe aren&amp;rsquo;t important in the &amp;lsquo;bigger picture&amp;rsquo;.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Volunteer. Swerve for deers. Don&amp;rsquo;t use buds to clean your ears. Talk to those with more or less years. Feel emotions and allow yourself tears. But more than anything, don&amp;rsquo;t become indifferent due to your fears.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
 
 &lt;p&gt;Lastly, I would like to end with a quote by Anne Marie Bonneau said, &amp;ldquo;We don&amp;rsquo;t need a handful of people doing zero waste perfectly. We need millions of people doing it imperfectly&amp;rdquo;.&lt;/p&gt;
 

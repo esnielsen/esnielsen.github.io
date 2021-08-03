@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sat, 22 Aug 2020 16:32:54 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 03 Aug 2021 16:32:54 +0200</lastBuildDate>
     
 	<atom:link href="https://esnielsen.github.io/project/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>GeeklyEDU Biology Videos</title>
+      <link>https://esnielsen.github.io/project/geeklyedu/</link>
+      <pubDate>Tue, 03 Aug 2021 16:32:54 +0200</pubDate>
+      
+      <guid>https://esnielsen.github.io/project/geeklyedu/</guid>
+      <description>In the time between completing my PhD and starting my postdoc, I was doing some freelance science communication work (which I found on the UpWork site for anyone interesting in freelance work).
+One of the jobs I had was creating ~5 minute videos explaining biology topics at the first-year university level. To see some of my work, click on the links below!
+                              </description>
+    </item>
     
     <item>
       <title>IMCC6 Talk</title>

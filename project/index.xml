@@ -7,10 +7,30 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Tue, 03 Aug 2021 16:32:54 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 22 Nov 2021 16:32:54 +0200</lastBuildDate>
     
 	<atom:link href="https://esnielsen.github.io/project/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Frontiers for Young Minds article</title>
+      <link>https://esnielsen.github.io/project/ffym.article/</link>
+      <pubDate>Mon, 22 Nov 2021 16:32:54 +0200</pubDate>
+      
+      <guid>https://esnielsen.github.io/project/ffym.article/</guid>
+      <description>Below is an article that a group of colleagues and myself wrote for Frontiers for Young Minds. This is a scientific journal aimed at making cutting-edge science available to younger audiences, and it does so by inviting scientists to submit articles which are then reviewed by kids! They have two types of articles: New Discoveries &amp;amp; Core Concepts.
+Here we chose to write a Core Concept article which focusses on the importance of genetic diversity in wild populations.</description>
+    </item>
+    
+    <item>
+      <title>The Conversation article</title>
+      <link>https://esnielsen.github.io/project/the.conversation/</link>
+      <pubDate>Fri, 22 Oct 2021 16:32:54 +0200</pubDate>
+      
+      <guid>https://esnielsen.github.io/project/the.conversation/</guid>
+      <description>Below is the article colleague Sam Walkes and myself wrote for The Conversation about our work at UC Davis. It highlights how we are combining ecological and evolutionary theories and techniques to understand how coastal species may respond to marine heatwaves, which are bound to become more common and intense as global warming continues.
+Ever since starting my PhD and making science communication videos, I&amp;rsquo;ve wanted to branch out with my communications and delve into written media.</description>
+    </item>
     
     <item>
       <title>GeeklyEDU Biology Videos</title>

@@ -7,8 +7,38 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sun, 15 Oct 2017 00:00:00 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 15 Oct 2017 00:00:00 +0200</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Frontiers for Young Minds article</title>
+      <link>https://esnielsen.github.io/project/ffym.article/</link>
+      <pubDate>Mon, 22 Nov 2021 16:32:54 +0200</pubDate>
+      
+      <guid>https://esnielsen.github.io/project/ffym.article/</guid>
+      <description>&lt;p&gt;Below is an article that a group of colleagues and myself wrote for &lt;a href=&#34;https://kids.frontiersin.org/&#34; target=&#34;_blank&#34;&gt;Frontiers for Young Minds&lt;/a&gt;. This is a scientific journal aimed at making cutting-edge science available to younger audiences, and it does so by inviting scientists to submit articles which are then reviewed by kids! They have two types of articles: New Discoveries &amp;amp; Core Concepts.&lt;/p&gt;
+
+&lt;p&gt;Here we chose to write a Core Concept article which focusses on the importance of genetic diversity in wild populations. Myself and fellow co-authors aimed to describe the field of Conservation Genetics in an easily digestible way, which included giving many examples and analogies! We wanted the young readers to walk away with an appreciation for genetic diversity, and why it is just as important to protect as species-level biodiversity. I was personally involved in creating the Florida panther example and Fig. 3, which I am pretty happy with!&lt;/p&gt;
+
+&lt;p&gt;Please share and let me know what you think!&lt;/p&gt;
+
+&lt;p&gt;Find the article &lt;a href=&#34;https://kids.frontiersin.org/articles/10.3389/frym.2021.656168&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The Conversation article</title>
+      <link>https://esnielsen.github.io/project/the.conversation/</link>
+      <pubDate>Fri, 22 Oct 2021 16:32:54 +0200</pubDate>
+      
+      <guid>https://esnielsen.github.io/project/the.conversation/</guid>
+      <description>&lt;p&gt;Below is the article colleague Sam Walkes and myself wrote for &lt;a href=&#34;https://theconversation.com/us&#34; target=&#34;_blank&#34;&gt;The Conversation&lt;/a&gt; about our work at UC Davis. It highlights how we are combining ecological and evolutionary theories and techniques to understand how coastal species may respond to marine heatwaves, which are bound to become more common and intense as global warming continues.&lt;/p&gt;
+
+&lt;p&gt;Ever since starting my PhD and making science communication videos, I&amp;rsquo;ve wanted to branch out with my communications and delve into written media. But I will let you know, this type of media has scared me for a long time, as I find writing short science articles to be captivating but not cheesy very difficult. I&amp;rsquo;ve also realised that creating science communication is more fulfilling when working with others, and found that I could more readily step out of my writing comfort zone once it was a collaboration. Plus the editors at the Conversation are fabulous and super helpful towards academic-inclined writers such as myself!&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s &lt;a href=&#34;https://theconversation.com/five-years-after-largest-marine-heatwave-on-record-hit-northern-california-coast-many-warm-water-species-have-stuck-around-168053&#34; target=&#34;_blank&#34;&gt;the article&lt;/a&gt;- happy reading!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>GeeklyEDU Biology Videos</title>
@@ -129,7 +159,7 @@
     <item>
       <title>Distinct interspecific and intraspecific vulnerability of coastal species to global change</title>
       <link>https://esnielsen.github.io/publication/gcb.2021/</link>
-      <pubDate>Sun, 01 Aug 2021 00:00:00 -0700</pubDate>
+      <pubDate>Sun, 01 Aug 2021 00:00:00 +0200</pubDate>
       
       <guid>https://esnielsen.github.io/publication/gcb.2021/</guid>
       <description></description>
@@ -974,7 +1004,7 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     <item>
       <title>A comparison of genetic and genomic approaches to represent evolutionary potential in conservation planning </title>
       <link>https://esnielsen.github.io/publication/bio.cons.2020/</link>
-      <pubDate>Wed, 01 Jan 2020 00:00:00 -0800</pubDate>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0200</pubDate>
       
       <guid>https://esnielsen.github.io/publication/bio.cons.2020/</guid>
       <description></description>
@@ -983,7 +1013,7 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
     <item>
       <title>Multi-model seascape genomics identifies distinct environmental drivers of selection among sympatric marine species</title>
       <link>https://esnielsen.github.io/publication/bmc.eb.2020/</link>
-      <pubDate>Wed, 01 Jan 2020 00:00:00 -0800</pubDate>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0200</pubDate>
       
       <guid>https://esnielsen.github.io/publication/bmc.eb.2020/</guid>
       <description></description>
@@ -1095,136 +1125,6 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
   &lt;iframe src=&#34;//player.vimeo.com/video/338846065&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
  &lt;/div&gt;
 
-</description>
-    </item>
-    
-    <item>
-      <title>A Sustainable Future</title>
-      <link>https://esnielsen.github.io/project/sustainability/</link>
-      <pubDate>Fri, 07 Sep 2018 16:32:54 +0200</pubDate>
-      
-      <guid>https://esnielsen.github.io/project/sustainability/</guid>
-      <description>&lt;p&gt;The Earth is changing, and rapidly. In the midst of a global pandemic, &lt;a href=&#34;https://climate.nasa.gov/climate_resources/139/video-global-warming-from-1880-to-2020/&#34; target=&#34;_blank&#34;&gt;2020 tied with 2016 as the warmest year ON RECORD&lt;/a&gt;. Ultimately, in order to reduce emissions by 45% by 2030, we will need large corporations and governments to take the lead to ensure that ongoing global development shifts from fossil fuels to renewable energy.&lt;/p&gt;
-
-&lt;p&gt;But while it is mainly a handful of companies that are responsible for 71% of greenhouse gas emissions, we as individuals and consumers can also fight towards and create a more sustainable future. As the lovel figure above by &lt;a href=&#34;http://www.ashleylukashevsky.com/&#34; target=&#34;_blank&#34;&gt;Ashley Lukashevsky&lt;/a&gt; shows, we are all in this together, and together we will rise.&lt;/p&gt;
-
-&lt;p&gt;Therefore, this multi-media post is an ode to small, sustainable actions. And it is important that this is at no means and exhaustive list, and everyone has their own passions and actions that they are attracted to. In the end, the greatest thing we can do is start a conversation on sustainability, as this is the best way to discover new and exciting ways we can transform our society.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;First, here is a fun little song I wrote with the intention spreading the idea of sustainability in a way that is hopefully catchy and creative.&lt;/p&gt;
-
-
-&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;//player.vimeo.com/video/361592712&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
- &lt;/div&gt;
-
-
-&lt;hr /&gt;
-
-&lt;p&gt;Probably one of the biggest ways to increase your impact in the fight against climate change is to speak up. Have conversations about climate change, and try to diversify your social circle to learn from those with different views on the climate crisis. You can also reach out to your local NGOs, send letters/emails to your elected officials, and question practices in your workplace.&lt;/p&gt;
-
-&lt;p&gt;Vote!&lt;/p&gt;
-
-&lt;p&gt;I also find this &lt;a href=&#34;https://onlinepublichealth.gwu.edu/how-to-reduce-climate-change/#top&#34; target=&#34;_blank&#34;&gt;nice resource&lt;/a&gt; which has several options to reduce your carbon footprint depending on the time, money, and effort you&amp;rsquo;re willing to spend.&lt;/p&gt;
-
-&lt;p&gt;In addition, indigenous people are &lt;a href=&#34;https://news.trust.org/item/20210420094705-ft6ou&#34; target=&#34;_blank&#34;&gt;arguably the leaders in protecting and conserving natural environments&lt;/a&gt; which are essential to absorb and retain carbon. Thus, you can support indigenous efforts, such as donating movements like &lt;a href=&#34;https://landback.org/donate/&#34; target=&#34;_blank&#34;&gt;LANDBACK&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Then there is the &lt;a href=&#34;https://www.ted.com/talks/leyla_acaroglu_paper_beats_plastic_how_to_rethink_environmental_folklore?language=en&#34; target=&#34;_blank&#34;&gt;TED talk&lt;/a&gt; which I found really interesting, and pointed out many &amp;lsquo;Sustainability Myths&amp;rsquo; that I was previously ignorant of.&lt;/p&gt;
-
-&lt;p&gt;I was also recently ignorant of the CO2 emissions of the internet, until I stumbled upon this lovely &lt;a href=&#34;https://climatecare.org/infographic-the-carbon-footprint-of-the-internet/&#34; target=&#34;_blank&#34;&gt;infographic&lt;/a&gt;. You can also switch your browser from Google to &lt;a href=&#34;https://www.ecosia.org/&#34; target=&#34;_blank&#34;&gt;Ecosia&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;There are also many monetary ways to achieve a lower carbon footprint. One of my favorite new ways is with micro-funding. Find out how you can give micro-loans to green initiatives with &lt;a href=&#34;https://www.kiva.org/&#34; target=&#34;_blank&#34;&gt;Kiva&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;But maybe these actions seem like they will take too much time and energy to implement. No need to fret, the UN has some actions even the laziest of us can do to become more sustainable: find them &lt;a href=&#34;https://www.un.org/sustainabledevelopment/takeaction/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Lastly, I would like to end with a quote by Anne Marie Bonneau said, &amp;ldquo;We don&amp;rsquo;t need a handful of people doing zero waste perfectly. We need millions of people doing it imperfectly&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;Thanks for reading!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Representation</title>
-      <link>https://esnielsen.github.io/project/respresentation/</link>
-      <pubDate>Fri, 07 Sep 2018 16:32:54 +0200</pubDate>
-      
-      <guid>https://esnielsen.github.io/project/respresentation/</guid>
-      <description>&lt;p&gt;Designing Marine Protected Areas, or MPAS, can be difficult, and we still have a lot to learn - as beautifully portrayed in the comic above by &lt;a href=&#34;https://www.ohdakuwaqa.com/&#34; target=&#34;_blank&#34;&gt;Anju Sabu&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;There are complex and dynamic social-ecological systems that need to be weighed and balanced to create an arrangement of MPAs that best protect the natural environment, and provide for various cultural and economic uses of marine resources.&lt;/p&gt;
-
-&lt;p&gt;But, we have come a long way in understanding how to best create this balance, often using spatial planning concepts, which this video by &lt;a href=&#34;https://jenmcgowanresearch.wordpress.com/&#34; target=&#34;_blank&#34;&gt;Jennifer McGowan&lt;/a&gt; does a superb job at explaining:&lt;/p&gt;
-
-
-&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;//www.youtube.com/embed/1IDeKJJO7s8&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-
-
-&lt;p&gt;However, as scientists, we often like to take simple concepts like targeting representation in MPAs, and make it more complex.&lt;/p&gt;
-
-&lt;p&gt;This is described in an Epistle by the conservation planning guru &lt;a href=&#34;http://possinghamlab.org/&#34; target=&#34;_blank&#34;&gt;Prof Hugh Possingham&lt;/a&gt;:&lt;/p&gt;
-
-&lt;p&gt;__&lt;/p&gt;
-
-&lt;p&gt;&amp;ldquo;The Lame-duck Conservation Principle&lt;/p&gt;
-
-&lt;p&gt;Remember the good old days when conservation planning was just two main principles – adequacy and representation?  It seems so simple and logical. But at some point we lost sight of the importance of representation, the simple notion of protecting a sample of everything in a well-managed protected area. What happened?&lt;/p&gt;
-
-&lt;p&gt;In theory, representation is still at the top of the international conservation agenda, it gets a solid mention in Aichi Target 11, which states:&lt;/p&gt;
-
-&lt;p&gt;&amp;lsquo;By 2020, at least 17 percent of terrestrial and inland water areas and 10 percent of coastal and marine areas, especially areas of particular importance for biodiversity and ecosystem services, are conserved through effectively and equitably managed, ecologically representative and well-connected systems of protected areas and other effective area-based conservation measures, and integrated into the wider landscape and seascape.&amp;rsquo;&lt;/p&gt;
-
-&lt;p&gt;The Nature Conservancy has championed the cause of representation, with representation and resilience forming the core principles of our new protect land and water strategy. But the rest of the world seems to have lost interest.&lt;/p&gt;
-
-&lt;p&gt;In my simple mind, The Nature Conservancy is the &amp;lsquo;habitat organisation.&amp;rsquo; That is why I joined.  We focus on how to make more quality habitat, in all its forms, because it delivers benefits for people and nature.  So it is only logical that we always return to a strong focus on habitat representation.&lt;/p&gt;
-
-&lt;p&gt;Yet while we continue to keep our eye on the ball, some organisations and groups believe that a focus on threatened species, via Key Biodiversity Areas, is the best way to prioritisation protection.  Others are pushing connectivity as the most important conservation principle — let’s connect the Yukon to Yellowstone.  I agree that both are important, but still very much secondary to the notion of protecting a representative sample of habitats or ecosystems.&lt;/p&gt;
-
-&lt;p&gt;Why are we losing this marketing campaign?  In my opinion, representation is on the backburner because it is intellectually a little dull.  Connectivity captures the imagination of many scientists, it can be measured by 100 different metrics, while ideas like &amp;lsquo;corridors&amp;rsquo; seem to capture the hearts and minds of the public and politicians.  I love connectivity, but I am convinced it is a secondary issue. And, of course, threatened species are all so sexy — with their big brown eyes— much sexier than a place like the mallee woodland (my favourite habitat in Australia).&lt;/p&gt;
-
-&lt;p&gt;So here’s my challenge to you:  Representation is the most boring but important concept in conservation. So how to we make it sexy again?&amp;rdquo;&lt;/p&gt;
-
-&lt;p&gt;__&lt;/p&gt;
-
-&lt;p&gt;I have been thinking of Prof Possingham&amp;rsquo;s question of how do we make the simple act of targeting representation sexy - and I think the answer comes down to making representation a surrogate for adaptability.&lt;/p&gt;
-
-&lt;p&gt;I would argue that nothing is sexier in conservation science at the moment than prioritising areas that are more resilient to climate change. My work specifically looks at areas that are more genetically diverse, and thus assumed to be more resilient to environmental change. And interestingly, there have been several recent publications that suggest that by representing different habitat types (or different species distributions), you are also capturing genetic diversity.&lt;/p&gt;
-
-&lt;p&gt;You can find such papers in the links below:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://onlinelibrary.wiley.com/doi/pdf/10.1111/ddi.12195&#34; target=&#34;_blank&#34;&gt;Geographical surrogates of genetic variation for selecting island populations for conservation&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://www.pnas.org/content/pnas/114/48/12755.full.pdf&#34; target=&#34;_blank&#34;&gt;Environmental and geographic variables are effective surrogates for genetic variation in conservation planning&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1472-4642.2011.00752.x&#34; target=&#34;_blank&#34;&gt;Incorporating evolutionary processes into conservation planning using species distribution data: a case study with the western Mediterranean herpetofauna: Evolutionary processes in conservation planning&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://onlinelibrary.wiley.com/doi/pdf/10.1111/ddi.12113&#34; target=&#34;_blank&#34;&gt;Testing large-scale conservation corridors designed for patterns and processes: comparative phylogeography of three tree species&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;But of course, this is science, so here is this paper arguing the opposite:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1365-294X.2008.04039.x&#34; target=&#34;_blank&#34;&gt;On the validity of habitat as a predictor of genetic structure in aquatic systems: a comparative study using California water beetles&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I think the argument of representative habitats as surrogates of species and genetic diversity could help bring this elegant practice back in the forefront of conservation planning, but I think it will also require scientists to change our perspective of our work, as to not think about how well our work will publish, but how well it can be applied to &amp;lsquo;real-world&amp;rsquo; conservation practice.&lt;/p&gt;
-
-&lt;p&gt;So really we need a whole paradigm shift within Academia&amp;hellip; but for now let&amp;rsquo;s just settle with a haiku about representation in conservation planning:&lt;/p&gt;
-
-&lt;p&gt;~&lt;/p&gt;
-
-&lt;p&gt;MPA designs,&lt;/p&gt;
-
-&lt;p&gt;To make easier target:&lt;/p&gt;
-
-&lt;p&gt;Representation&lt;/p&gt;
-
-&lt;p&gt;~&lt;/p&gt;
-
-&lt;p&gt;Thanks for reading!&lt;/p&gt;
 </description>
     </item>
     

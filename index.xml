@@ -41,6 +41,28 @@
     </item>
     
     <item>
+      <title>ICCB 2021 Talk</title>
+      <link>https://esnielsen.github.io/project/iccb.21/</link>
+      <pubDate>Sun, 22 Aug 2021 16:32:54 +0200</pubDate>
+      
+      <guid>https://esnielsen.github.io/project/iccb.21/</guid>
+      <description>&lt;p&gt;Below is my oral presentation at the &lt;a href=&#34;https://conbio.org/mini-sites/iccb-2021&#34; target=&#34;_blank&#34;&gt;2021 International Congress for Conservation Biology&lt;/a&gt;, in which I describe multiple ways that genetic and genomic information can be including into spatial planning tools such as &lt;a href=&#34;https://marxansolutions.org/&#34; target=&#34;_blank&#34;&gt;Marxan&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This was my first time attending ICCB, and overall I really enjoyed it. I appreciated the diversity of conservation topics offered, as well as the diversity of speakers from around the world! Plus there were MULTIPLE sessions relating to conservation genetics!&lt;/p&gt;
+
+&lt;p&gt;I especially enjoyed the session titled &amp;ldquo;Pathways to trusted &amp;amp; meaningful relationships between conservation geneticists &amp;amp; practitioners&amp;rdquo;. Here the speakers highlighted how genetic data lag behind other biodiversity data types in being included into conservation actions, often because the data is inaccessibile or is difficult to understand. One of the solutions to this is the co-creation of genetic data between scientists and practitioners, which means that the project should include both parties from the development to implementation of the project. The speakers also highlight how we need to be transparent about the relevance of genetic data, as it might not always be the best tool for the conservation problem at hand.  Finally, we need to communicate the uncertainties around different molecular data types. One of the speakers mentioned how she told a conservation practitioner that there was currently no structure between populations with microsatellite data, but this may change if they use genomic SNP markers, to which they agreed that if that is the case, then they will adapt the management plan to accommodate the new information. Yet many areas will need to build local capacity for this type of adaptive management.&lt;/p&gt;
+
+&lt;p&gt;My talk was within the session titled &amp;ldquo;Spatial planning with Marxan: Advances in biodiversity conservation in Africa&amp;rdquo;. Here I describe some work from my graduate studies in South Africa, which aimed to conserve the evolutionary potential of coastal species by integrating molecular approaches in spatial planning exercises.  Enjoy!&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//www.youtube.com/embed/d-ofdeY4itk&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+</description>
+    </item>
+    
+    <item>
       <title>GeeklyEDU Biology Videos</title>
       <link>https://esnielsen.github.io/project/geeklyedu/</link>
       <pubDate>Tue, 03 Aug 2021 16:32:54 +0200</pubDate>
@@ -1097,34 +1119,6 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
 
 &lt;li&gt;&lt;p&gt;Last but not least, we each took our turn identifying and mitigating threats such as dynamite fishing in a virtual reality diving game!&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Get Genetic With It</title>
-      <link>https://esnielsen.github.io/project/getgenetic/</link>
-      <pubDate>Fri, 14 Dec 2018 16:32:54 +0200</pubDate>
-      
-      <guid>https://esnielsen.github.io/project/getgenetic/</guid>
-      <description>&lt;p&gt;Below is my entry to the &lt;a href=&#34;https://evolutionfilmfestival.org/2019/02/11/enter-the-8th-annual-evolution-video-contest/&#34; target=&#34;_blank&#34;&gt;Evolution Film Contest&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;_&lt;/p&gt;
-
-&lt;p&gt;Every year our university opens its doors to high school students, so that they can get an idea of what postgraduates do within each lab. My intention with this video is to open our lab doors to a much wider audience and offer a view into my world as a PhD student studying conservation genetics. I wanted to make a video that is not only fun to watch, but also describes the basic theories and methodologies used within molecular ecology. I also wanted to highlight different sub-divisions of genetics so that viewers can get a sense of the diversity within the field.&lt;/p&gt;
-
-&lt;p&gt;Ultimately my hope is that genetics will not longer be a topic that &amp;ldquo;Students Just Don&amp;rsquo;t Understand&amp;rdquo; * wink wink to my Fresh Prince fans *&lt;/p&gt;
-
-&lt;p&gt;This video could not have happened without the support of my supervisor, fellow lab members, and Stellenbosch University. And special thanks to all those who agreed to wiggle in front of the camera!&lt;/p&gt;
-
-&lt;p&gt;Enjoy and feel free to comment!&lt;/p&gt;
-
-&lt;p&gt;_&lt;/p&gt;
-
-
-&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;//player.vimeo.com/video/338846065&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
- &lt;/div&gt;
-
 </description>
     </item>
     

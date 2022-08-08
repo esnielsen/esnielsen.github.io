@@ -11,6 +11,82 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>2022 Marine Genomics Course</title>
+      <link>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</link>
+      <pubDate>Sat, 07 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</guid>
+      <description>&lt;p&gt;As part of my postdoctoral position at University of California, Davis, I had the pleasure of teaching the Marine Genomics course, originally developed by one of my fellow &lt;a href=&#34;https://baylab.github.io/&#34; target=&#34;_blank&#34;&gt;Bay Lab&lt;/a&gt; postdocs, &lt;a href=&#34;https://serenacaplins.wordpress.com/&#34; target=&#34;_blank&#34;&gt;Serena Caplins&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;In this course, we introduce undergraduates to a suite of bioinformatic techniques used to analyse marine genomic data to answer questions pertaining to population differentiation, gene flow, genotype-phenotype associations, and genotype-environment associations.&lt;/p&gt;
+
+&lt;p&gt;The course was developed so that students needed no previous experience with bash/Unix or R. We suggest that the course is run with the following per week: a ~1.5 hr class with a brief lecture followed by a live coding demonstration of the weeks material, plus another ~1hr class where the students can go through the exercises on their own.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m very fortunate to have taught this course with an amazing set of co-instructors and TAs: Dr. Tali Magory Cohen, Leslie Guerrero, and Brooke Benson.&lt;/p&gt;
+
+&lt;p&gt;Below is the webpage for the course, as well as the link to the github used to create the course webpage.&lt;/p&gt;
+
+&lt;p&gt;Happy coding!&lt;/p&gt;
+
+&lt;p&gt;~&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://baylab.github.io/MarineGenomics2022/&#34; target=&#34;_blank&#34;&gt;https://baylab.github.io/MarineGenomics2022/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/BayLab/MarineGenomics2022&#34; target=&#34;_blank&#34;&gt;https://github.com/BayLab/MarineGenomics2022&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A gripping tale of evolution and conservation</title>
+      <link>https://esnielsen.github.io/project/bml.talk/</link>
+      <pubDate>Thu, 14 Apr 2022 16:32:54 +0200</pubDate>
+      
+      <guid>https://esnielsen.github.io/project/bml.talk/</guid>
+      <description>&lt;p&gt;While conducting my postdoc at UC Davis, I&amp;rsquo;ve had the pleasure of working with folks at the UC Davis Bodega Bay Marine Lab, and the occasional visit out the their beautiful facility.&lt;/p&gt;
+
+&lt;p&gt;I also was asked to give one of the John and Mary Louise Riley seminars, which was my first in-person talk after 2020 pandemic times. As such, I wanted to try something different, incorporating my SciComm background, which led to this talk below where I describe my PhD work as a TV series pitch!&lt;/p&gt;
+
+&lt;p&gt;Hope you enjoy!&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//www.youtube.com/embed/iqsqB0bCRBQ&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+</description>
+    </item>
+    
+    <item>
+      <title>Hershel the Horseshoe crab</title>
+      <link>https://esnielsen.github.io/project/hershel/</link>
+      <pubDate>Mon, 14 Feb 2022 16:32:54 +0200</pubDate>
+      
+      <guid>https://esnielsen.github.io/project/hershel/</guid>
+      <description>&lt;p&gt;In early 2022, University of California, Davis, held a &lt;a href=&#34;https://davissciencesays.ucdavis.edu/events/2022-science-art-contest&#34; target=&#34;_blank&#34;&gt;SciArt contest&lt;/a&gt;, which myself and a fellow UCD postdoc, &lt;a href=&#34;https://joannasgriffiths.wordpress.com/&#34; target=&#34;_blank&#34;&gt;Joanna Griffiths&lt;/a&gt; decided to enter.&lt;/p&gt;
+
+&lt;p&gt;I had just returned from a sampling trip on Catalina Island, where one of our hosts at the Wrigley Marine Center had described his career path, in which he began as a technician for a company which harvested horseshoe crab blood. Having this story as a recent memory, I suggested that we create a horseshoe crab piñata, and have it stuffed with blue pom poms/ribbons to represent the blue blood!&lt;/p&gt;
+
+&lt;p&gt;After many nights of cutting cardboard, tapping balloons, laying paper maché, and pasting tissue paper, Hershel the horseshoe crab piñata was born!&lt;/p&gt;
+
+&lt;p&gt;Below is the video entry for the SciArt contest. Sadly, Hershel did not win any prizes, but we were up against some amazing artists! See the winners of the contest &lt;a href=&#34;https://davissciencesays.ucdavis.edu/news/2022-science-art-contest-winners&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Hershel also got to make an appearance on the Chelicerata table of the Biology Departments &amp;lsquo;Tree of Life&amp;rsquo; exhibit on the 2022 UC Davis Open Day. Below are some photos of Hershel doing what he does best-generating excitement about science and marine invertebrates!&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//www.youtube.com/embed/vd9b7xfBegw&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/static/pday.1.JPG&#34; alt=&#34;Picnic Day 1&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/static/pday.1.HEIC&#34; alt=&#34;Picnic Day 2&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/static/pday.1.HEIC&#34; alt=&#34;Picnic Day 3&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Frontiers for Young Minds article</title>
       <link>https://esnielsen.github.io/project/ffym.article/</link>
       <pubDate>Mon, 22 Nov 2021 16:32:54 +0200</pubDate>
@@ -1039,87 +1115,6 @@ levelplot(CP.sdms, col.regions=cc, layout=c(1, 2)) + layer(sp.polygons(SAmap.c, 
       
       <guid>https://esnielsen.github.io/publication/bmc.eb.2020/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>2019 Conservation Symposium Review</title>
-      <link>https://esnielsen.github.io/project/sccp_2019/</link>
-      <pubDate>Sat, 14 Dec 2019 16:32:54 +0200</pubDate>
-      
-      <guid>https://esnielsen.github.io/project/sccp_2019/</guid>
-      <description>&lt;p&gt;On Nov 4-7th 2019 I had the opportunity to attend The Conservation Symposium, which aims to bring together those working on conservation issues within South Africa.&lt;/p&gt;
-
-&lt;p&gt;I enjoy this conference because it takes me out of my academia bubble and transports me into the ‘on the ground’ conservation practice realm. Students and academics make up a small portion of the attendees, outnumbered by NGOs, consulting companies, government organizations, attorneys, reporters, and filmmakers.&lt;/p&gt;
-
-&lt;p&gt;The main theme that struck me throughout this conference is the need to understand the human dimension to ensure effective conservation planning and management. Below I discuss a few of the key insights I had in relation to this topic.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;This year they had the first ever session dedicated to indigenous knowledge (IK) in conservation. It was interesting to see how as a country we are actually quite ahead of the game in the inclusion of IK in conservation publications. But the thing that irked me during this session was that the audience laughed at almost all mentions of local taboos (an example of which is that some indigenous people believe that touching a certain tree species causes women to immediately start menstruating). I think this demonstrates how far we have yet to go in reframing our mindsets to see conservation not from a typical westernized view, but from a more inclusive, open-minded framing.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;I also noted how all of the IK-related talks were in a terrestrial setting. I searched ‘South Africa indigenous knowledge marine’ in Web of Science and found zero papers investigating the use of IK in marine conservation. But, this made me remember an interesting poster at this year’s WIOMSA symposium where they interviewed local fishers along the South African coastline asking if water temperatures were changing, and reported areas where fishers’ knowledge differed from temperature changes monitored by scientists. We still have a long way to go with integrating IK into conservation management, and I think we will see a lot more marine conservation studies incorporating aspects of local communities in the near future.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;This year the symposium also introduced the Conservation Café, which involved youth-led discussions on conservation topics chosen by young (&amp;lt;35 yrs) attendants. During the tea breaks, we wrote on a white board what we wanted to discuss or added stars next to those topics on the board that we were interested in (seen in pictures below). In the session I went to, we talked again about IK within conservation, but also about capitalism and the goal of conservation. It was a lot of discussing problems, but one of the solutions I took away was that as youth we need to use our voices on social media, and also broaden our social circles in real life (or IRL as the kids say these days) to actively ‘market’ sustainable lifestyles and ‘make conservation cool again’.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Lastly, there were some very interesting talks on how people perceive our parks within the country. Nyiko Mutileni gave a talk on her work where she interviewed local communities just a few km outside of Man’ombe Nature Reserve, asking if they have every entered the reserve, and if they benefit from the reserve. Many local people had never even heard of the park, only ~3% had entered the park, and most believed they did not benefit from the park because they could no longer access natural resources. Another talk by Dr Izak Smit described how he interviewed visitors of Kruger National Park to understand how they perceived conservation. Most visitors do not believe that conservation areas should be focused on making money, or that we humans should actively manage nature through ‘harsh’ management such as culling. But most surprising to me was almost half of the interviewees believe that humans are separate from nature rather than interconnected through ecological processes. Dr Smit mentioned how this is partly driven by the fact that while 1.9 million people visit Kruger annually, only ~1% actually get out of their cars, walk in the bush, and physically connect with nature. Our disconnect with the natural world is a major issue of our time (shown by the fact that I had to mention ‘in real life’ in the previous point), and protected areas will be fundamental to our individual and societal resilience as we face ever increasing uncertainties on this Earth.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://esnielsen.github.io/img/sccp/p1.jpg&#34; alt=&#34;Example image&#34; /&gt;
-&lt;img src=&#34;https://esnielsen.github.io/img/sccp/p2.jpg&#34; alt=&#34;Example image&#34; /&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Youth 4 Conservation</title>
-      <link>https://esnielsen.github.io/project/youth4cons/</link>
-      <pubDate>Sun, 22 Sep 2019 16:32:54 +0200</pubDate>
-      
-      <guid>https://esnielsen.github.io/project/youth4cons/</guid>
-      <description>&lt;p&gt;Below is my entry to the Youth4Conservation video contest for the 2019 South African &lt;a href=&#34;https://conservationsym2019.dryfta.com/&#34; target=&#34;_blank&#34;&gt;Conservation Symposium&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;The &lt;a href=&#34;https://youth4conservation.co.za/&#34; target=&#34;_blank&#34;&gt;Youth4Conservation&lt;/a&gt; movement partners young volunteers with local conservation organisations to help tackle critical conservation issues within South Africa.&lt;/p&gt;
-
-&lt;p&gt;This year, the Conservation Symposium partnered with &lt;a href=&#34;http://wildtrust.co.za/&#34; target=&#34;_blank&#34;&gt;WildTrust&lt;/a&gt;, offering discounted registration prices to young attendees who send a short video describing how they are contributing to conservation within South Africa.&lt;/p&gt;
-
-&lt;p&gt;With this video, I hope to share why genetics and genomics are important to conserving biodiversity, especially with regards to an uncertain climatic future.&lt;/p&gt;
-
-&lt;p&gt;Enjoy!&lt;/p&gt;
-
-
-&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;//player.vimeo.com/video/358497236&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
- &lt;/div&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>2019 WIOMSA Symposium Review</title>
-      <link>https://esnielsen.github.io/project/wiomsa/</link>
-      <pubDate>Fri, 14 Dec 2018 16:32:54 +0200</pubDate>
-      
-      <guid>https://esnielsen.github.io/project/wiomsa/</guid>
-      <description>&lt;p&gt;During July 1-5 2019, I attended the 11th Western Indian Ocean Marine Science Association (WIOMSA) symposium at the University of Mauritius with two of my colleagues Nikki and Molly.&lt;/p&gt;
-
-&lt;p&gt;WIOMSA is always a great conference as it covers a variety of scientific disciplines and has a strong focus on integrating research and management within the region. Some of the highlights were:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Prof Golden’s &lt;a href=&#34;https://escholarship.org/content/qt0g805047/qt0g805047.pdf&#34; target=&#34;_blank&#34;&gt;plenary&lt;/a&gt; which discussed the impacts of climate change on small-scale fisheries and human nutrition. Here we were shown which countries were most vulnerable to malnutrition due to declined marine catches, and also which fish species are ideal candidates for aquaculture within these countries based on their sustainability and nutritional value.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Prof Dupont’s &lt;a href=&#34;https://www.nature.com/articles/498429a&#34; target=&#34;_blank&#34;&gt;plenary&lt;/a&gt; which discussed the vast and complex implications of ocean acidification. Prof Dupont proved how science communication can make something intangible, such as ocean acidification, tangible, by offering shrimp tastings where people could actually taste the difference between seafood raised in normal or low pH conditions.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;The science communication mini-symposium, as well as the multiple videos that were shown during the conference (including the following: &lt;a href=&#34;https://www.youtube.com/watch?v=LI7Xx21ESoY&#34; target=&#34;_blank&#34;&gt;mzansi&lt;/a&gt; &amp;amp; &lt;a href=&#34;https://vimeo.com/344745676&#34; target=&#34;_blank&#34;&gt;kokoly&lt;/a&gt;)&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;The Women In Science speed dating lunch where we discussed actions we could take to improve gender equality in the context of marine conservation within the region. We highlighted the need for more information sharing via face-to-face and online, increase position papers on women in small scale fisheries, and fundraise campaigns for projects that specifically support women and communities in the region.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;The exciting discoveries and opportunities regarding the deep and open ocean. With increasing off-shore threats such as mining, we will soon need to move towards ‘high-seas’ protected areas, which should be biologically meaningful instead of simply reaching a target % of the ocean. There were multiple talks on how new technology is allowing us to assess the biodiversity of seamounts and deep-water canyons, and results suggest that these areas should be considered for MPAs outside of EEZs.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;The multiple talks on social resilience, which highlighted how social adaptive capacity is space and time specific, and needs to be conducted on different gender groups and throughout different seasons. I also thought it was interesting how social resilience was qualified, by using questionnaires that asked questions such as ‘Do you think about the future?’.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;I also enjoyed the posters and talks that showed how surfers and kitesurfers can be used to monitor oceanographic features, often by putting cameras/sensors onto boards.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Last but not least, we each took our turn identifying and mitigating threats such as dynamite fishing in a virtual reality diving game!&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
     </item>
     
   </channel>

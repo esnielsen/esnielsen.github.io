@@ -14,10 +14,10 @@
     
     <item>
       <title>2022 Marine Genomics Course</title>
-      <link>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</link>
+      <link>https://esnielsen.github.io/post/mar-gen-22/</link>
       <pubDate>Sat, 07 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://esnielsen.github.io/post/a-guide-to-ngs-pool-seq-programs/</guid>
+      <guid>https://esnielsen.github.io/post/mar-gen-22/</guid>
       <description>As part of my postdoctoral position at University of California, Davis, I had the pleasure of teaching the Marine Genomics course, originally developed by one of my fellow Bay Lab postdocs, Serena Caplins.
 In this course, we introduce undergraduates to a suite of bioinformatic techniques used to analyse marine genomic data to answer questions pertaining to population differentiation, gene flow, genotype-phenotype associations, and genotype-environment associations.
 The course was developed so that students needed no previous experience with bash/Unix or R.</description>
